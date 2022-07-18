@@ -10,22 +10,22 @@ namespace Badminton.Classes
         public int Side1Score { get; set; }
         public int Side2Score { get; set; }
         public int CourtNumber { get; set; }
-        public DateTime? Start { get; set; }
-        public DateTime? End { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public bool EloNotAffected { get; set; }
 
         [IgnoreDataMember] public List<Player> PlayersOnCourt => Side1Players.Concat(Side2Players).ToList();
-        [IgnoreDataMember] public bool Started => Start.HasValue;
-        [IgnoreDataMember] public bool Finished => End.HasValue;
+        [IgnoreDataMember] public bool Started => StartDate.HasValue;
+        [IgnoreDataMember] public bool Finished => EndDate.HasValue;
 
         public void Begin()
         {
-            Start = DateTime.Now;
+            StartDate = DateTime.Now;
         }
 
         public void Finish()
         {
-            End = DateTime.Now;
+            EndDate = DateTime.Now;
 
             foreach (Player player in PlayersOnCourt)
             {

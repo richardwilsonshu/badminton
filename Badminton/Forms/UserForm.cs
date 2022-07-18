@@ -5,11 +5,11 @@ namespace Badminton.Forms
 {
     public partial class UserForm : Form
     {
-        private readonly BadmintonSession _session;
+        private readonly Session _session;
         private readonly Player? _existingPlayer;
         private int _originalElo = 0;
 
-        public UserForm(BadmintonSession session, Player? existingPlayer = null)
+        public UserForm(Session session, Player? existingPlayer = null)
         {
             _session = session;
             _existingPlayer = existingPlayer;
@@ -91,7 +91,7 @@ namespace Badminton.Forms
             var newPlayer = new Player(textBoxFirstName.Text, textBoxLastName.Text,
                 (Gender)comboGender.SelectedValue, elo);
 
-            _session.AllPlayers.Add(newPlayer);
+            _session.WaitingPlayers.Add(newPlayer);
         }
 
         private void EditPlayer()

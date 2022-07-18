@@ -4,19 +4,26 @@ using System.Runtime.Serialization;
 
 namespace Badminton.Classes
 {
-    public class BadmintonSession
+    public class Session
     {
-        public DateTime Start { get; set; }
-        public SortableBindingList<Player> AvailablePlayers { get; set; } = new SortableBindingList<Player> { };
-        public BindingList<Player> AllPlayers { get; set; } = new BindingList<Player> { };
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public SortableBindingList<Player> WaitingPlayers { get; set; } = new SortableBindingList<Player> { };
+        public BindingList<Player> RestingPlayers { get; set; } = new BindingList<Player> { };
         public BindingList<Match> Matches { get; set; } = new BindingList<Match> { };
-        public Match? Court1Match { get; set; }
-        public Match? Court2Match { get; set; }
+        public int[] CourtsAvailableToday { get; set; } = new int[] { 1, 2, 3, 4 };
 
-        public BadmintonSession()
+        public Session(int[] courtsAvailable)
         {
-            Start = DateTime.Now;
+            StartDate = DateTime.Now;
+            CourtsAvailableToday = courtsAvailable;
         }
+
+        [IgnoreDataMember]
+        public List<Match> ActiveMatches => Matches.Where(m => m.Started && !m.Finished).ToList();
+
+        [IgnoreDataMember]
+        public int[] CourtsInUse => ActiveMatches.Select(m => m.CourtNumber).ToArray();
 
         [IgnoreDataMember]
         public bool CanGenerateMatch 
@@ -24,28 +31,32 @@ namespace Badminton.Classes
             get
             {
                 var hasAvailablePlayers = TryGenerateMatch() != null;
-                var isCourtFree = Court1Match == null || Court2Match == null;
-
+                var isCourtFree = CourtsAvailableToday.Except(CourtsInUse).Any();
                 return hasAvailablePlayers && isCourtFree;
             }
         }
 
         [IgnoreDataMember]
-        public List<Player> PlayersInSession => AvailablePlayers
-            .Concat(Court1Match?.PlayersOnCourt ?? new List<Player>())
-            .Concat(Court2Match?.PlayersOnCourt ?? new List<Player>())
+        public List<Player> PlayersInSession => WaitingPlayers
+            .Concat(RestingPlayers)
+            .Concat(ActiveMatches.SelectMany(m => m.PlayersOnCourt))
             .ToList();
+
+        public Match? GetActiveMatchOnCourt(int courtNumber)
+        {
+            return ActiveMatches.FirstOrDefault(m => m.CourtNumber == courtNumber);
+        }
 
         public Match? TryGenerateMatch()
         {
-            if (!AvailablePlayers.Any())
+            if (!WaitingPlayers.Any())
             {
                 return null;
             }
 
             // Find best match based on search filters / settings (TODO) and based on rank
 
-            var waitingPlayer = AvailablePlayers.OrderBy(p => p.LastMatchTime).First();
+            var waitingPlayer = WaitingPlayers.OrderBy(p => p.LastMatchTime).First();
 
             var eloSearchDelta = Constants.DefaultEloSearchDelta;
 
@@ -53,7 +64,7 @@ namespace Badminton.Classes
             // We don't want them to keep waiting until the delta is high enough for them to be matched...
             // TODO !
 
-            var eloDeltasOfNearestPlayers = AvailablePlayers // PlayersInSession
+            var eloDeltasOfAllPlayers = WaitingPlayers // PlayersInSession
                 .Where(p => p != waitingPlayer)
                 .Select(p => new { EloDelta = Math.Abs(waitingPlayer.Elo - p.Elo), Player = p })
                 .OrderBy(m => m.Player.LastMatchTime)
@@ -61,7 +72,7 @@ namespace Badminton.Classes
 
             var lastMatch = waitingPlayer.AllMatchesPlayed.LastOrDefault();
 
-            if (lastMatch?.Start > Start)
+            if (lastMatch?.StartDate > StartDate)
             {
                 var minutesWaiting = (int) (DateTime.Now - waitingPlayer.LastMatchTime).TotalMinutes;
 
@@ -71,7 +82,7 @@ namespace Badminton.Classes
                 }
             }
 
-            var matchedPlayers = eloDeltasOfNearestPlayers
+            var matchedPlayers = eloDeltasOfAllPlayers
                 .Where(m => m.EloDelta >= -eloSearchDelta && m.EloDelta <= eloSearchDelta)
                 .Take(Constants.MinPlayersForGame - 1)
                 .ToList();
@@ -94,56 +105,32 @@ namespace Badminton.Classes
             return match;
         }
 
-        public void StartMatch(Match match)
+        public void Start(Match match)
         {
-            // Commit to starting the Match
-            var courtNumber = Court1Match == null ? 1 : 2;
+            var courtNumber = CourtsAvailableToday.Except(CourtsInUse).FirstOrDefault();
 
-            if (courtNumber == 1)
+            if (courtNumber == 0)
             {
-                Court1Match = match;
-            }
-            else
-            {
-                Court2Match = match;
+                return;
             }
 
             match.CourtNumber = courtNumber;
-
+            match.PlayersOnCourt.ForEach(player => WaitingPlayers.Remove(player));
+            WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
             Matches.Add(match);
-
-            match.PlayersOnCourt.ForEach(player => AvailablePlayers.Remove(player));
-            AvailablePlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
-
             match.Begin();
         }
 
-        public void FinishCourt1Match()
+        public void Finish(Match match)
         {
-            if (Court1Match == null)
+            if (match == null)
             {
                 return;
             }
 
-            Court1Match.Finish();
-
-            Court1Match.PlayersOnCourt.ForEach(player => AvailablePlayers.Add(player));
-            Court1Match = null;
-            AvailablePlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
-        }
-
-        public void FinishCourt2Match()
-        {
-            if (Court2Match == null)
-            {
-                return;
-            }
-
-            Court2Match.Finish();
-
-            Court2Match.PlayersOnCourt.ForEach(player => AvailablePlayers.Add(player));
-            Court2Match = null;
-            AvailablePlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
+            match.Finish();
+            match.PlayersOnCourt.ForEach(player => WaitingPlayers.Add(player));
+            WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
         }
     }
 }

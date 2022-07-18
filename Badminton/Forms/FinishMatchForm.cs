@@ -11,6 +11,10 @@ namespace Badminton.Forms
             _match = match;
 
             InitializeComponent();
+
+            labelCourtTitle.Text = $"Court {_match.CourtNumber}";
+            labelSide1Players.Text = string.Join(" & ", _match.Side1Players.Select(p => p.FullName));
+            labelSide2Players.Text = string.Join(" & ", _match.Side2Players.Select(p => p.FullName));
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

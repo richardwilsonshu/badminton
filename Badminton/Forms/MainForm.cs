@@ -6,7 +6,8 @@ namespace Badminton.Forms
 {
     public partial class MainForm : Form
     {
-        private BadmintonSession _session = new();
+        private Classes.Badminton _badminton = new();
+        private Session _session => _badminton.CurrentSession!;
 
         public MainForm()
         {
@@ -16,16 +17,16 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
-            BindListBox(listBoxActivePlayers, _session.AvailablePlayers, nameof(Player.Display), nameof(Player.Id));
-            BindPlayersListBox(listBoxClubPlayers, _session.AllPlayers);
+            BindListBox(listBoxWaitingPlayers, _session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
+            BindPlayersListBox(listBoxRestingPlayers, _session.RestingPlayers);
 
             EnableOrDisableGenerateGameButtons();
 
             BindCourt1();
             BindCourt2();
 
-            listBoxActivePlayers.CustomTabOffsets.Add(50);
-            listBoxActivePlayers.UseCustomTabOffsets = true;
+            listBoxWaitingPlayers.CustomTabOffsets.Add(50);
+            listBoxWaitingPlayers.UseCustomTabOffsets = true;
         }
 
         private void BindListBox(ListBox listBox, IBindingList bindingList, string displayMember, string valueMember)
@@ -42,24 +43,28 @@ namespace Badminton.Forms
 
         private void BindCourt1()
         {
-            if (_session.Court1Match == null)
+            var match = _session.GetActiveMatchOnCourt(1);
+
+            if (match == null)
             {
                 return;
             }
 
-            BindPlayersListBox(listBoxCourt1Side1, _session.Court1Match!.Side1Players);
-            BindPlayersListBox(listBoxCourt1Side2, _session.Court1Match!.Side2Players);
+            BindPlayersListBox(listBoxCourt1Side1, match.Side1Players);
+            BindPlayersListBox(listBoxCourt1Side2, match.Side2Players);
             panelCourt1.Enabled = true;
         }
         private void BindCourt2()
         {
-            if (_session.Court2Match == null)
+            var match = _session.GetActiveMatchOnCourt(2);
+
+            if (match == null)
             {
                 return;
             }
 
-            BindPlayersListBox(listBoxCourt2Side1, _session.Court2Match!.Side1Players);
-            BindPlayersListBox(listBoxCourt2Side2, _session.Court2Match!.Side2Players);
+            BindPlayersListBox(listBoxCourt2Side1, match.Side1Players);
+            BindPlayersListBox(listBoxCourt2Side2, match.Side2Players);
             panelCourt2.Enabled = true;
         }
 
@@ -68,23 +73,23 @@ namespace Badminton.Forms
             buttonGenerateGame.Enabled = _session.CanGenerateMatch;
         }
 
-        private void buttonAddPlayer_Click(object sender, EventArgs e)
+        private void buttonAddPlayerToSession_Click(object sender, EventArgs e)
         {
             using var newPlayerDialog = new UserForm(_session);
             newPlayerDialog.ShowDialog();
         }
 
-        private void buttonRemovePlayer_Click(object sender, EventArgs e)
+        private void buttonRemovePlayerFromSession_Click(object sender, EventArgs e)
         {
-            if (listBoxClubPlayers.SelectedItem is not Player player)
+            if (listBoxWaitingPlayers.SelectedItem is not Player player)
             {
                 return;
             }
 
-            var confirmResult = MessageBox.Show("Delete this player?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var confirmResult = MessageBox.Show("Remove this player from current session?", "Confirm Remove", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                _session.AllPlayers.Remove(player);
+                _session.WaitingPlayers.Remove(player);
             }
         }
 
@@ -103,7 +108,7 @@ namespace Badminton.Forms
                 try
                 {
                     using var writer = new StreamWriter(saveFileDialog.OpenFile());
-                    writer.Write(JsonConvert.SerializeObject(_session));
+                    writer.Write(JsonConvert.SerializeObject(_badminton));
 
                     MessageBox.Show("Saved", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -127,7 +132,7 @@ namespace Badminton.Forms
                 try
                 {
                     using var reader = new StreamReader(openFileDialog.OpenFile());
-                    _session = JsonConvert.DeserializeObject<BadmintonSession>(reader.ReadToEnd())!;
+                    _badminton = JsonConvert.DeserializeObject<Classes.Badminton>(reader.ReadToEnd())!;
 
                     InitializeCustomControls();
 
@@ -140,28 +145,28 @@ namespace Badminton.Forms
             }
         }
 
-        private void buttonMoveToActivePlayers_Click(object sender, EventArgs e)
+        private void buttonMoveToWaitingPlayers_Click(object sender, EventArgs e)
         {
-            if (listBoxClubPlayers.SelectedItem is not Player player)
+            if (listBoxRestingPlayers.SelectedItem is not Player player)
             {
                 return;
             }
 
-            _session.AllPlayers.Remove(player);
-            _session.AvailablePlayers.Add(player);
+            _session.RestingPlayers.Remove(player);
+            _session.WaitingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
 
         private void buttonRemoveFromActivePlayers_Click(object sender, EventArgs e)
         {
-            if (listBoxActivePlayers.SelectedItem is not Player player)
+            if (listBoxWaitingPlayers.SelectedItem is not Player player)
             {
                 return;
             }
 
-            _session.AvailablePlayers.Remove(player);
-            _session.AllPlayers.Add(player);
+            _session.WaitingPlayers.Remove(player);
+            _session.RestingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -175,7 +180,7 @@ namespace Badminton.Forms
                 return;
             }
 
-            _session.StartMatch(match);
+            _session.Start(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -193,14 +198,21 @@ namespace Badminton.Forms
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
         {
-            using var finishMatchForm = new FinishMatchForm(_session.Court1Match!);
+            var match = _session.GetActiveMatchOnCourt(1);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            using var finishMatchForm = new FinishMatchForm(match);
 
             if (finishMatchForm.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            _session.FinishCourt1Match();
+            _session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -211,14 +223,21 @@ namespace Badminton.Forms
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)
         {
-            using var finishMatchForm = new FinishMatchForm(_session.Court1Match!);
+            var match = _session.GetActiveMatchOnCourt(2);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            using var finishMatchForm = new FinishMatchForm(match);
 
             if (finishMatchForm.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            _session.FinishCourt2Match();
+            _session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -230,12 +249,15 @@ namespace Badminton.Forms
         private void timerMatches_Tick(object sender, EventArgs e)
         {
             // See https://stackoverflow.com/a/519557
-            listBoxActivePlayers.DisplayMember = "";
-            listBoxActivePlayers.DisplayMember = nameof(Player.Display);
+            listBoxWaitingPlayers.DisplayMember = "";
+            listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
-            if (_session.Court1Match != null)
+            var court1Match = _session.GetActiveMatchOnCourt(1);
+            var court2Match = _session.GetActiveMatchOnCourt(2);
+
+            if (court1Match?.Started == true)
             {
-                var elapsedTime = DateTime.Now - _session.Court1Match.Start!.Value;
+                var elapsedTime = DateTime.Now - court1Match.StartDate!.Value;
                 labelCourt1MatchTime.Text = $"Match time: {elapsedTime:h\\:mm\\:ss}";
             }
             else
@@ -243,9 +265,9 @@ namespace Badminton.Forms
                 labelCourt1MatchTime.Text = "Match time:";
             }
 
-            if (_session.Court2Match != null)
+            if (court2Match?.Started == true)
             {
-                var elapsedTime = DateTime.Now - _session.Court2Match.Start!.Value;
+                var elapsedTime = DateTime.Now - court2Match.StartDate!.Value;
                 labelCourt2MatchTime.Text = $"Match time: {elapsedTime:h\\:mm\\:ss}";
             }
             else
@@ -254,9 +276,9 @@ namespace Badminton.Forms
             }
         }
 
-        private void listBoxActivePlayers_DoubleClick(object sender, EventArgs e)
+        private void listBoxWaitingPlayers_DoubleClick(object sender, EventArgs e)
         {
-            if (listBoxActivePlayers.SelectedItem is not Player player)
+            if (listBoxWaitingPlayers.SelectedItem is not Player player)
             {
                 return;
             }

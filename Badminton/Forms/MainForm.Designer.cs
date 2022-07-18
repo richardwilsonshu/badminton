@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.listBoxActivePlayers = new System.Windows.Forms.ListBox();
-            this.buttonAddPlayer = new System.Windows.Forms.Button();
-            this.buttonRemovePlayer = new System.Windows.Forms.Button();
+            this.listBoxWaitingPlayers = new System.Windows.Forms.ListBox();
+            this.buttonAddPlayerToSession = new System.Windows.Forms.Button();
+            this.buttonRemovePlayerFromSession = new System.Windows.Forms.Button();
             this.buttonGenerateGame = new System.Windows.Forms.Button();
             this.listBoxCourt1Side1 = new System.Windows.Forms.ListBox();
             this.listBoxCourt1Side2 = new System.Windows.Forms.ListBox();
@@ -47,60 +47,71 @@
             this.labelCourt2 = new System.Windows.Forms.Label();
             this.listBoxCourt2Side1 = new System.Windows.Forms.ListBox();
             this.labelVsCourt2 = new System.Windows.Forms.Label();
-            this.listBoxClubPlayers = new System.Windows.Forms.ListBox();
+            this.listBoxRestingPlayers = new System.Windows.Forms.ListBox();
             this.buttonMoveToActivePlayers = new System.Windows.Forms.Button();
             this.buttonRemoveFromActivePlayers = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerMatches = new System.Windows.Forms.Timer(this.components);
-            this.labelAvailablePlayers = new System.Windows.Forms.Label();
-            this.labelAllPlayers = new System.Windows.Forms.Label();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerMatches = new System.Windows.Forms.Timer(this.components);
+            this.labelWaitingPlayers = new System.Windows.Forms.Label();
+            this.labelRestingPlayers = new System.Windows.Forms.Label();
+            this.Session = new System.Windows.Forms.TabControl();
+            this.tabPageSession = new System.Windows.Forms.TabPage();
+            this.tabPageAdmin = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelPlayers = new System.Windows.Forms.Label();
+            this.listBoxPlayers = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.Session.SuspendLayout();
+            this.tabPageSession.SuspendLayout();
+            this.tabPageAdmin.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBoxActivePlayers
+            // listBoxWaitingPlayers
             // 
-            this.listBoxActivePlayers.FormattingEnabled = true;
-            this.listBoxActivePlayers.ItemHeight = 15;
-            this.listBoxActivePlayers.Location = new System.Drawing.Point(12, 42);
-            this.listBoxActivePlayers.Name = "listBoxActivePlayers";
-            this.listBoxActivePlayers.Size = new System.Drawing.Size(204, 229);
-            this.listBoxActivePlayers.TabIndex = 0;
-            this.listBoxActivePlayers.DoubleClick += new System.EventHandler(this.listBoxActivePlayers_DoubleClick);
+            this.listBoxWaitingPlayers.FormattingEnabled = true;
+            this.listBoxWaitingPlayers.ItemHeight = 15;
+            this.listBoxWaitingPlayers.Location = new System.Drawing.Point(6, 24);
+            this.listBoxWaitingPlayers.Name = "listBoxWaitingPlayers";
+            this.listBoxWaitingPlayers.Size = new System.Drawing.Size(204, 229);
+            this.listBoxWaitingPlayers.TabIndex = 0;
+            this.listBoxWaitingPlayers.DoubleClick += new System.EventHandler(this.listBoxWaitingPlayers_DoubleClick);
             // 
-            // buttonAddPlayer
+            // buttonAddPlayerToSession
             // 
-            this.buttonAddPlayer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPlayer.Location = new System.Drawing.Point(173, 483);
-            this.buttonAddPlayer.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAddPlayer.Name = "buttonAddPlayer";
-            this.buttonAddPlayer.Size = new System.Drawing.Size(43, 44);
-            this.buttonAddPlayer.TabIndex = 1;
-            this.buttonAddPlayer.Text = "+";
-            this.buttonAddPlayer.UseVisualStyleBackColor = true;
-            this.buttonAddPlayer.Click += new System.EventHandler(this.buttonAddPlayer_Click);
+            this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(113, 256);
+            this.buttonAddPlayerToSession.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAddPlayerToSession.Name = "buttonAddPlayerToSession";
+            this.buttonAddPlayerToSession.Size = new System.Drawing.Size(43, 44);
+            this.buttonAddPlayerToSession.TabIndex = 1;
+            this.buttonAddPlayerToSession.Text = "+";
+            this.buttonAddPlayerToSession.UseVisualStyleBackColor = true;
+            this.buttonAddPlayerToSession.Click += new System.EventHandler(this.buttonAddPlayerToSession_Click);
             // 
-            // buttonRemovePlayer
+            // buttonRemovePlayerFromSession
             // 
-            this.buttonRemovePlayer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemovePlayer.Location = new System.Drawing.Point(12, 483);
-            this.buttonRemovePlayer.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRemovePlayer.Name = "buttonRemovePlayer";
-            this.buttonRemovePlayer.Size = new System.Drawing.Size(43, 44);
-            this.buttonRemovePlayer.TabIndex = 2;
-            this.buttonRemovePlayer.Text = "-";
-            this.buttonRemovePlayer.UseVisualStyleBackColor = true;
-            this.buttonRemovePlayer.Click += new System.EventHandler(this.buttonRemovePlayer_Click);
+            this.buttonRemovePlayerFromSession.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(59, 256);
+            this.buttonRemovePlayerFromSession.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonRemovePlayerFromSession.Name = "buttonRemovePlayerFromSession";
+            this.buttonRemovePlayerFromSession.Size = new System.Drawing.Size(43, 44);
+            this.buttonRemovePlayerFromSession.TabIndex = 2;
+            this.buttonRemovePlayerFromSession.Text = "-";
+            this.buttonRemovePlayerFromSession.UseVisualStyleBackColor = true;
+            this.buttonRemovePlayerFromSession.Click += new System.EventHandler(this.buttonRemovePlayerFromSession_Click);
             // 
             // buttonGenerateGame
             // 
             this.buttonGenerateGame.Enabled = false;
-            this.buttonGenerateGame.Location = new System.Drawing.Point(222, 27);
+            this.buttonGenerateGame.Location = new System.Drawing.Point(216, 9);
             this.buttonGenerateGame.Name = "buttonGenerateGame";
             this.buttonGenerateGame.Size = new System.Drawing.Size(118, 31);
             this.buttonGenerateGame.TabIndex = 3;
@@ -155,7 +166,7 @@
             this.panelCourt1.Controls.Add(this.listBoxCourt1Side1);
             this.panelCourt1.Controls.Add(this.labelVsCourt1);
             this.panelCourt1.Enabled = false;
-            this.panelCourt1.Location = new System.Drawing.Point(492, 27);
+            this.panelCourt1.Location = new System.Drawing.Point(631, 6);
             this.panelCourt1.Name = "panelCourt1";
             this.panelCourt1.Size = new System.Drawing.Size(296, 119);
             this.panelCourt1.TabIndex = 8;
@@ -189,7 +200,7 @@
             this.panelCourt2.Controls.Add(this.listBoxCourt2Side1);
             this.panelCourt2.Controls.Add(this.labelVsCourt2);
             this.panelCourt2.Enabled = false;
-            this.panelCourt2.Location = new System.Drawing.Point(492, 152);
+            this.panelCourt2.Location = new System.Drawing.Point(631, 131);
             this.panelCourt2.Name = "panelCourt2";
             this.panelCourt2.Size = new System.Drawing.Size(296, 119);
             this.panelCourt2.TabIndex = 10;
@@ -250,31 +261,31 @@
             this.labelVsCourt2.TabIndex = 6;
             this.labelVsCourt2.Text = "vs";
             // 
-            // listBoxClubPlayers
+            // listBoxRestingPlayers
             // 
-            this.listBoxClubPlayers.FormattingEnabled = true;
-            this.listBoxClubPlayers.ItemHeight = 15;
-            this.listBoxClubPlayers.Location = new System.Drawing.Point(12, 336);
-            this.listBoxClubPlayers.Name = "listBoxClubPlayers";
-            this.listBoxClubPlayers.Size = new System.Drawing.Size(204, 139);
-            this.listBoxClubPlayers.TabIndex = 11;
+            this.listBoxRestingPlayers.FormattingEnabled = true;
+            this.listBoxRestingPlayers.ItemHeight = 15;
+            this.listBoxRestingPlayers.Location = new System.Drawing.Point(6, 318);
+            this.listBoxRestingPlayers.Name = "listBoxRestingPlayers";
+            this.listBoxRestingPlayers.Size = new System.Drawing.Size(204, 184);
+            this.listBoxRestingPlayers.TabIndex = 11;
             // 
             // buttonMoveToActivePlayers
             // 
             this.buttonMoveToActivePlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMoveToActivePlayers.Location = new System.Drawing.Point(173, 274);
+            this.buttonMoveToActivePlayers.Location = new System.Drawing.Point(167, 256);
             this.buttonMoveToActivePlayers.Margin = new System.Windows.Forms.Padding(0);
             this.buttonMoveToActivePlayers.Name = "buttonMoveToActivePlayers";
             this.buttonMoveToActivePlayers.Size = new System.Drawing.Size(43, 44);
             this.buttonMoveToActivePlayers.TabIndex = 12;
             this.buttonMoveToActivePlayers.Text = "^";
             this.buttonMoveToActivePlayers.UseVisualStyleBackColor = true;
-            this.buttonMoveToActivePlayers.Click += new System.EventHandler(this.buttonMoveToActivePlayers_Click);
+            this.buttonMoveToActivePlayers.Click += new System.EventHandler(this.buttonMoveToWaitingPlayers_Click);
             // 
             // buttonRemoveFromActivePlayers
             // 
             this.buttonRemoveFromActivePlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemoveFromActivePlayers.Location = new System.Drawing.Point(12, 274);
+            this.buttonRemoveFromActivePlayers.Location = new System.Drawing.Point(6, 256);
             this.buttonRemoveFromActivePlayers.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRemoveFromActivePlayers.Name = "buttonRemoveFromActivePlayers";
             this.buttonRemoveFromActivePlayers.Size = new System.Drawing.Size(43, 44);
@@ -290,7 +301,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(965, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -317,51 +328,136 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
+            // 
             // timerMatches
             // 
             this.timerMatches.Enabled = true;
             this.timerMatches.Interval = 1000;
             this.timerMatches.Tick += new System.EventHandler(this.timerMatches_Tick);
             // 
-            // labelAvailablePlayers
+            // labelWaitingPlayers
             // 
-            this.labelAvailablePlayers.AutoSize = true;
-            this.labelAvailablePlayers.Location = new System.Drawing.Point(12, 24);
-            this.labelAvailablePlayers.Name = "labelAvailablePlayers";
-            this.labelAvailablePlayers.Size = new System.Drawing.Size(95, 15);
-            this.labelAvailablePlayers.TabIndex = 15;
-            this.labelAvailablePlayers.Text = "Available Players";
+            this.labelWaitingPlayers.AutoSize = true;
+            this.labelWaitingPlayers.Location = new System.Drawing.Point(6, 6);
+            this.labelWaitingPlayers.Name = "labelWaitingPlayers";
+            this.labelWaitingPlayers.Size = new System.Drawing.Size(88, 15);
+            this.labelWaitingPlayers.TabIndex = 15;
+            this.labelWaitingPlayers.Text = "Waiting Players";
             // 
-            // labelAllPlayers
+            // labelRestingPlayers
             // 
-            this.labelAllPlayers.AutoSize = true;
-            this.labelAllPlayers.Location = new System.Drawing.Point(12, 318);
-            this.labelAllPlayers.Name = "labelAllPlayers";
-            this.labelAllPlayers.Size = new System.Drawing.Size(61, 15);
-            this.labelAllPlayers.TabIndex = 16;
-            this.labelAllPlayers.Text = "All Players";
+            this.labelRestingPlayers.AutoSize = true;
+            this.labelRestingPlayers.Location = new System.Drawing.Point(6, 300);
+            this.labelRestingPlayers.Name = "labelRestingPlayers";
+            this.labelRestingPlayers.Size = new System.Drawing.Size(86, 15);
+            this.labelRestingPlayers.TabIndex = 16;
+            this.labelRestingPlayers.Text = "Resting Players";
             // 
-            // toolStripMenuItem1
+            // Session
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(122, 20);
+            this.Session.Controls.Add(this.tabPageAdmin);
+            this.Session.Controls.Add(this.tabPageSession);
+            this.Session.Location = new System.Drawing.Point(12, 27);
+            this.Session.Name = "Session";
+            this.Session.SelectedIndex = 0;
+            this.Session.Size = new System.Drawing.Size(941, 534);
+            this.Session.TabIndex = 17;
+            // 
+            // tabPageSession
+            // 
+            this.tabPageSession.Controls.Add(this.panelCourt1);
+            this.tabPageSession.Controls.Add(this.labelRestingPlayers);
+            this.tabPageSession.Controls.Add(this.panelCourt2);
+            this.tabPageSession.Controls.Add(this.labelWaitingPlayers);
+            this.tabPageSession.Controls.Add(this.buttonRemoveFromActivePlayers);
+            this.tabPageSession.Controls.Add(this.listBoxWaitingPlayers);
+            this.tabPageSession.Controls.Add(this.buttonMoveToActivePlayers);
+            this.tabPageSession.Controls.Add(this.buttonAddPlayerToSession);
+            this.tabPageSession.Controls.Add(this.listBoxRestingPlayers);
+            this.tabPageSession.Controls.Add(this.buttonRemovePlayerFromSession);
+            this.tabPageSession.Controls.Add(this.buttonGenerateGame);
+            this.tabPageSession.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSession.Name = "tabPageSession";
+            this.tabPageSession.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSession.Size = new System.Drawing.Size(933, 506);
+            this.tabPageSession.TabIndex = 0;
+            this.tabPageSession.Text = "Session";
+            this.tabPageSession.UseVisualStyleBackColor = true;
+            // 
+            // tabPageAdmin
+            // 
+            this.tabPageAdmin.Controls.Add(this.labelPlayers);
+            this.tabPageAdmin.Controls.Add(this.listBoxPlayers);
+            this.tabPageAdmin.Controls.Add(this.button2);
+            this.tabPageAdmin.Controls.Add(this.button3);
+            this.tabPageAdmin.Controls.Add(this.button1);
+            this.tabPageAdmin.Location = new System.Drawing.Point(4, 24);
+            this.tabPageAdmin.Name = "tabPageAdmin";
+            this.tabPageAdmin.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAdmin.Size = new System.Drawing.Size(933, 506);
+            this.tabPageAdmin.TabIndex = 1;
+            this.tabPageAdmin.Text = "Admin";
+            this.tabPageAdmin.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(805, 477);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Start New Session";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // labelPlayers
+            // 
+            this.labelPlayers.AutoSize = true;
+            this.labelPlayers.Location = new System.Drawing.Point(6, 32);
+            this.labelPlayers.Name = "labelPlayers";
+            this.labelPlayers.Size = new System.Drawing.Size(44, 15);
+            this.labelPlayers.TabIndex = 19;
+            this.labelPlayers.Text = "Players";
+            // 
+            // listBoxPlayers
+            // 
+            this.listBoxPlayers.FormattingEnabled = true;
+            this.listBoxPlayers.ItemHeight = 15;
+            this.listBoxPlayers.Location = new System.Drawing.Point(6, 50);
+            this.listBoxPlayers.Name = "listBoxPlayers";
+            this.listBoxPlayers.Size = new System.Drawing.Size(204, 229);
+            this.listBoxPlayers.TabIndex = 16;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button2.Location = new System.Drawing.Point(113, 282);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(43, 44);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "+";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button3.Location = new System.Drawing.Point(59, 282);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(43, 44);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "-";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 536);
-            this.Controls.Add(this.labelAllPlayers);
-            this.Controls.Add(this.labelAvailablePlayers);
-            this.Controls.Add(this.buttonRemoveFromActivePlayers);
-            this.Controls.Add(this.buttonMoveToActivePlayers);
-            this.Controls.Add(this.listBoxClubPlayers);
-            this.Controls.Add(this.panelCourt2);
-            this.Controls.Add(this.panelCourt1);
-            this.Controls.Add(this.buttonGenerateGame);
-            this.Controls.Add(this.buttonRemovePlayer);
-            this.Controls.Add(this.buttonAddPlayer);
-            this.Controls.Add(this.listBoxActivePlayers);
+            this.ClientSize = new System.Drawing.Size(965, 570);
+            this.Controls.Add(this.Session);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
@@ -374,6 +470,11 @@
             this.panelCourt2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.Session.ResumeLayout(false);
+            this.tabPageSession.ResumeLayout(false);
+            this.tabPageSession.PerformLayout();
+            this.tabPageAdmin.ResumeLayout(false);
+            this.tabPageAdmin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,9 +482,9 @@
 
         #endregion
 
-        private ListBox listBoxActivePlayers;
-        private Button buttonAddPlayer;
-        private Button buttonRemovePlayer;
+        private ListBox listBoxWaitingPlayers;
+        private Button buttonAddPlayerToSession;
+        private Button buttonRemovePlayerFromSession;
         private Button buttonGenerateGame;
         private ListBox listBoxCourt1Side1;
         private ListBox listBoxCourt1Side2;
@@ -397,7 +498,7 @@
         private Label labelCourt2;
         private ListBox listBoxCourt2Side1;
         private Label labelVsCourt2;
-        private ListBox listBoxClubPlayers;
+        private ListBox listBoxRestingPlayers;
         private Button buttonMoveToActivePlayers;
         private Button buttonRemoveFromActivePlayers;
         private Label labelCourt1MatchTime;
@@ -407,8 +508,16 @@
         private ToolStripMenuItem loadToolStripMenuItem;
         private ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Timer timerMatches;
-        private Label labelAvailablePlayers;
-        private Label labelAllPlayers;
+        private Label labelWaitingPlayers;
+        private Label labelRestingPlayers;
         private ToolStripMenuItem toolStripMenuItem1;
+        private TabControl Session;
+        private TabPage tabPageAdmin;
+        private TabPage tabPageSession;
+        private Label labelPlayers;
+        private ListBox listBoxPlayers;
+        private Button button2;
+        private Button button3;
+        private Button button1;
     }
 }

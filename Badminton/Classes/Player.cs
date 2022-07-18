@@ -25,7 +25,7 @@ namespace Badminton.Classes
 
         [IgnoreDataMember] public string FullName => $"{FirstName} {LastName}";
         [IgnoreDataMember] public string Display => $"[{Elo}] ({MinutesSinceLastMatch}m)\t{FullName}";
-        [IgnoreDataMember] public DateTime LastMatchTime => AllMatchesPlayed.Any() ? AllMatchesPlayed.Last().End!.Value : DateTime.MinValue;
+        [IgnoreDataMember] public DateTime LastMatchTime => AllMatchesPlayed.Any() ? AllMatchesPlayed.Last().EndDate!.Value : DateTime.MinValue;
         [IgnoreDataMember] public int MinutesSinceLastMatch => LastMatchTime != DateTime.MinValue ? (int)(DateTime.Now - LastMatchTime).TotalMinutes : 0;
         [IgnoreDataMember]
         public SkillLevel SkillLevel =>
