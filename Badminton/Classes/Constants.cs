@@ -2,6 +2,7 @@
 {
     public static class Constants
     {
+        public const int MaxNumberOfCourts = 4;
         public const int MinPlayersForGame = 4; // TODO singles?
 
         public const int EloIntermediateLower = 900;
