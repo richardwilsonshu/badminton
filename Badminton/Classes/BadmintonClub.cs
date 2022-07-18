@@ -1,6 +1,6 @@
 ﻿namespace Badminton.Classes
 {
-    public class Badminton
+    public class BadmintonClub
     {
         public Session? CurrentSession { get; set; } = new Session(new int[] { 1, 2, 3, 4 });
 

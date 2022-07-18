@@ -7,7 +7,7 @@ namespace Badminton.Forms
 {
     public partial class MainForm : Form
     {
-        private Classes.Badminton _badminton = new();
+        private BadmintonClub _badmintonClub = new();
 
         public MainForm()
         {
@@ -22,8 +22,8 @@ namespace Badminton.Forms
 
         private void LoadSession(Session session)
         {
-            _badminton.CurrentSession = session;
-            _badminton.Sessions.Add(session);
+            _badmintonClub.CurrentSession = session;
+            _badmintonClub.Sessions.Add(session);
 
             var sessionControl = new SessionControl(session);
             sessionControl.Dock = DockStyle.Fill;
@@ -60,7 +60,7 @@ namespace Badminton.Forms
                 try
                 {
                     using var writer = new StreamWriter(saveFileDialog.OpenFile());
-                    writer.Write(JsonConvert.SerializeObject(_badminton));
+                    writer.Write(JsonConvert.SerializeObject(_badmintonClub));
 
                     MessageBox.Show("Saved", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -84,11 +84,11 @@ namespace Badminton.Forms
                 try
                 {
                     using var reader = new StreamReader(openFileDialog.OpenFile());
-                    _badminton = JsonConvert.DeserializeObject<Classes.Badminton>(reader.ReadToEnd())!;
+                    _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
 
-                    if (_badminton.CurrentSession != null)
+                    if (_badmintonClub.CurrentSession != null)
                     {
-                        LoadSession(_badminton.CurrentSession);
+                        LoadSession(_badmintonClub.CurrentSession);
                     }
                     else
                     {
@@ -101,6 +101,17 @@ namespace Badminton.Forms
                 {
                     MessageBox.Show($"File '{openFileDialog.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void buttonAddPlayer_Click(object sender, EventArgs e)
+        {
+            using var newPlayerDialog = new UserForm();
+
+            if (newPlayerDialog.ShowDialog() == DialogResult.OK && 
+                newPlayerDialog.AddedPlayer != null)
+            {
+                _badmintonClub.Players.Add(newPlayerDialog.AddedPlayer);
             }
         }
     }

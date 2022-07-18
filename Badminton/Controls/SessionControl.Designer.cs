@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelCourt1 = new System.Windows.Forms.Panel();
             this.labelCourt1MatchTime = new System.Windows.Forms.Label();
-            this.buttonStartFinishCourt1 = new System.Windows.Forms.Button();
+            this.buttonFinishCourt1 = new System.Windows.Forms.Button();
             this.listBoxCourt1Side2 = new System.Windows.Forms.ListBox();
             this.labelCourt1 = new System.Windows.Forms.Label();
             this.listBoxCourt1Side1 = new System.Windows.Forms.ListBox();
@@ -44,13 +45,14 @@
             this.listBoxCourt2Side1 = new System.Windows.Forms.ListBox();
             this.labelVsCourt2 = new System.Windows.Forms.Label();
             this.labelWaitingPlayers = new System.Windows.Forms.Label();
-            this.buttonRemoveFromActivePlayers = new System.Windows.Forms.Button();
+            this.buttonRemoveFromWaitingPlayers = new System.Windows.Forms.Button();
             this.listBoxWaitingPlayers = new System.Windows.Forms.ListBox();
-            this.buttonMoveToActivePlayers = new System.Windows.Forms.Button();
+            this.buttonMoveToWaitingPlayers = new System.Windows.Forms.Button();
             this.buttonAddPlayerToSession = new System.Windows.Forms.Button();
             this.listBoxRestingPlayers = new System.Windows.Forms.ListBox();
             this.buttonRemovePlayerFromSession = new System.Windows.Forms.Button();
             this.buttonGenerateGame = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.SuspendLayout();
@@ -59,79 +61,83 @@
             // 
             this.panelCourt1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCourt1.Controls.Add(this.labelCourt1MatchTime);
-            this.panelCourt1.Controls.Add(this.buttonStartFinishCourt1);
+            this.panelCourt1.Controls.Add(this.buttonFinishCourt1);
             this.panelCourt1.Controls.Add(this.listBoxCourt1Side2);
             this.panelCourt1.Controls.Add(this.labelCourt1);
             this.panelCourt1.Controls.Add(this.listBoxCourt1Side1);
             this.panelCourt1.Controls.Add(this.labelVsCourt1);
             this.panelCourt1.Enabled = false;
-            this.panelCourt1.Location = new System.Drawing.Point(637, 13);
+            this.panelCourt1.Location = new System.Drawing.Point(728, 17);
+            this.panelCourt1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelCourt1.Name = "panelCourt1";
-            this.panelCourt1.Size = new System.Drawing.Size(296, 119);
+            this.panelCourt1.Size = new System.Drawing.Size(338, 158);
             this.panelCourt1.TabIndex = 21;
             // 
             // labelCourt1MatchTime
             // 
             this.labelCourt1MatchTime.AutoSize = true;
-            this.labelCourt1MatchTime.Location = new System.Drawing.Point(18, 86);
+            this.labelCourt1MatchTime.Location = new System.Drawing.Point(21, 115);
             this.labelCourt1MatchTime.Name = "labelCourt1MatchTime";
-            this.labelCourt1MatchTime.Size = new System.Drawing.Size(71, 15);
+            this.labelCourt1MatchTime.Size = new System.Drawing.Size(87, 20);
             this.labelCourt1MatchTime.TabIndex = 10;
             this.labelCourt1MatchTime.Text = "Match time:";
             // 
-            // buttonStartFinishCourt1
+            // buttonFinishCourt1
             // 
-            this.buttonStartFinishCourt1.Location = new System.Drawing.Point(164, 78);
-            this.buttonStartFinishCourt1.Name = "buttonStartFinishCourt1";
-            this.buttonStartFinishCourt1.Size = new System.Drawing.Size(118, 31);
-            this.buttonStartFinishCourt1.TabIndex = 9;
-            this.buttonStartFinishCourt1.Text = "Finish";
-            this.buttonStartFinishCourt1.UseVisualStyleBackColor = true;
-            this.buttonStartFinishCourt1.Click += new System.EventHandler(this.buttonFinishCourt1_Click);
+            this.buttonFinishCourt1.Location = new System.Drawing.Point(187, 104);
+            this.buttonFinishCourt1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFinishCourt1.Name = "buttonFinishCourt1";
+            this.buttonFinishCourt1.Size = new System.Drawing.Size(135, 41);
+            this.buttonFinishCourt1.TabIndex = 9;
+            this.buttonFinishCourt1.Text = "Finish";
+            this.buttonFinishCourt1.UseVisualStyleBackColor = true;
+            this.buttonFinishCourt1.Click += new System.EventHandler(this.buttonFinishCourt1_Click);
             // 
             // listBoxCourt1Side2
             // 
             this.listBoxCourt1Side2.FormattingEnabled = true;
-            this.listBoxCourt1Side2.ItemHeight = 15;
-            this.listBoxCourt1Side2.Location = new System.Drawing.Point(164, 38);
+            this.listBoxCourt1Side2.ItemHeight = 20;
+            this.listBoxCourt1Side2.Location = new System.Drawing.Point(187, 51);
+            this.listBoxCourt1Side2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxCourt1Side2.Name = "listBoxCourt1Side2";
-            this.listBoxCourt1Side2.Size = new System.Drawing.Size(116, 34);
+            this.listBoxCourt1Side2.Size = new System.Drawing.Size(132, 44);
             this.listBoxCourt1Side2.TabIndex = 5;
             // 
             // labelCourt1
             // 
             this.labelCourt1.AutoSize = true;
             this.labelCourt1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt1.Location = new System.Drawing.Point(125, 7);
+            this.labelCourt1.Location = new System.Drawing.Point(143, 9);
             this.labelCourt1.Name = "labelCourt1";
-            this.labelCourt1.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt1.Size = new System.Drawing.Size(61, 20);
             this.labelCourt1.TabIndex = 7;
             this.labelCourt1.Text = "Court 1";
             // 
             // listBoxCourt1Side1
             // 
             this.listBoxCourt1Side1.FormattingEnabled = true;
-            this.listBoxCourt1Side1.ItemHeight = 15;
-            this.listBoxCourt1Side1.Location = new System.Drawing.Point(18, 38);
+            this.listBoxCourt1Side1.ItemHeight = 20;
+            this.listBoxCourt1Side1.Location = new System.Drawing.Point(21, 51);
+            this.listBoxCourt1Side1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxCourt1Side1.Name = "listBoxCourt1Side1";
-            this.listBoxCourt1Side1.Size = new System.Drawing.Size(116, 34);
+            this.listBoxCourt1Side1.Size = new System.Drawing.Size(132, 44);
             this.listBoxCourt1Side1.TabIndex = 4;
             // 
             // labelVsCourt1
             // 
             this.labelVsCourt1.AutoSize = true;
-            this.labelVsCourt1.Location = new System.Drawing.Point(140, 47);
+            this.labelVsCourt1.Location = new System.Drawing.Point(160, 63);
             this.labelVsCourt1.Name = "labelVsCourt1";
-            this.labelVsCourt1.Size = new System.Drawing.Size(18, 15);
+            this.labelVsCourt1.Size = new System.Drawing.Size(22, 20);
             this.labelVsCourt1.TabIndex = 6;
             this.labelVsCourt1.Text = "vs";
             // 
             // labelRestingPlayers
             // 
             this.labelRestingPlayers.AutoSize = true;
-            this.labelRestingPlayers.Location = new System.Drawing.Point(12, 307);
+            this.labelRestingPlayers.Location = new System.Drawing.Point(14, 409);
             this.labelRestingPlayers.Name = "labelRestingPlayers";
-            this.labelRestingPlayers.Size = new System.Drawing.Size(86, 15);
+            this.labelRestingPlayers.Size = new System.Drawing.Size(108, 20);
             this.labelRestingPlayers.TabIndex = 27;
             this.labelRestingPlayers.Text = "Resting Players";
             // 
@@ -145,25 +151,27 @@
             this.panelCourt2.Controls.Add(this.listBoxCourt2Side1);
             this.panelCourt2.Controls.Add(this.labelVsCourt2);
             this.panelCourt2.Enabled = false;
-            this.panelCourt2.Location = new System.Drawing.Point(637, 138);
+            this.panelCourt2.Location = new System.Drawing.Point(728, 184);
+            this.panelCourt2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelCourt2.Name = "panelCourt2";
-            this.panelCourt2.Size = new System.Drawing.Size(296, 119);
+            this.panelCourt2.Size = new System.Drawing.Size(338, 158);
             this.panelCourt2.TabIndex = 22;
             // 
             // labelCourt2MatchTime
             // 
             this.labelCourt2MatchTime.AutoSize = true;
-            this.labelCourt2MatchTime.Location = new System.Drawing.Point(18, 86);
+            this.labelCourt2MatchTime.Location = new System.Drawing.Point(21, 115);
             this.labelCourt2MatchTime.Name = "labelCourt2MatchTime";
-            this.labelCourt2MatchTime.Size = new System.Drawing.Size(71, 15);
+            this.labelCourt2MatchTime.Size = new System.Drawing.Size(87, 20);
             this.labelCourt2MatchTime.TabIndex = 11;
             this.labelCourt2MatchTime.Text = "Match time:";
             // 
             // buttonFinishCourt2
             // 
-            this.buttonFinishCourt2.Location = new System.Drawing.Point(164, 78);
+            this.buttonFinishCourt2.Location = new System.Drawing.Point(187, 104);
+            this.buttonFinishCourt2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonFinishCourt2.Name = "buttonFinishCourt2";
-            this.buttonFinishCourt2.Size = new System.Drawing.Size(118, 31);
+            this.buttonFinishCourt2.Size = new System.Drawing.Size(135, 41);
             this.buttonFinishCourt2.TabIndex = 9;
             this.buttonFinishCourt2.Text = "Finish";
             this.buttonFinishCourt2.UseVisualStyleBackColor = true;
@@ -172,90 +180,93 @@
             // listBoxCourt2Side2
             // 
             this.listBoxCourt2Side2.FormattingEnabled = true;
-            this.listBoxCourt2Side2.ItemHeight = 15;
-            this.listBoxCourt2Side2.Location = new System.Drawing.Point(164, 38);
+            this.listBoxCourt2Side2.ItemHeight = 20;
+            this.listBoxCourt2Side2.Location = new System.Drawing.Point(187, 51);
+            this.listBoxCourt2Side2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxCourt2Side2.Name = "listBoxCourt2Side2";
-            this.listBoxCourt2Side2.Size = new System.Drawing.Size(116, 34);
+            this.listBoxCourt2Side2.Size = new System.Drawing.Size(132, 44);
             this.listBoxCourt2Side2.TabIndex = 5;
             // 
             // labelCourt2
             // 
             this.labelCourt2.AutoSize = true;
             this.labelCourt2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt2.Location = new System.Drawing.Point(125, 7);
+            this.labelCourt2.Location = new System.Drawing.Point(143, 9);
             this.labelCourt2.Name = "labelCourt2";
-            this.labelCourt2.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt2.Size = new System.Drawing.Size(61, 20);
             this.labelCourt2.TabIndex = 7;
             this.labelCourt2.Text = "Court 2";
             // 
             // listBoxCourt2Side1
             // 
             this.listBoxCourt2Side1.FormattingEnabled = true;
-            this.listBoxCourt2Side1.ItemHeight = 15;
-            this.listBoxCourt2Side1.Location = new System.Drawing.Point(18, 38);
+            this.listBoxCourt2Side1.ItemHeight = 20;
+            this.listBoxCourt2Side1.Location = new System.Drawing.Point(21, 51);
+            this.listBoxCourt2Side1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxCourt2Side1.Name = "listBoxCourt2Side1";
-            this.listBoxCourt2Side1.Size = new System.Drawing.Size(116, 34);
+            this.listBoxCourt2Side1.Size = new System.Drawing.Size(132, 44);
             this.listBoxCourt2Side1.TabIndex = 4;
             // 
             // labelVsCourt2
             // 
             this.labelVsCourt2.AutoSize = true;
-            this.labelVsCourt2.Location = new System.Drawing.Point(140, 47);
+            this.labelVsCourt2.Location = new System.Drawing.Point(160, 63);
             this.labelVsCourt2.Name = "labelVsCourt2";
-            this.labelVsCourt2.Size = new System.Drawing.Size(18, 15);
+            this.labelVsCourt2.Size = new System.Drawing.Size(22, 20);
             this.labelVsCourt2.TabIndex = 6;
             this.labelVsCourt2.Text = "vs";
             // 
             // labelWaitingPlayers
             // 
             this.labelWaitingPlayers.AutoSize = true;
-            this.labelWaitingPlayers.Location = new System.Drawing.Point(12, 13);
+            this.labelWaitingPlayers.Location = new System.Drawing.Point(14, 17);
             this.labelWaitingPlayers.Name = "labelWaitingPlayers";
-            this.labelWaitingPlayers.Size = new System.Drawing.Size(88, 15);
+            this.labelWaitingPlayers.Size = new System.Drawing.Size(110, 20);
             this.labelWaitingPlayers.TabIndex = 26;
             this.labelWaitingPlayers.Text = "Waiting Players";
             // 
-            // buttonRemoveFromActivePlayers
+            // buttonRemoveFromWaitingPlayers
             // 
-            this.buttonRemoveFromActivePlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemoveFromActivePlayers.Location = new System.Drawing.Point(12, 263);
-            this.buttonRemoveFromActivePlayers.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRemoveFromActivePlayers.Name = "buttonRemoveFromActivePlayers";
-            this.buttonRemoveFromActivePlayers.Size = new System.Drawing.Size(43, 44);
-            this.buttonRemoveFromActivePlayers.TabIndex = 25;
-            this.buttonRemoveFromActivePlayers.Text = "v";
-            this.buttonRemoveFromActivePlayers.UseVisualStyleBackColor = true;
-            this.buttonRemoveFromActivePlayers.Click += new System.EventHandler(this.buttonRemoveFromWaitingPlayers_Click);
+            this.buttonRemoveFromWaitingPlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRemoveFromWaitingPlayers.Location = new System.Drawing.Point(14, 351);
+            this.buttonRemoveFromWaitingPlayers.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonRemoveFromWaitingPlayers.Name = "buttonRemoveFromWaitingPlayers";
+            this.buttonRemoveFromWaitingPlayers.Size = new System.Drawing.Size(49, 59);
+            this.buttonRemoveFromWaitingPlayers.TabIndex = 25;
+            this.buttonRemoveFromWaitingPlayers.Text = "v";
+            this.buttonRemoveFromWaitingPlayers.UseVisualStyleBackColor = true;
+            this.buttonRemoveFromWaitingPlayers.Click += new System.EventHandler(this.buttonRemoveFromWaitingPlayers_Click);
             // 
             // listBoxWaitingPlayers
             // 
             this.listBoxWaitingPlayers.FormattingEnabled = true;
-            this.listBoxWaitingPlayers.ItemHeight = 15;
-            this.listBoxWaitingPlayers.Location = new System.Drawing.Point(12, 31);
+            this.listBoxWaitingPlayers.ItemHeight = 20;
+            this.listBoxWaitingPlayers.Location = new System.Drawing.Point(14, 41);
+            this.listBoxWaitingPlayers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxWaitingPlayers.Name = "listBoxWaitingPlayers";
-            this.listBoxWaitingPlayers.Size = new System.Drawing.Size(204, 229);
+            this.listBoxWaitingPlayers.Size = new System.Drawing.Size(233, 304);
             this.listBoxWaitingPlayers.TabIndex = 17;
             this.listBoxWaitingPlayers.DoubleClick += new System.EventHandler(this.listBoxWaitingPlayers_DoubleClick);
             // 
-            // buttonMoveToActivePlayers
+            // buttonMoveToWaitingPlayers
             // 
-            this.buttonMoveToActivePlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMoveToActivePlayers.Location = new System.Drawing.Point(173, 263);
-            this.buttonMoveToActivePlayers.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonMoveToActivePlayers.Name = "buttonMoveToActivePlayers";
-            this.buttonMoveToActivePlayers.Size = new System.Drawing.Size(43, 44);
-            this.buttonMoveToActivePlayers.TabIndex = 24;
-            this.buttonMoveToActivePlayers.Text = "^";
-            this.buttonMoveToActivePlayers.UseVisualStyleBackColor = true;
-            this.buttonMoveToActivePlayers.Click += new System.EventHandler(this.buttonMoveToWaitingPlayers_Click);
+            this.buttonMoveToWaitingPlayers.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMoveToWaitingPlayers.Location = new System.Drawing.Point(198, 351);
+            this.buttonMoveToWaitingPlayers.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonMoveToWaitingPlayers.Name = "buttonMoveToWaitingPlayers";
+            this.buttonMoveToWaitingPlayers.Size = new System.Drawing.Size(49, 59);
+            this.buttonMoveToWaitingPlayers.TabIndex = 24;
+            this.buttonMoveToWaitingPlayers.Text = "^";
+            this.buttonMoveToWaitingPlayers.UseVisualStyleBackColor = true;
+            this.buttonMoveToWaitingPlayers.Click += new System.EventHandler(this.buttonMoveToWaitingPlayers_Click);
             // 
             // buttonAddPlayerToSession
             // 
             this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(119, 263);
+            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(136, 351);
             this.buttonAddPlayerToSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddPlayerToSession.Name = "buttonAddPlayerToSession";
-            this.buttonAddPlayerToSession.Size = new System.Drawing.Size(43, 44);
+            this.buttonAddPlayerToSession.Size = new System.Drawing.Size(49, 59);
             this.buttonAddPlayerToSession.TabIndex = 18;
             this.buttonAddPlayerToSession.Text = "+";
             this.buttonAddPlayerToSession.UseVisualStyleBackColor = true;
@@ -264,19 +275,20 @@
             // listBoxRestingPlayers
             // 
             this.listBoxRestingPlayers.FormattingEnabled = true;
-            this.listBoxRestingPlayers.ItemHeight = 15;
-            this.listBoxRestingPlayers.Location = new System.Drawing.Point(12, 325);
+            this.listBoxRestingPlayers.ItemHeight = 20;
+            this.listBoxRestingPlayers.Location = new System.Drawing.Point(14, 433);
+            this.listBoxRestingPlayers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBoxRestingPlayers.Name = "listBoxRestingPlayers";
-            this.listBoxRestingPlayers.Size = new System.Drawing.Size(204, 184);
+            this.listBoxRestingPlayers.Size = new System.Drawing.Size(233, 244);
             this.listBoxRestingPlayers.TabIndex = 23;
             // 
             // buttonRemovePlayerFromSession
             // 
             this.buttonRemovePlayerFromSession.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(65, 263);
+            this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(74, 351);
             this.buttonRemovePlayerFromSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRemovePlayerFromSession.Name = "buttonRemovePlayerFromSession";
-            this.buttonRemovePlayerFromSession.Size = new System.Drawing.Size(43, 44);
+            this.buttonRemovePlayerFromSession.Size = new System.Drawing.Size(49, 59);
             this.buttonRemovePlayerFromSession.TabIndex = 19;
             this.buttonRemovePlayerFromSession.Text = "-";
             this.buttonRemovePlayerFromSession.UseVisualStyleBackColor = true;
@@ -285,31 +297,38 @@
             // buttonGenerateGame
             // 
             this.buttonGenerateGame.Enabled = false;
-            this.buttonGenerateGame.Location = new System.Drawing.Point(222, 16);
+            this.buttonGenerateGame.Location = new System.Drawing.Point(254, 21);
+            this.buttonGenerateGame.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonGenerateGame.Name = "buttonGenerateGame";
-            this.buttonGenerateGame.Size = new System.Drawing.Size(118, 31);
+            this.buttonGenerateGame.Size = new System.Drawing.Size(135, 41);
             this.buttonGenerateGame.TabIndex = 20;
             this.buttonGenerateGame.Text = "Generate Game";
             this.buttonGenerateGame.UseVisualStyleBackColor = true;
             this.buttonGenerateGame.Click += new System.EventHandler(this.buttonGenerateGame_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // SessionControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.panelCourt1);
             this.Controls.Add(this.labelRestingPlayers);
             this.Controls.Add(this.panelCourt2);
             this.Controls.Add(this.labelWaitingPlayers);
-            this.Controls.Add(this.buttonRemoveFromActivePlayers);
+            this.Controls.Add(this.buttonRemoveFromWaitingPlayers);
             this.Controls.Add(this.listBoxWaitingPlayers);
-            this.Controls.Add(this.buttonMoveToActivePlayers);
+            this.Controls.Add(this.buttonMoveToWaitingPlayers);
             this.Controls.Add(this.buttonAddPlayerToSession);
             this.Controls.Add(this.listBoxRestingPlayers);
             this.Controls.Add(this.buttonRemovePlayerFromSession);
             this.Controls.Add(this.buttonGenerateGame);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SessionControl";
-            this.Size = new System.Drawing.Size(941, 520);
+            this.Size = new System.Drawing.Size(1075, 693);
             this.panelCourt1.ResumeLayout(false);
             this.panelCourt1.PerformLayout();
             this.panelCourt2.ResumeLayout(false);
@@ -323,7 +342,7 @@
 
         private Panel panelCourt1;
         private Label labelCourt1MatchTime;
-        private Button buttonStartFinishCourt1;
+        private Button buttonFinishCourt1;
         private ListBox listBoxCourt1Side2;
         private Label labelCourt1;
         private ListBox listBoxCourt1Side1;
@@ -337,12 +356,13 @@
         private ListBox listBoxCourt2Side1;
         private Label labelVsCourt2;
         private Label labelWaitingPlayers;
-        private Button buttonRemoveFromActivePlayers;
+        private Button buttonRemoveFromWaitingPlayers;
         private ListBox listBoxWaitingPlayers;
-        private Button buttonMoveToActivePlayers;
+        private Button buttonMoveToWaitingPlayers;
         private Button buttonAddPlayerToSession;
         private ListBox listBoxRestingPlayers;
         private Button buttonRemovePlayerFromSession;
         private Button buttonGenerateGame;
+        private System.Windows.Forms.Timer timer1;
     }
 }

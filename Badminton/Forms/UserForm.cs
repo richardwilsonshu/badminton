@@ -5,13 +5,13 @@ namespace Badminton.Forms
 {
     public partial class UserForm : Form
     {
-        private readonly Session _session;
+        public Player? AddedPlayer { get; set; } = null;
+
         private readonly Player? _existingPlayer;
         private int _originalElo = 0;
 
-        public UserForm(Session session, Player? existingPlayer = null)
+        public UserForm(Player? existingPlayer = null)
         {
-            _session = session;
             _existingPlayer = existingPlayer;
 
             InitializeComponent();
@@ -71,7 +71,7 @@ namespace Badminton.Forms
         {
             if (_existingPlayer == null)
             {
-                AddPlayer();
+                AddedPlayer = CreatePlayer();
             }
             else
             {
@@ -81,17 +81,17 @@ namespace Badminton.Forms
             Close();
         }
 
-        private void AddPlayer()
+        private Player? CreatePlayer()
         {
             if (!int.TryParse(textBoxElo.Text, out var elo))
             {
-                return;
+                return null;
             }
 
             var newPlayer = new Player(textBoxFirstName.Text, textBoxLastName.Text,
                 (Gender)comboGender.SelectedValue, elo);
 
-            _session.WaitingPlayers.Add(newPlayer);
+            return newPlayer;
         }
 
         private void EditPlayer()
