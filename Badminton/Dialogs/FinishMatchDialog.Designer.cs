@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonFinish = new System.Windows.Forms.Button();
             this.labelCourtTitle = new System.Windows.Forms.Label();
             this.labelSide1Players = new System.Windows.Forms.Label();
             this.labelSide1Score = new System.Windows.Forms.Label();
@@ -38,28 +37,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelSide2Players = new System.Windows.Forms.Label();
             this.checkBoxNoElo = new System.Windows.Forms.CheckBox();
+            this.buttonAbandon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // buttonFinish
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 243);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonSave.Location = new System.Drawing.Point(143, 243);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 5;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonFinish.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonFinish.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonFinish.Location = new System.Drawing.Point(132, 235);
+            this.buttonFinish.Name = "buttonFinish";
+            this.buttonFinish.Size = new System.Drawing.Size(75, 31);
+            this.buttonFinish.TabIndex = 5;
+            this.buttonFinish.Text = "Finish";
+            this.buttonFinish.UseVisualStyleBackColor = true;
+            this.buttonFinish.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelCourtTitle
             // 
@@ -119,7 +110,7 @@
             this.labelSide2Players.Name = "labelSide2Players";
             this.labelSide2Players.Size = new System.Drawing.Size(105, 15);
             this.labelSide2Players.TabIndex = 6;
-            this.labelSide2Players.Text = "Player 1 && Player 2";
+            this.labelSide2Players.Text = "Player 3 && Player 4";
             // 
             // checkBoxNoElo
             // 
@@ -131,12 +122,22 @@
             this.checkBoxNoElo.Text = "Not a ranked game";
             this.checkBoxNoElo.UseVisualStyleBackColor = true;
             // 
-            // FinishMatchForm
+            // buttonAbandon
+            // 
+            this.buttonAbandon.DialogResult = System.Windows.Forms.DialogResult.Abort;
+            this.buttonAbandon.Location = new System.Drawing.Point(12, 235);
+            this.buttonAbandon.Name = "buttonAbandon";
+            this.buttonAbandon.Size = new System.Drawing.Size(75, 31);
+            this.buttonAbandon.TabIndex = 8;
+            this.buttonAbandon.Text = "Abandon";
+            this.buttonAbandon.UseVisualStyleBackColor = true;
+            // 
+            // FinishMatchDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 278);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(219, 278);
+            this.Controls.Add(this.buttonAbandon);
             this.Controls.Add(this.checkBoxNoElo);
             this.Controls.Add(this.textBoxSide2Score);
             this.Controls.Add(this.label1);
@@ -145,10 +146,11 @@
             this.Controls.Add(this.labelSide1Score);
             this.Controls.Add(this.labelSide1Players);
             this.Controls.Add(this.labelCourtTitle);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonFinish);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FinishMatchForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FinishMatchDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Finish Match";
             this.ResumeLayout(false);
@@ -157,9 +159,7 @@
         }
 
         #endregion
-
-        private Button buttonCancel;
-        private Button buttonSave;
+        private Button buttonFinish;
         private Label labelCourtTitle;
         private Label labelSide1Players;
         private Label labelSide1Score;
@@ -168,5 +168,6 @@
         private Label label1;
         private Label labelSide2Players;
         private CheckBox checkBoxNoElo;
+        private Button buttonAbandon;
     }
 }

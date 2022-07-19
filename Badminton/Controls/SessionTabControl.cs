@@ -5,14 +5,13 @@ namespace Badminton.Controls
 {
     public partial class SessionTabControl : UserControl
     {
-        public event EventHandler? SessionEnded;
-
         private BadmintonClub _badmintonClub = new();
         private Session Session => _badmintonClub.CurrentSession!;
 
         public SessionTabControl()
         {
             InitializeComponent();
+            SetBadmintonClub(_badmintonClub);
         }
 
         public void SetBadmintonClub(BadmintonClub badmintonClub) 
@@ -33,6 +32,8 @@ namespace Badminton.Controls
 
             listBoxWaitingPlayers.CustomTabOffsets.Add(50);
             listBoxWaitingPlayers.UseCustomTabOffsets = true;
+
+            comboBoxCourtsAvailable.SelectedIndex = comboBoxCourtsAvailable.Items.Count - 1;
         }
 
         private void BindCourt1()
@@ -44,8 +45,8 @@ namespace Badminton.Controls
                 return;
             }
 
-            listBoxCourt1Side1.BindPlayers(match.Side1Players);
-            listBoxCourt1Side2.BindPlayers(match.Side2Players);
+            listBoxCourt1Team1.BindPlayers(match.Side1Players);
+            listBoxCourt1Team2.BindPlayers(match.Side2Players);
             panelCourt1.Enabled = true;
         }
         private void BindCourt2()
@@ -57,14 +58,14 @@ namespace Badminton.Controls
                 return;
             }
 
-            listBoxCourt2Side1.BindPlayers(match.Side1Players);
-            listBoxCourt2Side2.BindPlayers(match.Side2Players);
+            listBoxCourt2Team1.BindPlayers(match.Side1Players);
+            listBoxCourt2Team2.BindPlayers(match.Side2Players);
             panelCourt2.Enabled = true;
         }
 
         private void EnableOrDisableGenerateGameButtons()
         {
-            buttonGenerateGame.Enabled = Session.CanGenerateMatch;
+            //buttonGenerateGame.Enabled = Session.CanGenerateMatch;
         }
 
         private void buttonAddPlayerToSession_Click(object sender, EventArgs e)
@@ -87,7 +88,7 @@ namespace Badminton.Controls
             }
         }
 
-        private void buttonMoveToWaitingPlayers_Click(object sender, EventArgs e)
+        private void buttonEndRest_Click(object sender, EventArgs e)
         {
             if (listBoxRestingPlayers.SelectedItem is not Player player)
             {
@@ -100,7 +101,7 @@ namespace Badminton.Controls
             EnableOrDisableGenerateGameButtons();
         }
 
-        private void buttonRemoveFromWaitingPlayers_Click(object sender, EventArgs e)
+        private void buttonRestPlayer_Click(object sender, EventArgs e)
         {
             if (listBoxWaitingPlayers.SelectedItem is not Player player)
             {
@@ -159,8 +160,8 @@ namespace Badminton.Controls
             EnableOrDisableGenerateGameButtons();
 
             panelCourt1.Enabled = false;
-            listBoxCourt1Side1.DataSource = null;
-            listBoxCourt1Side2.DataSource = null;
+            listBoxCourt1Team1.DataSource = null;
+            listBoxCourt1Team2.DataSource = null;
         }
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)
@@ -184,8 +185,8 @@ namespace Badminton.Controls
             EnableOrDisableGenerateGameButtons();
 
             panelCourt2.Enabled = false;
-            listBoxCourt2Side1.DataSource = null;
-            listBoxCourt2Side2.DataSource = null;
+            listBoxCourt2Team1.DataSource = null;
+            listBoxCourt2Team2.DataSource = null;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -218,31 +219,25 @@ namespace Badminton.Controls
             }
         }
 
-        private void listBoxWaitingPlayers_DoubleClick(object sender, EventArgs e)
-        {
-            if (listBoxWaitingPlayers.SelectedItem is not Player player)
-            {
-                return;
-            }
-
-            // TODO some sort of new player view control?
-            // e.g. games played, other stats, read-only info?
-
-            //using var playerDialog = new AddEditPlayerDialog(player);
-            
-            //if (playerDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    var newPlayer = playerDialog.AddedPlayer;
-            //}
-        }
-
         private void buttonEndSession_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show("Are you sure you want to end the current session?", "Confirm End Session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                SessionEnded?.Invoke(this, EventArgs.Empty);
+                _badmintonClub.CurrentSession = null;
             }
+        }
+
+        private void buttonStartSession_Click(object sender, EventArgs e)
+        {
+            //comboBoxCourtsAvailable.SelectedValue
+
+            //_badmintonClub.CurrentSession = new Session();
+        }
+
+        private void buttonMoveToWaitingPlayers_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

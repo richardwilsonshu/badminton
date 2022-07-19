@@ -6,7 +6,6 @@ namespace Badminton.Forms
     public partial class MainForm : Form
     {
         private BadmintonClub _badmintonClub = new();
-        private List<TabPage> _hiddenPages = new();
 
         public MainForm()
         {
@@ -16,53 +15,12 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
-            EnablePage(tabPageActiveSession, false);
-        }
-
-        /// <remarks>See https://stackoverflow.com/a/3365490 for more info</remarks>
-        private void EnablePage(TabPage page, bool enable)
-        {
-            if (enable)
-            {
-                Tabs.TabPages.Add(page);
-                _hiddenPages.Remove(page);
-            }
-            else
-            {
-                Tabs.TabPages.Remove(page);
-                _hiddenPages.Add(page);
-            }
-        }
-
-        private void ShowHideTabs()
-        {
-            if (_badmintonClub.CurrentSession != null)
-            {
-                EnablePage(tabPageNoSession, false);
-                EnablePage(tabPageActiveSession, true);
-            }
-            else
-            {
-                EnablePage(tabPageActiveSession, false);
-                EnablePage(tabPageNoSession, true);
-            }
-        }
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            foreach (var page in _hiddenPages)
-            {
-                page.Dispose();
-            }
-            base.OnFormClosed(e);
         }
 
         private void LoadSession(Session session)
         {
             _badmintonClub.CurrentSession = session;
             _badmintonClub.Sessions.Add(session);
-
-            ShowHideTabs();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,8 +68,6 @@ namespace Badminton.Forms
                     {
                         LoadSession(_badmintonClub.CurrentSession);
                     }
-
-                    ShowHideTabs();
 
                     MessageBox.Show("Loaded", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

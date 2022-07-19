@@ -29,121 +29,94 @@
         private void InitializeComponent()
         {
             this.buttonAddToSession = new System.Windows.Forms.Button();
-            this.listBoxSessionPlayers = new System.Windows.Forms.ListBox();
-            this.buttonRemoveFromSession = new System.Windows.Forms.Button();
-            this.labelSessionPlayers = new System.Windows.Forms.Label();
-            this.labelClubPlayers = new System.Windows.Forms.Label();
             this.listBoxPlayers = new System.Windows.Forms.ListBox();
-            this.buttonAddPlayer = new System.Windows.Forms.Button();
-            this.buttonRemovePlayer = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonAddNewPlayer = new System.Windows.Forms.Button();
+            this.textBoxPlayerName = new System.Windows.Forms.TextBox();
+            this.labelNewPlayerName = new System.Windows.Forms.Label();
+            this.panelNewPlayer = new System.Windows.Forms.Panel();
+            this.comboBoxGender = new System.Windows.Forms.ComboBox();
+            this.labelNewPlayerGender = new System.Windows.Forms.Label();
+            this.panelNewPlayer.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddToSession
             // 
             this.buttonAddToSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddToSession.Location = new System.Drawing.Point(222, 117);
+            this.buttonAddToSession.Location = new System.Drawing.Point(222, 12);
             this.buttonAddToSession.Name = "buttonAddToSession";
-            this.buttonAddToSession.Size = new System.Drawing.Size(75, 38);
+            this.buttonAddToSession.Size = new System.Drawing.Size(115, 86);
             this.buttonAddToSession.TabIndex = 1;
-            this.buttonAddToSession.Text = ">>";
+            this.buttonAddToSession.Text = "Add Player To Session";
             this.buttonAddToSession.UseVisualStyleBackColor = true;
             this.buttonAddToSession.Click += new System.EventHandler(this.buttonAddToSession_Click);
-            // 
-            // listBoxSessionPlayers
-            // 
-            this.listBoxSessionPlayers.FormattingEnabled = true;
-            this.listBoxSessionPlayers.ItemHeight = 15;
-            this.listBoxSessionPlayers.Location = new System.Drawing.Point(303, 40);
-            this.listBoxSessionPlayers.Name = "listBoxSessionPlayers";
-            this.listBoxSessionPlayers.Size = new System.Drawing.Size(217, 274);
-            this.listBoxSessionPlayers.TabIndex = 2;
-            // 
-            // buttonRemoveFromSession
-            // 
-            this.buttonRemoveFromSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemoveFromSession.Location = new System.Drawing.Point(222, 161);
-            this.buttonRemoveFromSession.Name = "buttonRemoveFromSession";
-            this.buttonRemoveFromSession.Size = new System.Drawing.Size(75, 38);
-            this.buttonRemoveFromSession.TabIndex = 3;
-            this.buttonRemoveFromSession.Text = "<<";
-            this.buttonRemoveFromSession.UseVisualStyleBackColor = true;
-            this.buttonRemoveFromSession.Click += new System.EventHandler(this.buttonRemoveFromSession_Click);
-            // 
-            // labelSessionPlayers
-            // 
-            this.labelSessionPlayers.AutoSize = true;
-            this.labelSessionPlayers.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSessionPlayers.Location = new System.Drawing.Point(347, 12);
-            this.labelSessionPlayers.Name = "labelSessionPlayers";
-            this.labelSessionPlayers.Size = new System.Drawing.Size(140, 25);
-            this.labelSessionPlayers.TabIndex = 4;
-            this.labelSessionPlayers.Text = "Session Players";
-            // 
-            // labelClubPlayers
-            // 
-            this.labelClubPlayers.AutoSize = true;
-            this.labelClubPlayers.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelClubPlayers.Location = new System.Drawing.Point(75, 12);
-            this.labelClubPlayers.Name = "labelClubPlayers";
-            this.labelClubPlayers.Size = new System.Drawing.Size(72, 25);
-            this.labelClubPlayers.TabIndex = 27;
-            this.labelClubPlayers.Text = "Players";
             // 
             // listBoxPlayers
             // 
             this.listBoxPlayers.FormattingEnabled = true;
             this.listBoxPlayers.ItemHeight = 15;
-            this.listBoxPlayers.Location = new System.Drawing.Point(12, 40);
+            this.listBoxPlayers.Location = new System.Drawing.Point(12, 10);
             this.listBoxPlayers.Name = "listBoxPlayers";
-            this.listBoxPlayers.Size = new System.Drawing.Size(204, 244);
+            this.listBoxPlayers.Size = new System.Drawing.Size(204, 274);
             this.listBoxPlayers.TabIndex = 24;
             // 
-            // buttonAddPlayer
+            // buttonAddNewPlayer
             // 
-            this.buttonAddPlayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPlayer.Location = new System.Drawing.Point(120, 287);
-            this.buttonAddPlayer.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonAddPlayer.Name = "buttonAddPlayer";
-            this.buttonAddPlayer.Size = new System.Drawing.Size(96, 26);
-            this.buttonAddPlayer.TabIndex = 25;
-            this.buttonAddPlayer.Text = "Add";
-            this.buttonAddPlayer.UseVisualStyleBackColor = true;
-            this.buttonAddPlayer.Click += new System.EventHandler(this.buttonAddPlayer_Click);
+            this.buttonAddNewPlayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddNewPlayer.Location = new System.Drawing.Point(9, 56);
+            this.buttonAddNewPlayer.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonAddNewPlayer.Name = "buttonAddNewPlayer";
+            this.buttonAddNewPlayer.Size = new System.Drawing.Size(122, 26);
+            this.buttonAddNewPlayer.TabIndex = 25;
+            this.buttonAddNewPlayer.Text = "Add New Player";
+            this.buttonAddNewPlayer.UseVisualStyleBackColor = true;
+            this.buttonAddNewPlayer.Click += new System.EventHandler(this.buttonAddPlayer_Click);
             // 
-            // buttonRemovePlayer
+            // textBoxPlayerName
             // 
-            this.buttonRemovePlayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemovePlayer.Location = new System.Drawing.Point(12, 287);
-            this.buttonRemovePlayer.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRemovePlayer.Name = "buttonRemovePlayer";
-            this.buttonRemovePlayer.Size = new System.Drawing.Size(96, 26);
-            this.buttonRemovePlayer.TabIndex = 26;
-            this.buttonRemovePlayer.Text = "Remove";
-            this.buttonRemovePlayer.UseVisualStyleBackColor = true;
-            this.buttonRemovePlayer.Click += new System.EventHandler(this.buttonRemovePlayer_Click);
+            this.textBoxPlayerName.Location = new System.Drawing.Point(9, 30);
+            this.textBoxPlayerName.Name = "textBoxPlayerName";
+            this.textBoxPlayerName.Size = new System.Drawing.Size(194, 23);
+            this.textBoxPlayerName.TabIndex = 28;
             // 
-            // buttonSave
+            // labelNewPlayerName
             // 
-            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonSave.Location = new System.Drawing.Point(445, 321);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 28;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.labelNewPlayerName.AutoSize = true;
+            this.labelNewPlayerName.Location = new System.Drawing.Point(9, 12);
+            this.labelNewPlayerName.Name = "labelNewPlayerName";
+            this.labelNewPlayerName.Size = new System.Drawing.Size(101, 15);
+            this.labelNewPlayerName.TabIndex = 29;
+            this.labelNewPlayerName.Text = "New Player Name";
             // 
-            // buttonCancel
+            // panelNewPlayer
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(364, 321);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 29;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.panelNewPlayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNewPlayer.Controls.Add(this.comboBoxGender);
+            this.panelNewPlayer.Controls.Add(this.labelNewPlayerGender);
+            this.panelNewPlayer.Controls.Add(this.textBoxPlayerName);
+            this.panelNewPlayer.Controls.Add(this.labelNewPlayerName);
+            this.panelNewPlayer.Controls.Add(this.buttonAddNewPlayer);
+            this.panelNewPlayer.Location = new System.Drawing.Point(12, 290);
+            this.panelNewPlayer.Name = "panelNewPlayer";
+            this.panelNewPlayer.Size = new System.Drawing.Size(325, 92);
+            this.panelNewPlayer.TabIndex = 30;
+            // 
+            // comboBoxGender
+            // 
+            this.comboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Location = new System.Drawing.Point(209, 30);
+            this.comboBoxGender.Name = "comboBoxGender";
+            this.comboBoxGender.Size = new System.Drawing.Size(107, 23);
+            this.comboBoxGender.TabIndex = 31;
+            // 
+            // labelNewPlayerGender
+            // 
+            this.labelNewPlayerGender.AutoSize = true;
+            this.labelNewPlayerGender.Location = new System.Drawing.Point(209, 12);
+            this.labelNewPlayerGender.Name = "labelNewPlayerGender";
+            this.labelNewPlayerGender.Size = new System.Drawing.Size(107, 15);
+            this.labelNewPlayerGender.TabIndex = 30;
+            this.labelNewPlayerGender.Text = "New Player Gender";
             // 
             // ManagePlayersDialog
             // 
@@ -151,39 +124,31 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(538, 356);
-            this.ControlBox = false;
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.labelClubPlayers);
+            this.ClientSize = new System.Drawing.Size(349, 393);
+            this.Controls.Add(this.panelNewPlayer);
             this.Controls.Add(this.listBoxPlayers);
-            this.Controls.Add(this.buttonAddPlayer);
-            this.Controls.Add(this.buttonRemovePlayer);
-            this.Controls.Add(this.labelSessionPlayers);
-            this.Controls.Add(this.buttonRemoveFromSession);
-            this.Controls.Add(this.listBoxSessionPlayers);
             this.Controls.Add(this.buttonAddToSession);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ManagePlayersDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Players";
+            this.panelNewPlayer.ResumeLayout(false);
+            this.panelNewPlayer.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private Button buttonAddToSession;
-        private ListBox listBoxSessionPlayers;
-        private Button buttonRemoveFromSession;
-        private Label labelSessionPlayers;
-        private Label labelClubPlayers;
         private ListBox listBoxPlayers;
-        private Button buttonAddPlayer;
-        private Button buttonRemovePlayer;
-        private Button buttonSave;
-        private Button buttonCancel;
+        private Button buttonAddNewPlayer;
+        private TextBox textBoxPlayerName;
+        private Label labelNewPlayerName;
+        private Panel panelNewPlayer;
+        private ComboBox comboBoxGender;
+        private Label labelNewPlayerGender;
     }
 }
