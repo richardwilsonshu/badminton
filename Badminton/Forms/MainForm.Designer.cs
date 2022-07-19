@@ -97,7 +97,7 @@
             this.tabPageAdmin.Location = new System.Drawing.Point(4, 24);
             this.tabPageAdmin.Name = "tabPageAdmin";
             this.tabPageAdmin.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAdmin.Size = new System.Drawing.Size(993, 533);
+            this.tabPageAdmin.Size = new System.Drawing.Size(948, 520);
             this.tabPageAdmin.TabIndex = 1;
             this.tabPageAdmin.Text = "Admin";
             this.tabPageAdmin.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             this.tabPageActiveSession.Location = new System.Drawing.Point(4, 24);
             this.tabPageActiveSession.Name = "tabPageActiveSession";
             this.tabPageActiveSession.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageActiveSession.Size = new System.Drawing.Size(993, 533);
+            this.tabPageActiveSession.Size = new System.Drawing.Size(948, 520);
             this.tabPageActiveSession.TabIndex = 2;
             this.tabPageActiveSession.Text = "Session";
             this.tabPageActiveSession.UseVisualStyleBackColor = true;
@@ -154,14 +154,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(977, 581);
-            this.ControlBox = false;
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Badminton";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

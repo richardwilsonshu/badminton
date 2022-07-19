@@ -7,23 +7,24 @@ namespace Badminton.Controls
     {
         public event EventHandler? SessionEnded;
 
-        private Session _session = new(new int[] { 1, 2, 3, 4 });
+        private BadmintonClub _badmintonClub = new();
+        private Session Session => _badmintonClub.CurrentSession!;
 
         public SessionTabControl()
         {
             InitializeComponent();
         }
 
-        public void SetSession(Session session) 
+        public void SetBadmintonClub(BadmintonClub badmintonClub) 
         {
-            _session = session;
+            _badmintonClub = badmintonClub;
             InitializeCustomControls();
         }
 
         private void InitializeCustomControls()
         {
-            listBoxWaitingPlayers.Bind(_session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
-            listBoxRestingPlayers.BindPlayers(_session.RestingPlayers);
+            listBoxWaitingPlayers.Bind(Session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
+            listBoxRestingPlayers.BindPlayers(Session.RestingPlayers);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -36,7 +37,7 @@ namespace Badminton.Controls
 
         private void BindCourt1()
         {
-            var match = _session.GetActiveMatchOnCourt(1);
+            var match = Session.GetActiveMatchOnCourt(1);
 
             if (match == null)
             {
@@ -49,7 +50,7 @@ namespace Badminton.Controls
         }
         private void BindCourt2()
         {
-            var match = _session.GetActiveMatchOnCourt(2);
+            var match = Session.GetActiveMatchOnCourt(2);
 
             if (match == null)
             {
@@ -63,13 +64,13 @@ namespace Badminton.Controls
 
         private void EnableOrDisableGenerateGameButtons()
         {
-            buttonGenerateGame.Enabled = _session.CanGenerateMatch;
+            buttonGenerateGame.Enabled = Session.CanGenerateMatch;
         }
 
         private void buttonAddPlayerToSession_Click(object sender, EventArgs e)
         {
-            using var clubPlayersDialog = new ManagePlayersDialog();
-            clubPlayersDialog.ShowDialog();
+            using var managePlayersDialog = new ManagePlayersDialog(_badmintonClub);
+            managePlayersDialog.ShowDialog();
         }
 
         private void buttonRemovePlayerFromSession_Click(object sender, EventArgs e)
@@ -82,7 +83,7 @@ namespace Badminton.Controls
             var confirmResult = MessageBox.Show("Remove this player from current session?", "Confirm Remove", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                _session.WaitingPlayers.Remove(player);
+                Session.WaitingPlayers.Remove(player);
             }
         }
 
@@ -93,8 +94,8 @@ namespace Badminton.Controls
                 return;
             }
 
-            _session.RestingPlayers.Remove(player);
-            _session.WaitingPlayers.Add(player);
+            Session.RestingPlayers.Remove(player);
+            Session.WaitingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -106,22 +107,22 @@ namespace Badminton.Controls
                 return;
             }
 
-            _session.WaitingPlayers.Remove(player);
-            _session.RestingPlayers.Add(player);
+            Session.WaitingPlayers.Remove(player);
+            Session.RestingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
 
         private void buttonGenerateGame_Click(object sender, EventArgs e)
         {
-            var match = _session.TryGenerateMatch();
+            var match = Session.TryGenerateMatch();
 
             if (match == null)
             {
                 return;
             }
 
-            _session.Start(match);
+            Session.Start(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -139,7 +140,7 @@ namespace Badminton.Controls
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
         {
-            var match = _session.GetActiveMatchOnCourt(1);
+            var match = Session.GetActiveMatchOnCourt(1);
 
             if (match == null)
             {
@@ -153,7 +154,7 @@ namespace Badminton.Controls
                 return;
             }
 
-            _session.Finish(match);
+            Session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -164,7 +165,7 @@ namespace Badminton.Controls
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)
         {
-            var match = _session.GetActiveMatchOnCourt(2);
+            var match = Session.GetActiveMatchOnCourt(2);
 
             if (match == null)
             {
@@ -178,7 +179,7 @@ namespace Badminton.Controls
                 return;
             }
 
-            _session.Finish(match);
+            Session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -193,8 +194,8 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
-            var court1Match = _session.GetActiveMatchOnCourt(1);
-            var court2Match = _session.GetActiveMatchOnCourt(2);
+            var court1Match = Session.GetActiveMatchOnCourt(1);
+            var court2Match = Session.GetActiveMatchOnCourt(2);
 
             if (court1Match?.Started == true)
             {
@@ -224,8 +225,15 @@ namespace Badminton.Controls
                 return;
             }
 
-            using var playerDialog = new AddEditPlayerDialog(player);
-            playerDialog.ShowDialog();
+            // TODO some sort of new player view control?
+            // e.g. games played, other stats, read-only info?
+
+            //using var playerDialog = new AddEditPlayerDialog(player);
+            
+            //if (playerDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    var newPlayer = playerDialog.AddedPlayer;
+            //}
         }
 
         private void buttonEndSession_Click(object sender, EventArgs e)

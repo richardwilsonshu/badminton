@@ -255,7 +255,7 @@
             // buttonAddPlayerToSession
             // 
             this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(119, 263);
+            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(222, 52);
             this.buttonAddPlayerToSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddPlayerToSession.Name = "buttonAddPlayerToSession";
             this.buttonAddPlayerToSession.Size = new System.Drawing.Size(43, 44);
@@ -311,7 +311,7 @@
             this.buttonEndSession.UseVisualStyleBackColor = true;
             this.buttonEndSession.Click += new System.EventHandler(this.buttonEndSession_Click);
             // 
-            // SessionControl
+            // SessionTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -328,7 +328,7 @@
             this.Controls.Add(this.listBoxRestingPlayers);
             this.Controls.Add(this.buttonRemovePlayerFromSession);
             this.Controls.Add(this.buttonGenerateGame);
-            this.Name = "SessionControl";
+            this.Name = "SessionTabControl";
             this.Size = new System.Drawing.Size(941, 520);
             this.panelCourt1.ResumeLayout(false);
             this.panelCourt1.PerformLayout();

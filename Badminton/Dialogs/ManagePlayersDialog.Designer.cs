@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.buttonAddToSession = new System.Windows.Forms.Button();
-            this.listBoxSessionWaitingPlayers = new System.Windows.Forms.ListBox();
+            this.listBoxSessionPlayers = new System.Windows.Forms.ListBox();
             this.buttonRemoveFromSession = new System.Windows.Forms.Button();
             this.labelSessionPlayers = new System.Windows.Forms.Label();
             this.labelClubPlayers = new System.Windows.Forms.Label();
             this.listBoxPlayers = new System.Windows.Forms.ListBox();
             this.buttonAddPlayer = new System.Windows.Forms.Button();
             this.buttonRemovePlayer = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAddToSession
@@ -49,14 +51,14 @@
             this.buttonAddToSession.UseVisualStyleBackColor = true;
             this.buttonAddToSession.Click += new System.EventHandler(this.buttonAddToSession_Click);
             // 
-            // listBoxSessionWaitingPlayers
+            // listBoxSessionPlayers
             // 
-            this.listBoxSessionWaitingPlayers.FormattingEnabled = true;
-            this.listBoxSessionWaitingPlayers.ItemHeight = 15;
-            this.listBoxSessionWaitingPlayers.Location = new System.Drawing.Point(303, 40);
-            this.listBoxSessionWaitingPlayers.Name = "listBoxSessionWaitingPlayers";
-            this.listBoxSessionWaitingPlayers.Size = new System.Drawing.Size(217, 244);
-            this.listBoxSessionWaitingPlayers.TabIndex = 2;
+            this.listBoxSessionPlayers.FormattingEnabled = true;
+            this.listBoxSessionPlayers.ItemHeight = 15;
+            this.listBoxSessionPlayers.Location = new System.Drawing.Point(303, 40);
+            this.listBoxSessionPlayers.Name = "listBoxSessionPlayers";
+            this.listBoxSessionPlayers.Size = new System.Drawing.Size(217, 274);
+            this.listBoxSessionPlayers.TabIndex = 2;
             // 
             // buttonRemoveFromSession
             // 
@@ -67,6 +69,7 @@
             this.buttonRemoveFromSession.TabIndex = 3;
             this.buttonRemoveFromSession.Text = "<<";
             this.buttonRemoveFromSession.UseVisualStyleBackColor = true;
+            this.buttonRemoveFromSession.Click += new System.EventHandler(this.buttonRemoveFromSession_Click);
             // 
             // labelSessionPlayers
             // 
@@ -107,6 +110,7 @@
             this.buttonAddPlayer.TabIndex = 25;
             this.buttonAddPlayer.Text = "Add";
             this.buttonAddPlayer.UseVisualStyleBackColor = true;
+            this.buttonAddPlayer.Click += new System.EventHandler(this.buttonAddPlayer_Click);
             // 
             // buttonRemovePlayer
             // 
@@ -120,24 +124,49 @@
             this.buttonRemovePlayer.UseVisualStyleBackColor = true;
             this.buttonRemovePlayer.Click += new System.EventHandler(this.buttonRemovePlayer_Click);
             // 
+            // buttonSave
+            // 
+            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonSave.Location = new System.Drawing.Point(445, 321);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 28;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(364, 321);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 29;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            // 
             // ManagePlayersDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(538, 329);
+            this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(538, 356);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelClubPlayers);
             this.Controls.Add(this.listBoxPlayers);
             this.Controls.Add(this.buttonAddPlayer);
             this.Controls.Add(this.buttonRemovePlayer);
             this.Controls.Add(this.labelSessionPlayers);
             this.Controls.Add(this.buttonRemoveFromSession);
-            this.Controls.Add(this.listBoxSessionWaitingPlayers);
+            this.Controls.Add(this.listBoxSessionPlayers);
             this.Controls.Add(this.buttonAddToSession);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ManagePlayersDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Players";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,12 +176,14 @@
         #endregion
 
         private Button buttonAddToSession;
-        private ListBox listBoxSessionWaitingPlayers;
+        private ListBox listBoxSessionPlayers;
         private Button buttonRemoveFromSession;
         private Label labelSessionPlayers;
         private Label labelClubPlayers;
         private ListBox listBoxPlayers;
         private Button buttonAddPlayer;
         private Button buttonRemovePlayer;
+        private Button buttonSave;
+        private Button buttonCancel;
     }
 }

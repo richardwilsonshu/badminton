@@ -16,7 +16,7 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
-            ShowHideTabs();
+            EnablePage(tabPageActiveSession, false);
         }
 
         /// <remarks>See https://stackoverflow.com/a/3365490 for more info</remarks>
@@ -38,11 +38,13 @@ namespace Badminton.Forms
         {
             if (_badmintonClub.CurrentSession != null)
             {
-                // TODO!
+                EnablePage(tabPageNoSession, false);
+                EnablePage(tabPageActiveSession, true);
             }
             else
             {
-                // TODO!
+                EnablePage(tabPageActiveSession, false);
+                EnablePage(tabPageNoSession, true);
             }
         }
 
@@ -60,7 +62,7 @@ namespace Badminton.Forms
             _badmintonClub.CurrentSession = session;
             _badmintonClub.Sessions.Add(session);
 
-            // TODO set tabs
+            ShowHideTabs();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
