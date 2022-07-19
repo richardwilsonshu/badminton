@@ -6,9 +6,6 @@ namespace Badminton.Dialogs
 {
     public partial class ManagePlayersDialog : Form
     {
-        private BindingList<Player> _players = new BindingList<Player>();
-        private BindingList<Player> _playersInSession = new BindingList<Player>();
-
         private BadmintonClub _badmintonClub = new();
 
         public ManagePlayersDialog(BadmintonClub badmintonClub)
@@ -34,27 +31,7 @@ namespace Badminton.Dialogs
         public void SetBadmintonClub(BadmintonClub badmintonClub)
         {
             _badmintonClub = badmintonClub;
-
-            // Different lists, but same Player references. (Shallow copy)
-            _players = new BindingList<Player>(new List<Player>(badmintonClub.Players));
-            _playersInSession = new BindingList<Player>(new List<Player>(_badmintonClub.CurrentSession!.PlayersInSession));
-
-            listBoxPlayers.BindPlayers(_players);
-            //listBoxSessionPlayers.BindPlayers(_playersInSession);
-        }
-
-        private void buttonRemovePlayer_Click(object sender, EventArgs e)
-        {
-            if (listBoxPlayers.SelectedItem is not Player player)
-            {
-                return;
-            }
-
-            var confirmResult = MessageBox.Show("Remove this player?", "Confirm Remove", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirmResult == DialogResult.Yes)
-            {
-                _players.Remove(player);
-            }
+            listBoxPlayers.BindPlayers(badmintonClub.Players);
         }
 
         private void buttonAddPlayer_Click(object sender, EventArgs e)
@@ -67,13 +44,12 @@ namespace Badminton.Dialogs
 
         private void buttonAddToSession_Click(object sender, EventArgs e)
         {
-            if (listBoxPlayers.SelectedItem is not Player player || 
-                _badmintonClub.CurrentSession!.PlayersInSession.All(p => p.Id != player.Id))
+            if (listBoxPlayers.SelectedItem is not Player player)
             {
                 return;
             }
 
-            _playersInSession.Add(player);
+            _badmintonClub.Players.Add(player);
         }
 
         private void buttonRemoveFromSession_Click(object sender, EventArgs e)

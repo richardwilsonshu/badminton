@@ -162,6 +162,8 @@ namespace Badminton.Controls
             panelCourt1.Enabled = false;
             listBoxCourt1Team1.DataSource = null;
             listBoxCourt1Team2.DataSource = null;
+
+            // TODO Save here??
         }
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)

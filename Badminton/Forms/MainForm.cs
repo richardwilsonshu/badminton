@@ -9,6 +9,8 @@ namespace Badminton.Forms
 
         public MainForm()
         {
+            LoadBadmintonClub();
+
             InitializeComponent();
             InitializeCustomControls();
         }
@@ -23,59 +25,44 @@ namespace Badminton.Forms
             _badmintonClub.Sessions.Add(session);
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveBadmintonClub(object sender, EventArgs e)
         {
-            using var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Json files (*.json)|*.json";
-            saveFileDialog.Title = "Save";
-            saveFileDialog.OverwritePrompt = false;
-            saveFileDialog.AddExtension = true;
-            saveFileDialog.FileName = "badminton";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    using var writer = new StreamWriter(saveFileDialog.OpenFile());
-                    writer.Write(JsonConvert.SerializeObject(_badmintonClub));
+                using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
+                writer.Write(JsonConvert.SerializeObject(_badmintonClub));
 
-                    MessageBox.Show("Saved", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"File '{saveFileDialog.FileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Saved", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{Constants.FileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadBadmintonClub()
         {
-            using var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Json files (*.json)|*.json";
-            openFileDialog.Title = "Load";
-            openFileDialog.Multiselect = false;
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    using var reader = new StreamReader(openFileDialog.OpenFile());
-                    _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
+                using var reader = new StreamReader(File.OpenRead(Constants.FileName));
+                _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
 
-                    if (_badmintonClub.CurrentSession != null)
-                    {
-                        LoadSession(_badmintonClub.CurrentSession);
-                    }
-
-                    MessageBox.Show("Loaded", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
+                if (_badmintonClub.CurrentSession != null)
                 {
-                    MessageBox.Show($"File '{openFileDialog.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    LoadSession(_badmintonClub.CurrentSession);
                 }
+
+                MessageBox.Show("Loaded", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void sessionTabControl1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
