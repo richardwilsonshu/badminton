@@ -69,7 +69,7 @@
             this.buttonAddNewPlayer.TabIndex = 25;
             this.buttonAddNewPlayer.Text = "Add New Player";
             this.buttonAddNewPlayer.UseVisualStyleBackColor = true;
-            this.buttonAddNewPlayer.Click += new System.EventHandler(this.buttonAddPlayer_Click);
+            this.buttonAddNewPlayer.Click += new System.EventHandler(this.buttonAddNewPlayer_Click);
             // 
             // textBoxPlayerName
             // 

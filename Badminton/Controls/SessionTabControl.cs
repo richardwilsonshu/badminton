@@ -114,31 +114,6 @@ namespace Badminton.Controls
             EnableOrDisableGenerateGameButtons();
         }
 
-        private void buttonGenerateGame_Click(object sender, EventArgs e)
-        {
-            var match = Session.TryGenerateMatch();
-
-            if (match == null)
-            {
-                return;
-            }
-
-            Session.Start(match);
-
-            EnableOrDisableGenerateGameButtons();
-
-            if (match.CourtNumber == 1)
-            {
-                BindCourt1();
-            }
-            else
-            {
-                BindCourt2();
-            }
-
-            match.Begin();
-        }
-
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
         {
             var match = Session.GetActiveMatchOnCourt(1);
