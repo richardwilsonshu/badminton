@@ -1,16 +1,16 @@
 ﻿using Badminton.Classes;
 using Badminton.Enums;
 
-namespace Badminton.Forms
+namespace Badminton.Dialogs
 {
-    public partial class UserForm : Form
+    public partial class AddEditPlayerDialog : Form
     {
         public Player? AddedPlayer { get; set; } = null;
 
         private readonly Player? _existingPlayer;
         private int _originalElo = 0;
 
-        public UserForm(Player? existingPlayer = null)
+        public AddEditPlayerDialog(Player? existingPlayer = null)
         {
             _existingPlayer = existingPlayer;
 

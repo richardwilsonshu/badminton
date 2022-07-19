@@ -1,12 +1,12 @@
 ﻿using Badminton.Classes;
 
-namespace Badminton.Forms
+namespace Badminton.Dialogs
 {
-    public partial class FinishMatchForm : Form
+    public partial class FinishMatchDialog : Form
     {
         private Match _match;
 
-        public FinishMatchForm(Match match)
+        public FinishMatchDialog(Match match)
         {
             _match = match;
 

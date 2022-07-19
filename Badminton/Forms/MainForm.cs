@@ -1,13 +1,12 @@
 using Badminton.Classes;
-using Badminton.Controls;
 using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace Badminton.Forms
 {
     public partial class MainForm : Form
     {
         private BadmintonClub _badmintonClub = new();
+        private List<TabPage> _hiddenPages = new();
 
         public MainForm()
         {
@@ -17,7 +16,43 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
-            SetPlaceholderSessionControl();
+            ShowHideTabs();
+        }
+
+        /// <remarks>See https://stackoverflow.com/a/3365490 for more info</remarks>
+        private void EnablePage(TabPage page, bool enable)
+        {
+            if (enable)
+            {
+                Tabs.TabPages.Add(page);
+                _hiddenPages.Remove(page);
+            }
+            else
+            {
+                Tabs.TabPages.Remove(page);
+                _hiddenPages.Add(page);
+            }
+        }
+
+        private void ShowHideTabs()
+        {
+            if (_badmintonClub.CurrentSession != null)
+            {
+                // TODO!
+            }
+            else
+            {
+                // TODO!
+            }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            foreach (var page in _hiddenPages)
+            {
+                page.Dispose();
+            }
+            base.OnFormClosed(e);
         }
 
         private void LoadSession(Session session)
@@ -25,24 +60,7 @@ namespace Badminton.Forms
             _badmintonClub.CurrentSession = session;
             _badmintonClub.Sessions.Add(session);
 
-            var sessionControl = new SessionControl(session);
-            sessionControl.Dock = DockStyle.Fill;
-            tabPageSession.Controls.Clear();
-            tabPageSession.Controls.Add(sessionControl);
-        }
-
-        private void SetPlaceholderSessionControl()
-        {
-            var placeholderSessionControl = new PlaceholderSessionControl();
-            placeholderSessionControl.Dock = DockStyle.Fill;
-            placeholderSessionControl.SessionChanged += PlaceholderSessionControl_SessionChanged;
-            tabPageSession.Controls.Clear();
-            tabPageSession.Controls.Add(placeholderSessionControl);
-        }
-
-        private void PlaceholderSessionControl_SessionChanged(object? sender, SessionCreatedEventArgs e)
-        {
-            LoadSession(e.Session);
+            // TODO set tabs
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,10 +108,8 @@ namespace Badminton.Forms
                     {
                         LoadSession(_badmintonClub.CurrentSession);
                     }
-                    else
-                    {
-                        SetPlaceholderSessionControl();
-                    }
+
+                    ShowHideTabs();
 
                     MessageBox.Show("Loaded", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -101,17 +117,6 @@ namespace Badminton.Forms
                 {
                     MessageBox.Show($"File '{openFileDialog.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        private void buttonAddPlayer_Click(object sender, EventArgs e)
-        {
-            using var newPlayerDialog = new UserForm();
-
-            if (newPlayerDialog.ShowDialog() == DialogResult.OK && 
-                newPlayerDialog.AddedPlayer != null)
-            {
-                _badmintonClub.Players.Add(newPlayerDialog.AddedPlayer);
             }
         }
     }

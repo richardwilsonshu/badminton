@@ -1,25 +1,29 @@
 ﻿using Badminton.Classes;
-using Badminton.Forms;
-using System.ComponentModel;
+using Badminton.Dialogs;
 
 namespace Badminton.Controls
 {
-    public partial class SessionControl : UserControl
+    public partial class SessionTabControl : UserControl
     {
-        private Session Session { get; }
+        public event EventHandler? SessionEnded;
 
-        public SessionControl(Session session)
+        private Session _session = new(new int[] { 1, 2, 3, 4 });
+
+        public SessionTabControl()
         {
-            Session = session;
-
             InitializeComponent();
+        }
+
+        public void SetSession(Session session) 
+        {
+            _session = session;
             InitializeCustomControls();
         }
 
         private void InitializeCustomControls()
         {
-            BindListBox(listBoxWaitingPlayers, Session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
-            BindPlayersListBox(listBoxRestingPlayers, Session.RestingPlayers);
+            listBoxWaitingPlayers.Bind(_session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
+            listBoxRestingPlayers.BindPlayers(_session.RestingPlayers);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -30,54 +34,42 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.UseCustomTabOffsets = true;
         }
 
-        private void BindListBox(ListBox listBox, IBindingList bindingList, string displayMember, string valueMember)
-        {
-            listBox.DisplayMember = displayMember;
-            listBox.ValueMember = valueMember;
-            listBox.DataSource = bindingList;
-        }
-
-        private void BindPlayersListBox(ListBox listBox, IBindingList bindingList)
-        {
-            BindListBox(listBox, bindingList, nameof(Player.FullName), nameof(Player.Id));
-        }
-
         private void BindCourt1()
         {
-            var match = Session.GetActiveMatchOnCourt(1);
+            var match = _session.GetActiveMatchOnCourt(1);
 
             if (match == null)
             {
                 return;
             }
 
-            BindPlayersListBox(listBoxCourt1Side1, match.Side1Players);
-            BindPlayersListBox(listBoxCourt1Side2, match.Side2Players);
+            listBoxCourt1Side1.BindPlayers(match.Side1Players);
+            listBoxCourt1Side2.BindPlayers(match.Side2Players);
             panelCourt1.Enabled = true;
         }
         private void BindCourt2()
         {
-            var match = Session.GetActiveMatchOnCourt(2);
+            var match = _session.GetActiveMatchOnCourt(2);
 
             if (match == null)
             {
                 return;
             }
 
-            BindPlayersListBox(listBoxCourt2Side1, match.Side1Players);
-            BindPlayersListBox(listBoxCourt2Side2, match.Side2Players);
+            listBoxCourt2Side1.BindPlayers(match.Side1Players);
+            listBoxCourt2Side2.BindPlayers(match.Side2Players);
             panelCourt2.Enabled = true;
         }
 
         private void EnableOrDisableGenerateGameButtons()
         {
-            buttonGenerateGame.Enabled = Session.CanGenerateMatch;
+            buttonGenerateGame.Enabled = _session.CanGenerateMatch;
         }
 
         private void buttonAddPlayerToSession_Click(object sender, EventArgs e)
         {
-            using var newPlayerDialog = new UserForm(Session);
-            newPlayerDialog.ShowDialog();
+            using var clubPlayersDialog = new ManagePlayersDialog();
+            clubPlayersDialog.ShowDialog();
         }
 
         private void buttonRemovePlayerFromSession_Click(object sender, EventArgs e)
@@ -90,7 +82,7 @@ namespace Badminton.Controls
             var confirmResult = MessageBox.Show("Remove this player from current session?", "Confirm Remove", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                Session.WaitingPlayers.Remove(player);
+                _session.WaitingPlayers.Remove(player);
             }
         }
 
@@ -101,8 +93,8 @@ namespace Badminton.Controls
                 return;
             }
 
-            Session.RestingPlayers.Remove(player);
-            Session.WaitingPlayers.Add(player);
+            _session.RestingPlayers.Remove(player);
+            _session.WaitingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -114,22 +106,22 @@ namespace Badminton.Controls
                 return;
             }
 
-            Session.WaitingPlayers.Remove(player);
-            Session.RestingPlayers.Add(player);
+            _session.WaitingPlayers.Remove(player);
+            _session.RestingPlayers.Add(player);
 
             EnableOrDisableGenerateGameButtons();
         }
 
         private void buttonGenerateGame_Click(object sender, EventArgs e)
         {
-            var match = Session.TryGenerateMatch();
+            var match = _session.TryGenerateMatch();
 
             if (match == null)
             {
                 return;
             }
 
-            Session.Start(match);
+            _session.Start(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -147,21 +139,21 @@ namespace Badminton.Controls
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
         {
-            var match = Session.GetActiveMatchOnCourt(1);
+            var match = _session.GetActiveMatchOnCourt(1);
 
             if (match == null)
             {
                 return;
             }
 
-            using var finishMatchForm = new FinishMatchForm(match);
+            using var finishMatchForm = new FinishMatchDialog(match);
 
             if (finishMatchForm.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            Session.Finish(match);
+            _session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -172,21 +164,21 @@ namespace Badminton.Controls
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)
         {
-            var match = Session.GetActiveMatchOnCourt(2);
+            var match = _session.GetActiveMatchOnCourt(2);
 
             if (match == null)
             {
                 return;
             }
 
-            using var finishMatchForm = new FinishMatchForm(match);
+            using var finishMatchForm = new FinishMatchDialog(match);
 
             if (finishMatchForm.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            Session.Finish(match);
+            _session.Finish(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -201,8 +193,8 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
-            var court1Match = Session.GetActiveMatchOnCourt(1);
-            var court2Match = Session.GetActiveMatchOnCourt(2);
+            var court1Match = _session.GetActiveMatchOnCourt(1);
+            var court2Match = _session.GetActiveMatchOnCourt(2);
 
             if (court1Match?.Started == true)
             {
@@ -232,8 +224,17 @@ namespace Badminton.Controls
                 return;
             }
 
-            using var newPlayerDialog = new UserForm(Session, player);
-            newPlayerDialog.ShowDialog();
+            using var playerDialog = new AddEditPlayerDialog(player);
+            playerDialog.ShowDialog();
+        }
+
+        private void buttonEndSession_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure you want to end the current session?", "Confirm End Session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.Yes)
+            {
+                SessionEnded?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

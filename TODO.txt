@@ -1,0 +1,4 @@
+Due to naming collisions, it's probably best to have a separate user control for each tab.
+
+The user control can then be dragged on to the tab, and the tabs can be shown/hidden depending on the current state. 
+See https://stackoverflow.com/a/3365490

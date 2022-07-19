@@ -1,6 +1,6 @@
-﻿namespace Badminton.Forms
+﻿namespace Badminton.Dialogs
 {
-    partial class UserForm
+    partial class AddEditPlayerDialog
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
-﻿namespace Badminton.Forms
+﻿namespace Badminton.Dialogs
 {
-    partial class FinishMatchForm
+    partial class FinishMatchDialog
     {
         /// <summary>
         /// Required designer variable.
