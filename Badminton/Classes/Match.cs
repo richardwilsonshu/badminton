@@ -32,11 +32,6 @@ namespace Badminton.Classes
                 player.AllMatchesPlayed.Add(this);
             }
 
-            if (Side1Score == Side2Score)
-            {
-                return;
-            }
-
             var side1Wins = Side1Score > Side2Score;
 
             CalculateAndUpdateElo(side1Wins);

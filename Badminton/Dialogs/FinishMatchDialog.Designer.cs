@@ -86,6 +86,7 @@
             this.textBoxSide1Score.Name = "textBoxSide1Score";
             this.textBoxSide1Score.Size = new System.Drawing.Size(100, 23);
             this.textBoxSide1Score.TabIndex = 1;
+            this.textBoxSide1Score.TextChanged += new System.EventHandler(this.textBoxSide1Score_TextChanged);
             // 
             // textBoxSide2Score
             // 
@@ -93,6 +94,7 @@
             this.textBoxSide2Score.Name = "textBoxSide2Score";
             this.textBoxSide2Score.Size = new System.Drawing.Size(100, 23);
             this.textBoxSide2Score.TabIndex = 2;
+            this.textBoxSide2Score.TextChanged += new System.EventHandler(this.textBoxSide2Score_TextChanged);
             // 
             // label1
             // 

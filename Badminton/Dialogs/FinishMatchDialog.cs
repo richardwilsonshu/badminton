@@ -32,5 +32,15 @@ namespace Badminton.Dialogs
             _match.Side2Score = side2Score;
             _match.EloNotAffected = checkBoxNoElo.Checked;
         }
+
+        private void textBoxSide1Score_TextChanged(object sender, EventArgs e)
+        {
+            // TODO are the scores equal?
+        }
+
+        private void textBoxSide2Score_TextChanged(object sender, EventArgs e)
+        {
+            // TODO are the scores equal?
+        }
     }
 }
