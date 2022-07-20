@@ -1,14 +1,16 @@
-﻿using System.ComponentModel;
+﻿using KGySoft.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Badminton.Classes
 {
     public class BadmintonClub
     {
-        public Session? CurrentSession { get; set; } = new Session(new int[] { 1, 2, 3, 4 });
+        public SortableBindingList<Player> Players { get; set; } = new SortableBindingList<Player>();
+        public List<Session> Sessions { get; set; } = new List<Session> 
+        { 
+            new Session(numberOfCourts: 4) 
+        };
 
-        public List<Session> Sessions { get; set; } = new List<Session>();
-        public BindingList<Player> Players { get; set; } = new BindingList<Player>();
-
-        public int NumberOfCourts { get; set; } = 4;
+        [IgnoreDataMember] public Session CurrentSession => Sessions.Last();
     }
 }

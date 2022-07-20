@@ -9,14 +9,14 @@ namespace Badminton.Classes
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public SortableBindingList<Player> WaitingPlayers { get; set; } = new SortableBindingList<Player> { };
-        public BindingList<Player> RestingPlayers { get; set; } = new BindingList<Player> { };
-        public BindingList<Match> Matches { get; set; } = new BindingList<Match> { };
-        public int[] CourtsAvailableToday { get; set; } = new int[] { 1, 2, 3, 4 };
+        public SortableBindingList<Player> RestingPlayers { get; set; } = new SortableBindingList<Player> { };
+        public List<Match> Matches { get; set; } = new List<Match> { };
+        public Match MatchPreview { get; set; } = new Match();
+        public int CourtsAvailable { get; set; }
 
-        public Session(int[] courtsAvailable)
+        public Session(int numberOfCourts)
         {
-            StartDate = DateTime.Now;
-            CourtsAvailableToday = courtsAvailable;
+            CourtsAvailable = numberOfCourts;
         }
 
         [IgnoreDataMember]
@@ -36,30 +36,44 @@ namespace Badminton.Classes
             return ActiveMatches.FirstOrDefault(m => m.CourtNumber == courtNumber);
         }
 
-        public void Start(Match match)
+        public void Start()
         {
-            var courtNumber = CourtsAvailableToday.Except(CourtsInUse).FirstOrDefault();
+            StartDate = DateTime.Now;
+        }
+
+        public void StartMatch(Match match)
+        {
+            var courtNumber = Enumerable.Range(1, CourtsAvailable).Except(CourtsInUse).FirstOrDefault();
 
             if (courtNumber == 0)
             {
                 return;
             }
 
+            match.StartDate = DateTime.Now;
             match.CourtNumber = courtNumber;
             match.PlayersOnCourt.ForEach(player => WaitingPlayers.Remove(player));
             WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
             Matches.Add(match);
-            match.Begin();
         }
 
-        public void Finish(Match match)
+        public void FinishMatch(Match match)
         {
             if (match == null)
             {
                 return;
             }
 
-            match.Finish();
+            match.EndDate = DateTime.Now;
+
+            foreach (Player player in match.PlayersOnCourt)
+            {
+                player.MatchesPlayed[this].Add(match);
+            }
+
+            //var eloCalculator = new EloCalculator();
+            //eloCalculator.
+
             match.PlayersOnCourt.ForEach(player => WaitingPlayers.Add(player));
             WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
         }

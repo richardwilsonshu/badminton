@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sessionTabControl1 = new Badminton.Controls.SessionTabControl();
+            this.sessionControl = new Badminton.Controls.SessionControl();
             this.SuspendLayout();
             // 
-            // sessionTabControl1
+            // sessionControl
             // 
-            this.sessionTabControl1.AutoSize = true;
-            this.sessionTabControl1.Location = new System.Drawing.Point(2, 2);
-            this.sessionTabControl1.Name = "sessionTabControl1";
-            this.sessionTabControl1.Size = new System.Drawing.Size(936, 500);
-            this.sessionTabControl1.TabIndex = 15;
-            this.sessionTabControl1.Load += new System.EventHandler(this.sessionTabControl1_Load);
+            this.sessionControl.AutoSize = true;
+            this.sessionControl.Location = new System.Drawing.Point(2, 2);
+            this.sessionControl.Name = "sessionControl";
+            this.sessionControl.Size = new System.Drawing.Size(936, 500);
+            this.sessionControl.TabIndex = 15;
+            this.sessionControl.Load += new System.EventHandler(this.sessionControl_Load);
             // 
             // MainForm
             // 
@@ -47,7 +47,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(942, 507);
-            this.Controls.Add(this.sessionTabControl1);
+            this.Controls.Add(this.sessionControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
@@ -60,6 +60,6 @@
         }
 
         #endregion
-        private Controls.SessionTabControl sessionTabControl1;
+        private Controls.SessionControl sessionControl;
     }
 }

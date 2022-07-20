@@ -17,22 +17,28 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
+            sessionControl.SetBadmintonClub(_badmintonClub);
+            sessionControl.SessionFinished += SessionControl_SessionFinished;
         }
 
-        private void LoadSession(Session session)
+        private void SessionControl_SessionFinished(object? sender, EventArgs e)
         {
-            _badmintonClub.CurrentSession = session;
-            _badmintonClub.Sessions.Add(session);
+            sessionControl.SessionFinished -= SessionControl_SessionFinished;
+            Controls.Remove(sessionControl);
+            sessionControl.Dispose();
+            sessionControl = new Controls.SessionControl();
+            sessionControl.SetBadmintonClub(_badmintonClub);
+            sessionControl.SessionFinished += SessionControl_SessionFinished;
+            Controls.Add(sessionControl);
         }
 
+        // TODO review save/load
         private void SaveBadmintonClub(object sender, EventArgs e)
         {
             try
             {
                 using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
                 writer.Write(JsonConvert.SerializeObject(_badmintonClub));
-
-                MessageBox.Show("Saved", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -40,19 +46,16 @@ namespace Badminton.Forms
             }
         }
 
+        // TODO review save/load
         private void LoadBadmintonClub()
         {
             try
             {
-                using var reader = new StreamReader(File.OpenRead(Constants.FileName));
-                _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
-
-                if (_badmintonClub.CurrentSession != null)
+                if (File.Exists(Constants.FileName))
                 {
-                    LoadSession(_badmintonClub.CurrentSession);
+                    using var reader = new StreamReader(File.OpenRead(Constants.FileName));
+                    _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
                 }
-
-                MessageBox.Show("Loaded", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -60,7 +63,8 @@ namespace Badminton.Forms
             }
         }
 
-        private void sessionTabControl1_Load(object sender, EventArgs e)
+        // I keep clicking this, so I'm leaving it in...
+        private void sessionControl_Load(object sender, EventArgs e)
         {
 
         }

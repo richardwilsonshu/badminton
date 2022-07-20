@@ -3,15 +3,16 @@ using Badminton.Dialogs;
 
 namespace Badminton.Controls
 {
-    public partial class SessionTabControl : UserControl
+    public partial class SessionControl : UserControl
     {
         private BadmintonClub _badmintonClub = new();
         private Session Session => _badmintonClub.CurrentSession!;
 
-        public SessionTabControl()
+        public event EventHandler? SessionFinished;
+
+        public SessionControl()
         {
             InitializeComponent();
-            SetBadmintonClub(_badmintonClub);
         }
 
         public void SetBadmintonClub(BadmintonClub badmintonClub) 
@@ -34,6 +35,9 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.UseCustomTabOffsets = true;
 
             comboBoxCourtsAvailable.SelectedIndex = comboBoxCourtsAvailable.Items.Count - 1;
+
+            listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
+            listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
         }
 
         private void BindCourt1()
@@ -45,8 +49,8 @@ namespace Badminton.Controls
                 return;
             }
 
-            listBoxCourt1Team1.BindPlayers(match.Side1Players);
-            listBoxCourt1Team2.BindPlayers(match.Side2Players);
+            listBoxCourt1Team1.BindPlayers(match.Team1Players);
+            listBoxCourt1Team2.BindPlayers(match.Team2Players);
             panelCourt1.Enabled = true;
         }
         private void BindCourt2()
@@ -58,13 +62,14 @@ namespace Badminton.Controls
                 return;
             }
 
-            listBoxCourt2Team1.BindPlayers(match.Side1Players);
-            listBoxCourt2Team2.BindPlayers(match.Side2Players);
+            listBoxCourt2Team1.BindPlayers(match.Team1Players);
+            listBoxCourt2Team2.BindPlayers(match.Team2Players);
             panelCourt2.Enabled = true;
         }
 
         private void EnableOrDisableGenerateGameButtons()
         {
+            // TODO
             //buttonGenerateGame.Enabled = Session.CanGenerateMatch;
         }
 
@@ -85,6 +90,9 @@ namespace Badminton.Controls
             if (confirmResult == DialogResult.Yes)
             {
                 Session.WaitingPlayers.Remove(player);
+                _badmintonClub.Players.Add(player);
+
+                _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
             }
         }
 
@@ -98,6 +106,9 @@ namespace Badminton.Controls
             Session.RestingPlayers.Remove(player);
             Session.WaitingPlayers.Add(player);
 
+            Session.RestingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+
             EnableOrDisableGenerateGameButtons();
         }
 
@@ -110,6 +121,9 @@ namespace Badminton.Controls
 
             Session.WaitingPlayers.Remove(player);
             Session.RestingPlayers.Add(player);
+
+            Session.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+            Session.RestingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -130,7 +144,7 @@ namespace Badminton.Controls
                 return;
             }
 
-            Session.Finish(match);
+            Session.FinishMatch(match);
 
             EnableOrDisableGenerateGameButtons();
 
@@ -157,13 +171,15 @@ namespace Badminton.Controls
                 return;
             }
 
-            Session.Finish(match);
+            Session.FinishMatch(match);
 
             EnableOrDisableGenerateGameButtons();
 
             panelCourt2.Enabled = false;
             listBoxCourt2Team1.DataSource = null;
             listBoxCourt2Team2.DataSource = null;
+
+            // TODO Save here??
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -172,6 +188,7 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
+            // TODO court 3 and 4 ? perhaps find a less repetitive way with lists?
             var court1Match = Session.GetActiveMatchOnCourt(1);
             var court2Match = Session.GetActiveMatchOnCourt(2);
 
@@ -196,25 +213,54 @@ namespace Badminton.Controls
             }
         }
 
+        private void buttonStartSession_Click(object sender, EventArgs e)
+        {
+            var numberOfCourts = comboBoxCourtsAvailable.SelectedIndex + 1;
+
+            _badmintonClub.CurrentSession.CourtsAvailable = numberOfCourts;
+            _badmintonClub.CurrentSession.Start();
+
+            buttonStartSession.Enabled = false;
+            buttonEndSession.Enabled = true;
+
+            buttonAddToTeam1.Enabled = true;
+            buttonAddToTeam2.Enabled = true;
+
+            panelMatchPreview.Enabled = true;
+        }
+
         private void buttonEndSession_Click(object sender, EventArgs e)
         {
+            if (_badmintonClub.CurrentSession.ActiveMatches.Count > 0)
+            {
+                MessageBox.Show("Please finish the Active Matches before ending the session", "End Session", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var confirmResult = MessageBox.Show("Are you sure you want to end the current session?", "Confirm End Session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                _badmintonClub.CurrentSession = null;
+                _badmintonClub.CurrentSession.EndDate = DateTime.Now;
+
+                var placeholderSession = new Session(numberOfCourts: 4);
+                _badmintonClub.Sessions.Add(placeholderSession);
+
+                SessionFinished?.Invoke(sender, EventArgs.Empty);
             }
         }
 
-        private void buttonStartSession_Click(object sender, EventArgs e)
+        private void buttonAddToTeam1_Click(object sender, EventArgs e)
         {
-            //comboBoxCourtsAvailable.SelectedValue
+            if (listBoxWaitingPlayers.SelectedItem is not Player player ||
+                Session.MatchPreview.Team1Players.Count >= 2)
+            {
+                return;
+            }
 
-            //_badmintonClub.CurrentSession = new Session();
-        }
+            Session.MatchPreview.Team1Players.Add(player);
+            Session.WaitingPlayers.Remove(player);
 
-        private void buttonMoveToWaitingPlayers_Click(object sender, EventArgs e)
-        {
-
+            buttonAddToTeam1.Enabled = Session.MatchPreview.Team1Players.Count < 2;
         }
     }
 }

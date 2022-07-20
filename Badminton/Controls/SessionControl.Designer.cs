@@ -1,6 +1,6 @@
 ﻿namespace Badminton.Controls
 {
-    partial class SessionTabControl
+    partial class SessionControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -56,8 +56,8 @@
             this.buttonFindMens = new System.Windows.Forms.Button();
             this.panelMatchPreview = new System.Windows.Forms.Panel();
             this.buttonMatchPreviewTeam2RemovePlayer = new System.Windows.Forms.Button();
-            this.labelMatchPreviewSide2 = new System.Windows.Forms.Label();
-            this.labelMatchPreviewSide1 = new System.Windows.Forms.Label();
+            this.labelMatchPreviewTeam2 = new System.Windows.Forms.Label();
+            this.labelMatchPreviewTeam1 = new System.Windows.Forms.Label();
             this.buttonMatchPreviewTeam1RemovePlayer = new System.Windows.Forms.Button();
             this.buttonStartGame = new System.Windows.Forms.Button();
             this.listBoxMatchPreviewTeam2 = new System.Windows.Forms.ListBox();
@@ -349,8 +349,8 @@
             // 
             this.panelMatchPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMatchPreview.Controls.Add(this.buttonMatchPreviewTeam2RemovePlayer);
-            this.panelMatchPreview.Controls.Add(this.labelMatchPreviewSide2);
-            this.panelMatchPreview.Controls.Add(this.labelMatchPreviewSide1);
+            this.panelMatchPreview.Controls.Add(this.labelMatchPreviewTeam2);
+            this.panelMatchPreview.Controls.Add(this.labelMatchPreviewTeam1);
             this.panelMatchPreview.Controls.Add(this.buttonMatchPreviewTeam1RemovePlayer);
             this.panelMatchPreview.Controls.Add(this.buttonStartGame);
             this.panelMatchPreview.Controls.Add(this.listBoxMatchPreviewTeam2);
@@ -365,6 +365,7 @@
             // 
             // buttonMatchPreviewTeam2RemovePlayer
             // 
+            this.buttonMatchPreviewTeam2RemovePlayer.Enabled = false;
             this.buttonMatchPreviewTeam2RemovePlayer.Location = new System.Drawing.Point(164, 90);
             this.buttonMatchPreviewTeam2RemovePlayer.Name = "buttonMatchPreviewTeam2RemovePlayer";
             this.buttonMatchPreviewTeam2RemovePlayer.Size = new System.Drawing.Size(116, 31);
@@ -372,26 +373,27 @@
             this.buttonMatchPreviewTeam2RemovePlayer.Text = "Remove Player";
             this.buttonMatchPreviewTeam2RemovePlayer.UseVisualStyleBackColor = true;
             // 
-            // labelMatchPreviewSide2
+            // labelMatchPreviewTeam2
             // 
-            this.labelMatchPreviewSide2.AutoSize = true;
-            this.labelMatchPreviewSide2.Location = new System.Drawing.Point(201, 32);
-            this.labelMatchPreviewSide2.Name = "labelMatchPreviewSide2";
-            this.labelMatchPreviewSide2.Size = new System.Drawing.Size(44, 15);
-            this.labelMatchPreviewSide2.TabIndex = 12;
-            this.labelMatchPreviewSide2.Text = "Team 2";
+            this.labelMatchPreviewTeam2.AutoSize = true;
+            this.labelMatchPreviewTeam2.Location = new System.Drawing.Point(201, 32);
+            this.labelMatchPreviewTeam2.Name = "labelMatchPreviewTeam2";
+            this.labelMatchPreviewTeam2.Size = new System.Drawing.Size(44, 15);
+            this.labelMatchPreviewTeam2.TabIndex = 12;
+            this.labelMatchPreviewTeam2.Text = "Team 2";
             // 
-            // labelMatchPreviewSide1
+            // labelMatchPreviewTeam1
             // 
-            this.labelMatchPreviewSide1.AutoSize = true;
-            this.labelMatchPreviewSide1.Location = new System.Drawing.Point(54, 32);
-            this.labelMatchPreviewSide1.Name = "labelMatchPreviewSide1";
-            this.labelMatchPreviewSide1.Size = new System.Drawing.Size(44, 15);
-            this.labelMatchPreviewSide1.TabIndex = 11;
-            this.labelMatchPreviewSide1.Text = "Team 1";
+            this.labelMatchPreviewTeam1.AutoSize = true;
+            this.labelMatchPreviewTeam1.Location = new System.Drawing.Point(54, 32);
+            this.labelMatchPreviewTeam1.Name = "labelMatchPreviewTeam1";
+            this.labelMatchPreviewTeam1.Size = new System.Drawing.Size(44, 15);
+            this.labelMatchPreviewTeam1.TabIndex = 11;
+            this.labelMatchPreviewTeam1.Text = "Team 1";
             // 
             // buttonMatchPreviewTeam1RemovePlayer
             // 
+            this.buttonMatchPreviewTeam1RemovePlayer.Enabled = false;
             this.buttonMatchPreviewTeam1RemovePlayer.Location = new System.Drawing.Point(18, 90);
             this.buttonMatchPreviewTeam1RemovePlayer.Name = "buttonMatchPreviewTeam1RemovePlayer";
             this.buttonMatchPreviewTeam1RemovePlayer.Size = new System.Drawing.Size(116, 31);
@@ -401,6 +403,7 @@
             // 
             // buttonStartGame
             // 
+            this.buttonStartGame.Enabled = false;
             this.buttonStartGame.Location = new System.Drawing.Point(89, 127);
             this.buttonStartGame.Name = "buttonStartGame";
             this.buttonStartGame.Size = new System.Drawing.Size(118, 31);
@@ -486,6 +489,7 @@
             this.buttonAddToTeam1.TabIndex = 33;
             this.buttonAddToTeam1.Text = "Add To Team 1";
             this.buttonAddToTeam1.UseVisualStyleBackColor = true;
+            this.buttonAddToTeam1.Click += new System.EventHandler(this.buttonAddToTeam1_Click);
             // 
             // buttonAddToTeam2
             // 
@@ -663,7 +667,7 @@
             this.comboBoxCourtsAvailable.Size = new System.Drawing.Size(121, 23);
             this.comboBoxCourtsAvailable.TabIndex = 38;
             // 
-            // SessionTabControl
+            // SessionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -690,7 +694,7 @@
             this.Controls.Add(this.buttonAddPlayerToSession);
             this.Controls.Add(this.listBoxRestingPlayers);
             this.Controls.Add(this.buttonRemovePlayerFromSession);
-            this.Name = "SessionTabControl";
+            this.Name = "SessionControl";
             this.Size = new System.Drawing.Size(941, 501);
             this.panelCourt1.ResumeLayout(false);
             this.panelCourt1.PerformLayout();
@@ -735,8 +739,8 @@
         private Button buttonEndSession;
         private Button buttonFindMens;
         private Panel panelMatchPreview;
-        private Label labelMatchPreviewSide2;
-        private Label labelMatchPreviewSide1;
+        private Label labelMatchPreviewTeam2;
+        private Label labelMatchPreviewTeam1;
         private Button buttonMatchPreviewTeam1RemovePlayer;
         private Button buttonStartGame;
         private ListBox listBoxMatchPreviewTeam2;

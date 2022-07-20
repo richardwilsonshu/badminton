@@ -38,6 +38,8 @@ namespace Badminton.Dialogs
             var newPlayer = new Player(fullName, gender);
 
             _badmintonClub.Players.Add(newPlayer);
+
+            textBoxPlayerName.Text = "";
         }
 
         private void buttonAddToSession_Click(object sender, EventArgs e)
@@ -50,6 +52,8 @@ namespace Badminton.Dialogs
 
             _badmintonClub.Players.Remove(player);
             _badmintonClub.CurrentSession.WaitingPlayers.Add(player);
+
+            _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
         }
     }
 }

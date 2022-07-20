@@ -30,12 +30,12 @@
         {
             this.buttonFinish = new System.Windows.Forms.Button();
             this.labelCourtTitle = new System.Windows.Forms.Label();
-            this.labelSide1Players = new System.Windows.Forms.Label();
-            this.labelSide1Score = new System.Windows.Forms.Label();
-            this.textBoxSide1Score = new System.Windows.Forms.TextBox();
-            this.textBoxSide2Score = new System.Windows.Forms.TextBox();
+            this.labelTeam1Players = new System.Windows.Forms.Label();
+            this.labelTeam1Score = new System.Windows.Forms.Label();
+            this.textBoxTeam1Score = new System.Windows.Forms.TextBox();
+            this.textBoxTeam2Score = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelSide2Players = new System.Windows.Forms.Label();
+            this.labelTeam2Players = new System.Windows.Forms.Label();
             this.checkBoxNoElo = new System.Windows.Forms.CheckBox();
             this.buttonAbandon = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -62,39 +62,39 @@
             this.labelCourtTitle.TabIndex = 2;
             this.labelCourtTitle.Text = "Court 1";
             // 
-            // labelSide1Players
+            // labelTeam1Players
             // 
-            this.labelSide1Players.AutoSize = true;
-            this.labelSide1Players.Location = new System.Drawing.Point(12, 49);
-            this.labelSide1Players.Name = "labelSide1Players";
-            this.labelSide1Players.Size = new System.Drawing.Size(105, 15);
-            this.labelSide1Players.TabIndex = 3;
-            this.labelSide1Players.Text = "Player 1 && Player 2";
+            this.labelTeam1Players.AutoSize = true;
+            this.labelTeam1Players.Location = new System.Drawing.Point(12, 49);
+            this.labelTeam1Players.Name = "labelTeam1Players";
+            this.labelTeam1Players.Size = new System.Drawing.Size(105, 15);
+            this.labelTeam1Players.TabIndex = 3;
+            this.labelTeam1Players.Text = "Player 1 && Player 2";
             // 
-            // labelSide1Score
+            // labelTeam1Score
             // 
-            this.labelSide1Score.AutoSize = true;
-            this.labelSide1Score.Location = new System.Drawing.Point(17, 80);
-            this.labelSide1Score.Name = "labelSide1Score";
-            this.labelSide1Score.Size = new System.Drawing.Size(39, 15);
-            this.labelSide1Score.TabIndex = 4;
-            this.labelSide1Score.Text = "Score:";
+            this.labelTeam1Score.AutoSize = true;
+            this.labelTeam1Score.Location = new System.Drawing.Point(17, 80);
+            this.labelTeam1Score.Name = "labelTeam1Score";
+            this.labelTeam1Score.Size = new System.Drawing.Size(39, 15);
+            this.labelTeam1Score.TabIndex = 4;
+            this.labelTeam1Score.Text = "Score:";
             // 
-            // textBoxSide1Score
+            // textBoxTeam1Score
             // 
-            this.textBoxSide1Score.Location = new System.Drawing.Point(62, 77);
-            this.textBoxSide1Score.Name = "textBoxSide1Score";
-            this.textBoxSide1Score.Size = new System.Drawing.Size(100, 23);
-            this.textBoxSide1Score.TabIndex = 1;
-            this.textBoxSide1Score.TextChanged += new System.EventHandler(this.textBoxSide1Score_TextChanged);
+            this.textBoxTeam1Score.Location = new System.Drawing.Point(62, 77);
+            this.textBoxTeam1Score.Name = "textBoxTeam1Score";
+            this.textBoxTeam1Score.Size = new System.Drawing.Size(100, 23);
+            this.textBoxTeam1Score.TabIndex = 1;
+            this.textBoxTeam1Score.TextChanged += new System.EventHandler(this.textBoxTeam1Score_TextChanged);
             // 
-            // textBoxSide2Score
+            // textBoxTeam2Score
             // 
-            this.textBoxSide2Score.Location = new System.Drawing.Point(62, 147);
-            this.textBoxSide2Score.Name = "textBoxSide2Score";
-            this.textBoxSide2Score.Size = new System.Drawing.Size(100, 23);
-            this.textBoxSide2Score.TabIndex = 2;
-            this.textBoxSide2Score.TextChanged += new System.EventHandler(this.textBoxSide2Score_TextChanged);
+            this.textBoxTeam2Score.Location = new System.Drawing.Point(62, 147);
+            this.textBoxTeam2Score.Name = "textBoxTeam2Score";
+            this.textBoxTeam2Score.Size = new System.Drawing.Size(100, 23);
+            this.textBoxTeam2Score.TabIndex = 2;
+            this.textBoxTeam2Score.TextChanged += new System.EventHandler(this.textBoxTeam2Score_TextChanged);
             // 
             // label1
             // 
@@ -105,14 +105,14 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Score:";
             // 
-            // labelSide2Players
+            // labelTeam2Players
             // 
-            this.labelSide2Players.AutoSize = true;
-            this.labelSide2Players.Location = new System.Drawing.Point(12, 119);
-            this.labelSide2Players.Name = "labelSide2Players";
-            this.labelSide2Players.Size = new System.Drawing.Size(105, 15);
-            this.labelSide2Players.TabIndex = 6;
-            this.labelSide2Players.Text = "Player 3 && Player 4";
+            this.labelTeam2Players.AutoSize = true;
+            this.labelTeam2Players.Location = new System.Drawing.Point(12, 119);
+            this.labelTeam2Players.Name = "labelTeam2Players";
+            this.labelTeam2Players.Size = new System.Drawing.Size(105, 15);
+            this.labelTeam2Players.TabIndex = 6;
+            this.labelTeam2Players.Text = "Player 3 && Player 4";
             // 
             // checkBoxNoElo
             // 
@@ -141,12 +141,12 @@
             this.ClientSize = new System.Drawing.Size(219, 278);
             this.Controls.Add(this.buttonAbandon);
             this.Controls.Add(this.checkBoxNoElo);
-            this.Controls.Add(this.textBoxSide2Score);
+            this.Controls.Add(this.textBoxTeam2Score);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelSide2Players);
-            this.Controls.Add(this.textBoxSide1Score);
-            this.Controls.Add(this.labelSide1Score);
-            this.Controls.Add(this.labelSide1Players);
+            this.Controls.Add(this.labelTeam2Players);
+            this.Controls.Add(this.textBoxTeam1Score);
+            this.Controls.Add(this.labelTeam1Score);
+            this.Controls.Add(this.labelTeam1Players);
             this.Controls.Add(this.labelCourtTitle);
             this.Controls.Add(this.buttonFinish);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -163,12 +163,12 @@
         #endregion
         private Button buttonFinish;
         private Label labelCourtTitle;
-        private Label labelSide1Players;
-        private Label labelSide1Score;
-        private TextBox textBoxSide1Score;
-        private TextBox textBoxSide2Score;
+        private Label labelTeam1Players;
+        private Label labelTeam1Score;
+        private TextBox textBoxTeam1Score;
+        private TextBox textBoxTeam2Score;
         private Label label1;
-        private Label labelSide2Players;
+        private Label labelTeam2Players;
         private CheckBox checkBoxNoElo;
         private Button buttonAbandon;
     }
