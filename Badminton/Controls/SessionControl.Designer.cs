@@ -372,6 +372,7 @@
             this.buttonMatchPreviewTeam2RemovePlayer.TabIndex = 13;
             this.buttonMatchPreviewTeam2RemovePlayer.Text = "Remove Player";
             this.buttonMatchPreviewTeam2RemovePlayer.UseVisualStyleBackColor = true;
+            this.buttonMatchPreviewTeam2RemovePlayer.Click += new System.EventHandler(this.buttonMatchPreviewTeam2RemovePlayer_Click);
             // 
             // labelMatchPreviewTeam2
             // 
@@ -400,6 +401,7 @@
             this.buttonMatchPreviewTeam1RemovePlayer.TabIndex = 10;
             this.buttonMatchPreviewTeam1RemovePlayer.Text = "Remove Player";
             this.buttonMatchPreviewTeam1RemovePlayer.UseVisualStyleBackColor = true;
+            this.buttonMatchPreviewTeam1RemovePlayer.Click += new System.EventHandler(this.buttonMatchPreviewTeam1RemovePlayer_Click);
             // 
             // buttonStartGame
             // 
@@ -410,6 +412,7 @@
             this.buttonStartGame.TabIndex = 9;
             this.buttonStartGame.Text = "Start";
             this.buttonStartGame.UseVisualStyleBackColor = true;
+            this.buttonStartGame.Click += new System.EventHandler(this.buttonStartGame_Click);
             // 
             // listBoxMatchPreviewTeam2
             // 
@@ -502,6 +505,7 @@
             this.buttonAddToTeam2.TabIndex = 34;
             this.buttonAddToTeam2.Text = "Add To Team 2";
             this.buttonAddToTeam2.UseVisualStyleBackColor = true;
+            this.buttonAddToTeam2.Click += new System.EventHandler(this.buttonAddToTeam2_Click);
             // 
             // panelCourt3
             // 

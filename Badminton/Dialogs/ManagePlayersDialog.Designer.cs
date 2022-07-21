@@ -77,6 +77,7 @@
             this.textBoxPlayerName.Name = "textBoxPlayerName";
             this.textBoxPlayerName.Size = new System.Drawing.Size(194, 23);
             this.textBoxPlayerName.TabIndex = 28;
+            this.textBoxPlayerName.TextChanged += new System.EventHandler(this.textBoxPlayerName_TextChanged);
             // 
             // labelNewPlayerName
             // 

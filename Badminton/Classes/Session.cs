@@ -41,8 +41,9 @@ namespace Badminton.Classes
             StartDate = DateTime.Now;
         }
 
-        public void StartMatch(Match match)
+        public void StartMatch()
         {
+            var match = MatchPreview;
             var courtNumber = Enumerable.Range(1, CourtsAvailable).Except(CourtsInUse).FirstOrDefault();
 
             if (courtNumber == 0)
@@ -55,6 +56,7 @@ namespace Badminton.Classes
             match.PlayersOnCourt.ForEach(player => WaitingPlayers.Remove(player));
             WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
             Matches.Add(match);
+            MatchPreview = new Match();
         }
 
         public void FinishMatch(Match match)
@@ -68,7 +70,7 @@ namespace Badminton.Classes
 
             foreach (Player player in match.PlayersOnCourt)
             {
-                player.MatchesPlayed[this].Add(match);
+                player.AddMatchPlayed(this, match);
             }
 
             //var eloCalculator = new EloCalculator();

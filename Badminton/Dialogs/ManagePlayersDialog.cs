@@ -55,5 +55,10 @@ namespace Badminton.Dialogs
 
             _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
         }
+
+        private void textBoxPlayerName_TextChanged(object sender, EventArgs e)
+        {
+            buttonAddNewPlayer.Enabled = textBoxPlayerName.TextLength > 0;
+        }
     }
 }

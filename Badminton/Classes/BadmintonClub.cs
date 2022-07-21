@@ -12,5 +12,18 @@ namespace Badminton.Classes
         };
 
         [IgnoreDataMember] public Session CurrentSession => Sessions.Last();
+
+        public void EndCurrentSession()
+        {
+            foreach (var player in CurrentSession.PlayersInSession)
+            {
+                Players.Add(player);
+            }
+
+            CurrentSession.EndDate = DateTime.Now;
+
+            var placeholderSession = new Session(CurrentSession.CourtsAvailable);
+            Sessions.Add(placeholderSession);
+        }
     }
 }

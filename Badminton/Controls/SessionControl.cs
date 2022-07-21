@@ -67,6 +67,34 @@ namespace Badminton.Controls
             panelCourt2.Enabled = true;
         }
 
+        private void BindCourt3()
+        {
+            var match = Session.GetActiveMatchOnCourt(3);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            listBoxCourt3Team1.BindPlayers(match.Team1Players);
+            listBoxCourt3Team2.BindPlayers(match.Team2Players);
+            panelCourt3.Enabled = true;
+        }
+
+        private void BindCourt4()
+        {
+            var match = Session.GetActiveMatchOnCourt(4);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            listBoxCourt4Team1.BindPlayers(match.Team1Players);
+            listBoxCourt4Team2.BindPlayers(match.Team2Players);
+            panelCourt4.Enabled = true;
+        }
+
         private void EnableOrDisableGenerateGameButtons()
         {
             // TODO
@@ -240,10 +268,7 @@ namespace Badminton.Controls
             var confirmResult = MessageBox.Show("Are you sure you want to end the current session?", "Confirm End Session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult == DialogResult.Yes)
             {
-                _badmintonClub.CurrentSession.EndDate = DateTime.Now;
-
-                var placeholderSession = new Session(numberOfCourts: 4);
-                _badmintonClub.Sessions.Add(placeholderSession);
+                _badmintonClub.EndCurrentSession();
 
                 SessionFinished?.Invoke(sender, EventArgs.Empty);
             }
@@ -260,7 +285,88 @@ namespace Badminton.Controls
             Session.MatchPreview.Team1Players.Add(player);
             Session.WaitingPlayers.Remove(player);
 
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonAddToTeam2_Click(object sender, EventArgs e)
+        {
+            if (listBoxWaitingPlayers.SelectedItem is not Player player ||
+                Session.MatchPreview.Team2Players.Count >= 2)
+            {
+                return;
+            }
+
+            Session.MatchPreview.Team2Players.Add(player);
+            Session.WaitingPlayers.Remove(player);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonMatchPreviewTeam1RemovePlayer_Click(object sender, EventArgs e)
+        {
+            if (listBoxMatchPreviewTeam1.SelectedItem is not Player player)
+            {
+                return;
+            }
+
+            Session.MatchPreview.Team1Players.Remove(player);
+            Session.WaitingPlayers.Add(player);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonMatchPreviewTeam2RemovePlayer_Click(object sender, EventArgs e)
+        {
+            if (listBoxMatchPreviewTeam2.SelectedItem is not Player player)
+            {
+                return;
+            }
+
+            Session.MatchPreview.Team2Players.Remove(player);
+            Session.WaitingPlayers.Add(player);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void UpdateMatchPreviewState()
+        {
             buttonAddToTeam1.Enabled = Session.MatchPreview.Team1Players.Count < 2;
+            buttonMatchPreviewTeam1RemovePlayer.Enabled = Session.MatchPreview.Team1Players.Count > 0;
+
+            buttonAddToTeam2.Enabled = Session.MatchPreview.Team2Players.Count < 2;
+            buttonMatchPreviewTeam2RemovePlayer.Enabled = Session.MatchPreview.Team2Players.Count > 0;
+
+            buttonStartGame.Enabled = 
+                Session.MatchPreview.Team1Players.Count == 2 &&
+                Session.MatchPreview.Team2Players.Count == 2;
+        }
+
+        private void buttonStartGame_Click(object sender, EventArgs e)
+        {
+            var match = Session.MatchPreview;
+
+            Session.StartMatch();
+            UpdateMatchPreviewState();
+
+            listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
+            listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
+
+            if (match.CourtNumber == 1)
+            {
+                BindCourt1();
+            }
+            else if (match.CourtNumber == 2)
+            {
+                BindCourt2();
+            }
+            else if (match.CourtNumber == 3)
+            {
+                BindCourt3();
+            }
+            else if (match.CourtNumber == 4)
+            {
+                BindCourt4();
+            }
         }
     }
 }

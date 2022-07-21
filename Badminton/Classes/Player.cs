@@ -33,5 +33,15 @@ namespace Badminton.Classes
         [IgnoreDataMember] public string Display => $"[{Elo}] ({MinutesSinceLastMatch}m)\t{FullName}";
         [IgnoreDataMember] public DateTime LastMatchTime => MatchesPlayed.LastOrDefault().Value?.Last()?.EndDate.GetValueOrDefault() ?? DateTime.MinValue;
         [IgnoreDataMember] public int MinutesSinceLastMatch => LastMatchTime != DateTime.MinValue ? (int)(DateTime.Now - LastMatchTime).TotalMinutes : 0;
+
+        public void AddMatchPlayed(Session session, Match match)
+        {
+            if (!MatchesPlayed.ContainsKey(session))
+            {
+                MatchesPlayed[session] = new List<Match>();
+            }
+
+            MatchesPlayed[session].Add(match);
+        }
     }
 }
