@@ -14,7 +14,7 @@ namespace Badminton.Classes
         public DateTime? EndDate { get; set; }
         public bool EloNotAffected { get; set; }
 
-        [IgnoreDataMember] public List<Player> PlayersOnCourt => Team1Players.Concat(Team2Players).ToList();
+        [IgnoreDataMember] public List<Player> Players => Team1Players.Concat(Team2Players).ToList();
         [IgnoreDataMember] public bool Started => StartDate.HasValue;
         [IgnoreDataMember] public bool Finished => EndDate.HasValue;
     }

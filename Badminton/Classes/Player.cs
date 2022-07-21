@@ -18,8 +18,6 @@ namespace Badminton.Classes
 
         public Dictionary<Session, List<EloHistory>> EloHistory { get; set; } = new Dictionary<Session, List<EloHistory>>();
         public Dictionary<Session, List<Match>> MatchesPlayed { get; set; } = new Dictionary<Session, List<Match>>();
-        public Dictionary<Session, List<Player>> PlayedWith { get; set; } = new Dictionary<Session, List<Player>>();
-        public Dictionary<Session, List<Player>> PlayedAgainst { get; set; } = new Dictionary<Session, List<Player>>();
 
         public Player(string fullName, Gender gender)
         {
@@ -42,6 +40,28 @@ namespace Badminton.Classes
             }
 
             MatchesPlayed[session].Add(match);
+        }
+
+        public List<Player> GetPlayedAgainst(Session session)
+        {
+            return session.Matches
+                .Where(m => m.Players.Contains(this))
+                .SelectMany(m => m.Team1Players.Contains(this) ? m.Team2Players : m.Team1Players)
+                .Distinct()
+                .ToList();
+        }
+
+        public List<Player> GetPlayedWith(Session session)
+        {
+            var players = session.Matches
+                .Where(m => m.Players.Contains(this))
+                .SelectMany(m => m.Team1Players.Contains(this) ? m.Team1Players : m.Team2Players)
+                .Distinct()
+                .ToList();
+
+            players.Remove(this);
+
+            return players;
         }
     }
 }

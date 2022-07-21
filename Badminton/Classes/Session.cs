@@ -28,7 +28,7 @@ namespace Badminton.Classes
         [IgnoreDataMember]
         public List<Player> PlayersInSession => WaitingPlayers
             .Concat(RestingPlayers)
-            .Concat(ActiveMatches.SelectMany(m => m.PlayersOnCourt))
+            .Concat(ActiveMatches.SelectMany(m => m.Players))
             .ToList();
 
         public Match? GetActiveMatchOnCourt(int courtNumber)
@@ -53,7 +53,7 @@ namespace Badminton.Classes
 
             match.StartDate = DateTime.Now;
             match.CourtNumber = courtNumber;
-            match.PlayersOnCourt.ForEach(player => WaitingPlayers.Remove(player));
+            match.Players.ForEach(player => WaitingPlayers.Remove(player));
             WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
             Matches.Add(match);
             MatchPreview = new Match();
@@ -68,7 +68,7 @@ namespace Badminton.Classes
 
             match.EndDate = DateTime.Now;
 
-            foreach (Player player in match.PlayersOnCourt)
+            foreach (Player player in match.Players)
             {
                 player.AddMatchPlayed(this, match);
             }
@@ -76,7 +76,7 @@ namespace Badminton.Classes
             //var eloCalculator = new EloCalculator();
             //eloCalculator.
 
-            match.PlayersOnCourt.ForEach(player => WaitingPlayers.Add(player));
+            match.Players.ForEach(player => WaitingPlayers.Add(player));
             WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), ListSortDirection.Ascending);
         }
     }
