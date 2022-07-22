@@ -15,5 +15,5 @@ Badminton Tasks to do before V1
 
 - The case of the vanishing players when abandoning
 - Match time not updating
-- Saving - don't duplicate the players (may mess up with querying if player != player)
-- 
+- Saving - don't duplicate the players (may mess up with querying by Player reference)
+- Courts Available dropdown (must finish match e.g. if all in use before changing to only 3 available)

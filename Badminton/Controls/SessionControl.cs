@@ -421,6 +421,9 @@ namespace Badminton.Controls
 
                 var firstPlayerNumberOfTimes = playedWith.FirstOrDefault()?.Count ?? 0;
             }
+
+            //Session.MatchPreview.Team1Players.Clear();
+            //Session.MatchPreview.Team1Players.Add(Session.WaitingPlayers[0]);
         }
     }
 }
