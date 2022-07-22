@@ -2,17 +2,42 @@
 {
     public class EloCalculator
     {
-        // Taken from https://www.geeksforgeeks.org/elo-rating-algorithm/
-        // Also see https://en.wikipedia.org/wiki/Elo_rating_system#Implementing_Elo's_scheme
-        private float CalculateWinProbability(float rating1, float rating2)
+        public void UpdateElo(Match match)
         {
-            return 1.0f * 1.0f / (1 + 1.0f * (float)(Math.Pow(10, 1.0f * (rating1 - rating2) / 400)));
+            int K = 20;
+            double Ea = 0.0;
+            int DeltaElo = 0;
+            float WinnerElo = 0;
+            float LosserElo = 0;
+
+            if (match.Team1Score > match.Team2Score)
+            {
+                WinnerElo = (match.Team1Players[0].Elo + match.Team1Players[1].Elo) / 2;
+                LosserElo = (match.Team2Players[0].Elo + match.Team2Players[1].Elo) / 2;
+            }
+            else
+            {
+                WinnerElo = (match.Team2Players[0].Elo + match.Team2Players[1].Elo) / 2;
+                LosserElo = (match.Team1Players[0].Elo + match.Team1Players[1].Elo) / 2;
+            }
+
+            Ea = 1.0f / (1.0f + Math.Pow(10.0f, (WinnerElo - LosserElo) / 400));
+            DeltaElo = Convert.ToInt32(Ea * K);
+
+            if (match.Team1Score > match.Team2Score)
+            {
+                match.Team1Players[0].Elo += DeltaElo;
+                match.Team1Players[1].Elo += DeltaElo;
+                match.Team2Players[0].Elo -= DeltaElo;
+                match.Team2Players[1].Elo -= DeltaElo;
+            }
+            else
+            {
+                match.Team1Players[0].Elo -= DeltaElo;
+                match.Team1Players[1].Elo -= DeltaElo;
+                match.Team2Players[0].Elo += DeltaElo;
+                match.Team2Players[1].Elo += DeltaElo;
+            }
         }
-
-        // Calculate from scores etc
-        //private float Calculate(float player1Elo, float player2Elo)
-        //{
-
-        //}
     }
 }

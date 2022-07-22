@@ -1,5 +1,6 @@
 ﻿using Badminton.Classes;
 using Badminton.Dialogs;
+using System.ComponentModel;
 
 namespace Badminton.Controls
 {
@@ -120,7 +121,7 @@ namespace Badminton.Controls
                 Session.WaitingPlayers.Remove(player);
                 _badmintonClub.Players.Add(player);
 
-                _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+                _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
             }
         }
 
@@ -134,8 +135,8 @@ namespace Badminton.Controls
             Session.RestingPlayers.Remove(player);
             Session.WaitingPlayers.Add(player);
 
-            Session.RestingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
-            Session.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+            Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -150,8 +151,8 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Remove(player);
             Session.RestingPlayers.Add(player);
 
-            Session.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
-            Session.RestingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
 
             EnableOrDisableGenerateGameButtons();
         }
@@ -165,22 +166,13 @@ namespace Badminton.Controls
                 return;
             }
 
-            using var finishMatchForm = new FinishMatchDialog(match);
-
-            if (finishMatchForm.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-            Session.FinishMatch(match);
-
-            EnableOrDisableGenerateGameButtons();
+            FinishMatch(match);
 
             panelCourt1.Enabled = false;
             listBoxCourt1Team1.DataSource = null;
             listBoxCourt1Team2.DataSource = null;
 
-            // TODO Save here??
+            _badmintonClub.Save();
         }
 
         private void buttonFinishCourt2_Click(object sender, EventArgs e)
@@ -192,22 +184,70 @@ namespace Badminton.Controls
                 return;
             }
 
-            using var finishMatchForm = new FinishMatchDialog(match);
-
-            if (finishMatchForm.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-            Session.FinishMatch(match);
-
-            EnableOrDisableGenerateGameButtons();
+            FinishMatch(match);
 
             panelCourt2.Enabled = false;
             listBoxCourt2Team1.DataSource = null;
             listBoxCourt2Team2.DataSource = null;
 
-            // TODO Save here??
+            _badmintonClub.Save();
+        }
+
+        private void buttonFinishCourt3_Click(object sender, EventArgs e)
+        {
+            var match = Session.GetActiveMatchOnCourt(3);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            FinishMatch(match);
+
+            panelCourt3.Enabled = false;
+            listBoxCourt3Team1.DataSource = null;
+            listBoxCourt3Team2.DataSource = null;
+
+            _badmintonClub.Save();
+        }
+
+        private void buttonFinishCourt4_Click(object sender, EventArgs e)
+        {
+            var match = Session.GetActiveMatchOnCourt(4);
+
+            if (match == null)
+            {
+                return;
+            }
+
+            FinishMatch(match);
+
+            panelCourt4.Enabled = false;
+            listBoxCourt4Team1.DataSource = null;
+            listBoxCourt4Team2.DataSource = null;
+
+            _badmintonClub.Save();
+        }
+
+        private void FinishMatch(Match match)
+        {
+            using var finishMatchDialog = new FinishMatchDialog(match);
+
+            if (finishMatchDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (finishMatchDialog.MatchAbandoned)
+            {
+                Session.AbandonMatch(match);
+            }
+            else
+            {
+                Session.FinishMatch(match);
+            }
+
+            EnableOrDisableGenerateGameButtons();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -269,6 +309,7 @@ namespace Badminton.Controls
             if (confirmResult == DialogResult.Yes)
             {
                 _badmintonClub.EndCurrentSession();
+                _badmintonClub.Save();
 
                 SessionFinished?.Invoke(sender, EventArgs.Empty);
             }
@@ -367,6 +408,11 @@ namespace Badminton.Controls
             {
                 BindCourt4();
             }
+        }
+
+        private void buttonFindGenderless_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -50,7 +50,7 @@
             this.buttonFinish.TabIndex = 5;
             this.buttonFinish.Text = "Finish";
             this.buttonFinish.UseVisualStyleBackColor = true;
-            this.buttonFinish.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonFinish.Click += new System.EventHandler(this.buttonFinish_Click);
             // 
             // labelCourtTitle
             // 
@@ -133,6 +133,7 @@
             this.buttonAbandon.TabIndex = 8;
             this.buttonAbandon.Text = "Abandon";
             this.buttonAbandon.UseVisualStyleBackColor = true;
+            this.buttonAbandon.Click += new System.EventHandler(this.buttonAbandon_Click);
             // 
             // FinishMatchDialog
             // 

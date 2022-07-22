@@ -480,6 +480,7 @@
             this.buttonFindGenderless.TabIndex = 32;
             this.buttonFindGenderless.Text = "Find Genderless";
             this.buttonFindGenderless.UseVisualStyleBackColor = true;
+            this.buttonFindGenderless.Click += new System.EventHandler(this.buttonFindGenderless_Click);
             // 
             // buttonAddToTeam1
             // 
@@ -539,6 +540,7 @@
             this.buttonFinishCourt3.TabIndex = 9;
             this.buttonFinishCourt3.Text = "Finish";
             this.buttonFinishCourt3.UseVisualStyleBackColor = true;
+            this.buttonFinishCourt3.Click += new System.EventHandler(this.buttonFinishCourt3_Click);
             // 
             // listBoxCourt3Team2
             // 
@@ -609,6 +611,7 @@
             this.buttonFinishCourt4.TabIndex = 9;
             this.buttonFinishCourt4.Text = "Finish";
             this.buttonFinishCourt4.UseVisualStyleBackColor = true;
+            this.buttonFinishCourt4.Click += new System.EventHandler(this.buttonFinishCourt4_Click);
             // 
             // listBoxCourt4Team2
             // 

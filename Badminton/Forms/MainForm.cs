@@ -1,5 +1,4 @@
 using Badminton.Classes;
-using Newtonsoft.Json;
 
 namespace Badminton.Forms
 {
@@ -9,7 +8,12 @@ namespace Badminton.Forms
 
         public MainForm()
         {
-            LoadBadmintonClub();
+            var loadedBadmintonClub = BadmintonClub.Load();
+
+            if (loadedBadmintonClub != null)
+            {
+                _badmintonClub = loadedBadmintonClub;
+            }
 
             InitializeComponent();
             InitializeCustomControls();
@@ -30,37 +34,6 @@ namespace Badminton.Forms
             sessionControl.SetBadmintonClub(_badmintonClub);
             sessionControl.SessionFinished += SessionControl_SessionFinished;
             Controls.Add(sessionControl);
-        }
-
-        // TODO review save/load
-        private void SaveBadmintonClub(object sender, EventArgs e)
-        {
-            try
-            {
-                using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
-                writer.Write(JsonConvert.SerializeObject(_badmintonClub));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"File '{Constants.FileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // TODO review save/load
-        private void LoadBadmintonClub()
-        {
-            try
-            {
-                if (File.Exists(Constants.FileName))
-                {
-                    using var reader = new StreamReader(File.OpenRead(Constants.FileName));
-                    _badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         // I keep clicking this, so I'm leaving it in...

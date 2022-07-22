@@ -5,7 +5,9 @@ namespace Badminton.Classes
 {
     public class Player
     {
-        public Guid Id { get; set; }
+        private static int UId = 0;
+
+        public int Id { get; }
         public string FullName { get; set; }
         public Gender Gender { get; set; }
         public int Elo { get; set; }
@@ -13,55 +15,46 @@ namespace Badminton.Classes
         public DateTime CreatedDate { get; set; }
         // For reporting / statistics we will want to keep the player
         // If the player has not participated in any matches etc, then we can consider hard deleting them instead
+        public DateTime? WaitingSinceDate { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedDate { get; set; }
 
-        public Dictionary<Session, List<EloHistory>> EloHistory { get; set; } = new Dictionary<Session, List<EloHistory>>();
-        public Dictionary<Session, List<Match>> MatchesPlayed { get; set; } = new Dictionary<Session, List<Match>>();
+        public Dictionary<Session, List<EloResult>> EloResults { get; set; } = new Dictionary<Session, List<EloResult>>();
 
         public Player(string fullName, Gender gender)
         {
-            Id = Guid.NewGuid();
+            Id = ++UId;
             FullName = fullName;
             Gender = gender;
             Elo = 1600;
             CreatedDate = DateTime.Now;
         }
 
-        [IgnoreDataMember] public string Display => $"[{Elo}] ({MinutesSinceLastMatch}m)\t{FullName}";
-        [IgnoreDataMember] public DateTime LastMatchTime => MatchesPlayed.LastOrDefault().Value?.Last()?.EndDate.GetValueOrDefault() ?? DateTime.MinValue;
-        [IgnoreDataMember] public int MinutesSinceLastMatch => LastMatchTime != DateTime.MinValue ? (int)(DateTime.Now - LastMatchTime).TotalMinutes : 0;
+        [IgnoreDataMember] public string Display => $"[{Elo}]  {MinutesDisplay}  {GenderDisplay}\t{FullName}";
+        /// <remarks>using int.MaxValue so that players that haven't played yet are prioritized and ordered first</remarks>
+        [IgnoreDataMember] public int MinutesWaiting => WaitingSinceDate.HasValue ? (int)(DateTime.Now - WaitingSinceDate.Value).TotalMinutes : int.MaxValue;
+        [IgnoreDataMember] public string MinutesDisplay => MinutesWaiting == int.MaxValue ? "" : $"{MinutesWaiting}m";
+        [IgnoreDataMember] public string GenderDisplay => Gender == Gender.Male ? "M" : "F";
 
-        public void AddMatchPlayed(Session session, Match match)
-        {
-            if (!MatchesPlayed.ContainsKey(session))
-            {
-                MatchesPlayed[session] = new List<Match>();
-            }
-
-            MatchesPlayed[session].Add(match);
-        }
-
-        public List<Player> GetPlayedAgainst(Session session)
+        public List<PlayerCount> GetPlayedAgainst(Session session)
         {
             return session.Matches
-                .Where(m => m.Players.Contains(this))
-                .SelectMany(m => m.Team1Players.Contains(this) ? m.Team2Players : m.Team1Players)
-                .Distinct()
+                .Where(match => match.Players.Contains(this))
+                .SelectMany(match => match.Team1Players.Contains(this) ? match.Team2Players : match.Team1Players)
+                .GroupBy(player => player)
+                .Select(group => new PlayerCount(group.Key, group.Count()))
                 .ToList();
         }
 
-        public List<Player> GetPlayedWith(Session session)
+        public List<PlayerCount> GetPlayedWith(Session session)
         {
-            var players = session.Matches
-                .Where(m => m.Players.Contains(this))
-                .SelectMany(m => m.Team1Players.Contains(this) ? m.Team1Players : m.Team2Players)
-                .Distinct()
+            return session.Matches
+                .Where(match => match.Players.Contains(this))
+                .SelectMany(match => match.Team1Players.Contains(this) ? match.Team1Players : match.Team2Players)
+                .GroupBy(player => player)
+                .Where(group => group.Key != this)
+                .Select(group => new PlayerCount(group.Key, group.Count()))
                 .ToList();
-
-            players.Remove(this);
-
-            return players;
         }
     }
 }

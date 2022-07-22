@@ -6,6 +6,8 @@ namespace Badminton.Dialogs
     {
         private Match _match;
 
+        public bool MatchAbandoned { get; set; }
+
         public FinishMatchDialog(Match match)
         {
             _match = match;
@@ -13,11 +15,26 @@ namespace Badminton.Dialogs
             InitializeComponent();
 
             labelCourtTitle.Text = $"Court {_match.CourtNumber}";
-            labelTeam1Players.Text = string.Join(" & ", _match.Team1Players.Select(p => p.FullName));
-            labelTeam2Players.Text = string.Join(" & ", _match.Team2Players.Select(p => p.FullName));
+            labelTeam1Players.Text = string.Join(" && ", _match.Team1Players.Select(p => p.FullName));
+            labelTeam2Players.Text = string.Join(" && ", _match.Team2Players.Select(p => p.FullName));
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void textBoxTeam1Score_TextChanged(object sender, EventArgs e)
+        {
+            // TODO are the scores equal?
+        }
+
+        private void textBoxTeam2Score_TextChanged(object sender, EventArgs e)
+        {
+            // TODO are the scores equal?
+        }
+
+        private void buttonAbandon_Click(object sender, EventArgs e)
+        {
+            MatchAbandoned = true;
+        }
+
+        private void buttonFinish_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(textBoxTeam1Score.Text, out var Team1Score))
             {
@@ -31,16 +48,6 @@ namespace Badminton.Dialogs
             _match.Team1Score = Team1Score;
             _match.Team2Score = Team2Score;
             _match.EloNotAffected = checkBoxNoElo.Checked;
-        }
-
-        private void textBoxTeam1Score_TextChanged(object sender, EventArgs e)
-        {
-            // TODO are the scores equal?
-        }
-
-        private void textBoxTeam2Score_TextChanged(object sender, EventArgs e)
-        {
-            // TODO are the scores equal?
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KGySoft.ComponentModel;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 namespace Badminton.Classes
@@ -24,6 +25,46 @@ namespace Badminton.Classes
 
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
             Sessions.Add(placeholderSession);
+        }
+
+        // TODO review save/load
+        public void Save()
+        {
+            try
+            {
+                using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
+                writer.Write(JsonConvert.SerializeObject(this));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{Constants.FileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // TODO review save/load
+        public static BadmintonClub? Load()
+        {
+            try
+            {
+                if (File.Exists(Constants.FileName))
+                {
+                    using var reader = new StreamReader(File.OpenRead(Constants.FileName));
+                    return JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
+        }
+
+        public bool PlayerAlreadyExists(string fullName)
+        {
+            return CurrentSession.PlayersInSession
+                .Concat(Players)
+                .Any(player => player.FullName.ToLower() == fullName.ToLower());
         }
     }
 }

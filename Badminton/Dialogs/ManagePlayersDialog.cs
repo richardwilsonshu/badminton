@@ -1,5 +1,6 @@
 ﻿using Badminton.Classes;
 using Badminton.Enums;
+using System.ComponentModel;
 
 namespace Badminton.Dialogs
 {
@@ -35,6 +36,17 @@ namespace Badminton.Dialogs
             var fullName = textBoxPlayerName.Text;
             var gender = (Gender)comboBoxGender.SelectedValue;
 
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                return;
+            }
+
+            if (_badmintonClub.PlayerAlreadyExists(fullName))
+            {
+                MessageBox.Show($"'{fullName}' is already taken. Please change your name!", "Name Taken", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var newPlayer = new Player(fullName, gender);
 
             _badmintonClub.Players.Add(newPlayer);
@@ -51,9 +63,11 @@ namespace Badminton.Dialogs
             }
 
             _badmintonClub.Players.Remove(player);
+
+            player.WaitingSinceDate = DateTime.Now;
             _badmintonClub.CurrentSession.WaitingPlayers.Add(player);
 
-            _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.LastMatchTime), System.ComponentModel.ListSortDirection.Ascending);
+            _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
         }
 
         private void textBoxPlayerName_TextChanged(object sender, EventArgs e)
