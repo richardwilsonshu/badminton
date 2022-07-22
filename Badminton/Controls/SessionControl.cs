@@ -419,7 +419,11 @@ namespace Badminton.Controls
                 var playedWith = player.GetPlayedWith(Session);
                 var playedAgainst = player.GetPlayedAgainst(Session);
 
-                var firstPlayerNumberOfTimes = playedWith.FirstOrDefault()?.Count ?? 0;
+                //playedWith[1].Count
+                //if (playedWith[1].Player == Session.WaitingPlayers[2])
+                //{
+
+                //}
             }
 
             //Session.MatchPreview.Team1Players.Clear();

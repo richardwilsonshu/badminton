@@ -2,7 +2,7 @@
 {
     public class PlayerCount
     {
-        Player Player { get; set; }
+        public Player Player { get; set; }
         public int Count { get; set; }
 
         public PlayerCount(Player player, int count)
