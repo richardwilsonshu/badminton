@@ -1,9 +1,3 @@
-Due to naming collisions, it's probably best to have a separate user control for each tab.
-
-The user control can then be dragged on to the tab, and the tabs can be shown/hidden depending on the current state. 
-See https://stackoverflow.com/a/3365490
-
-
 // Adam's Match Score Algorithm
 Have they played together?
 Team A (Side A) = 0 & 1
@@ -14,3 +8,12 @@ Each player -> Minutes waiting * 4 (benefit those waiting longest)
 
 
 High score = bad...
+
+
+
+Badminton Tasks to do before V1
+
+- The case of the vanishing players when abandoning
+- Match time not updating
+- Saving - don't duplicate the players (may mess up with querying if player != player)
+- 

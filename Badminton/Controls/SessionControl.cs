@@ -295,6 +295,8 @@ namespace Badminton.Controls
             buttonAddToTeam2.Enabled = true;
 
             panelMatchPreview.Enabled = true;
+
+            buttonFindGenderless.Enabled = true;
         }
 
         private void buttonEndSession_Click(object sender, EventArgs e)
@@ -412,7 +414,13 @@ namespace Badminton.Controls
 
         private void buttonFindGenderless_Click(object sender, EventArgs e)
         {
+            foreach (var player in Session.WaitingPlayers)
+            {
+                var playedWith = player.GetPlayedWith(Session);
+                var playedAgainst = player.GetPlayedAgainst(Session);
 
+                var firstPlayerNumberOfTimes = playedWith.FirstOrDefault()?.Count ?? 0;
+            }
         }
     }
 }
