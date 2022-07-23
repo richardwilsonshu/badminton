@@ -86,7 +86,6 @@
             this.textBoxTeam1Score.Name = "textBoxTeam1Score";
             this.textBoxTeam1Score.Size = new System.Drawing.Size(100, 23);
             this.textBoxTeam1Score.TabIndex = 1;
-            this.textBoxTeam1Score.TextChanged += new System.EventHandler(this.textBoxTeam1Score_TextChanged);
             // 
             // textBoxTeam2Score
             // 
@@ -94,7 +93,6 @@
             this.textBoxTeam2Score.Name = "textBoxTeam2Score";
             this.textBoxTeam2Score.Size = new System.Drawing.Size(100, 23);
             this.textBoxTeam2Score.TabIndex = 2;
-            this.textBoxTeam2Score.TextChanged += new System.EventHandler(this.textBoxTeam2Score_TextChanged);
             // 
             // label1
             // 

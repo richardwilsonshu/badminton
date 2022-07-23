@@ -164,6 +164,7 @@ namespace Badminton.Controls
             panelCourt1.Enabled = false;
             listBoxCourt1Team1.DataSource = null;
             listBoxCourt1Team2.DataSource = null;
+            labelCourt1MatchTime.Text = "Match time:";
 
             _badmintonClub.Save();
         }
@@ -187,6 +188,7 @@ namespace Badminton.Controls
             panelCourt2.Enabled = false;
             listBoxCourt2Team1.DataSource = null;
             listBoxCourt2Team2.DataSource = null;
+            labelCourt2MatchTime.Text = "Match time:";
 
             _badmintonClub.Save();
         }
@@ -210,6 +212,7 @@ namespace Badminton.Controls
             panelCourt3.Enabled = false;
             listBoxCourt3Team1.DataSource = null;
             listBoxCourt3Team2.DataSource = null;
+            labelCourt3MatchTime.Text = "Match time:";
 
             _badmintonClub.Save();
         }
@@ -233,6 +236,7 @@ namespace Badminton.Controls
             panelCourt4.Enabled = false;
             listBoxCourt4Team1.DataSource = null;
             listBoxCourt4Team2.DataSource = null;
+            labelCourt4MatchTime.Text = "Match time:";
 
             _badmintonClub.Save();
         }
@@ -261,28 +265,28 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
-            // TODO court 3 and 4 ? perhaps find a less repetitive way with lists?
-            var court1Match = Session.GetActiveMatchOnCourt(1);
-            var court2Match = Session.GetActiveMatchOnCourt(2);
+            // TODO perhaps find a less repetitive way with lists?
+            foreach (var match in Session.ActiveMatches)
+            {
+                var elapsedTime = DateTime.Now - match.StartDate!.Value;
+                var text = $"Match time: {elapsedTime:h\\:mm\\:ss}";
 
-            if (court1Match?.Started == true)
-            {
-                var elapsedTime = DateTime.Now - court1Match.StartDate!.Value;
-                labelCourt1MatchTime.Text = $"Match time: {elapsedTime:h\\:mm\\:ss}";
-            }
-            else
-            {
-                labelCourt1MatchTime.Text = "Match time:";
-            }
-
-            if (court2Match?.Started == true)
-            {
-                var elapsedTime = DateTime.Now - court2Match.StartDate!.Value;
-                labelCourt2MatchTime.Text = $"Match time: {elapsedTime:h\\:mm\\:ss}";
-            }
-            else
-            {
-                labelCourt2MatchTime.Text = "Match time:";
+                if (match.CourtNumber == 1)
+                {
+                    labelCourt1MatchTime.Text = text;
+                }
+                else if (match.CourtNumber == 2)
+                {
+                    labelCourt2MatchTime.Text = text;
+                }
+                else if (match.CourtNumber == 3)
+                {
+                    labelCourt3MatchTime.Text = text;
+                }
+                else if (match.CourtNumber == 4)
+                {
+                    labelCourt4MatchTime.Text = text;
+                }
             }
         }
 
