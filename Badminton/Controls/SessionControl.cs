@@ -452,7 +452,8 @@ namespace Badminton.Controls
 
             if (newNumber < currentNumber && Session.ActiveMatches.Count > newNumber)
             {
-                MessageBox.Show($"Please finish {(newNumber - currentNumber)} match(es) first!", "Court Availability Change", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Please finish {currentNumber - newNumber} match(es) first!", "Court Availability Change", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                comboBoxCourtsAvailable.SelectedIndex = currentNumber - 1;
                 return;
             }
 
