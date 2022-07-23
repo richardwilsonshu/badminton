@@ -1,3 +1,11 @@
+FYI - Deployment:
+
+https://www.hanselman.com/blog/how-to-make-a-winforms-app-with-net-5-entirely-from-the-command-line-and-publish-as-one-selfcontained-file
+
+Just right-click "Badminton" project -> Publish -> click "Publish" on FolderProfile.pubxml
+
+Note that it is a big exe (~150MB) since it includes the whole runtime. It really is a self-contained exe.
+
 // Adam's Match Score Algorithm
 Have they played together?
 Team A (Side A) = 0 & 1
