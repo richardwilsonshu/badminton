@@ -27,8 +27,6 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.Bind(Session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
             listBoxRestingPlayers.BindPlayers(Session.RestingPlayers);
 
-            EnableOrDisableGenerateGameButtons();
-
             BindCourt1();
             BindCourt2();
 
@@ -96,12 +94,6 @@ namespace Badminton.Controls
             panelCourt4.Enabled = true;
         }
 
-        private void EnableOrDisableGenerateGameButtons()
-        {
-            // TODO
-            //buttonGenerateGame.Enabled = Session.CanGenerateMatch;
-        }
-
         private void buttonAddPlayerToSession_Click(object sender, EventArgs e)
         {
             using var managePlayersDialog = new ManagePlayersDialog(_badmintonClub);
@@ -137,8 +129,6 @@ namespace Badminton.Controls
 
             Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
             Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
-
-            EnableOrDisableGenerateGameButtons();
         }
 
         private void buttonRestPlayer_Click(object sender, EventArgs e)
@@ -153,8 +143,6 @@ namespace Badminton.Controls
 
             Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
             Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
-
-            EnableOrDisableGenerateGameButtons();
         }
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
@@ -166,7 +154,12 @@ namespace Badminton.Controls
                 return;
             }
 
-            FinishMatch(match);
+            var dialogResult = FinishMatch(match);
+
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
 
             panelCourt1.Enabled = false;
             listBoxCourt1Team1.DataSource = null;
@@ -184,7 +177,12 @@ namespace Badminton.Controls
                 return;
             }
 
-            FinishMatch(match);
+            var dialogResult = FinishMatch(match);
+
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
 
             panelCourt2.Enabled = false;
             listBoxCourt2Team1.DataSource = null;
@@ -202,7 +200,12 @@ namespace Badminton.Controls
                 return;
             }
 
-            FinishMatch(match);
+            var dialogResult = FinishMatch(match);
+
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
 
             panelCourt3.Enabled = false;
             listBoxCourt3Team1.DataSource = null;
@@ -220,7 +223,12 @@ namespace Badminton.Controls
                 return;
             }
 
-            FinishMatch(match);
+            var dialogResult = FinishMatch(match);
+
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
 
             panelCourt4.Enabled = false;
             listBoxCourt4Team1.DataSource = null;
@@ -229,25 +237,22 @@ namespace Badminton.Controls
             _badmintonClub.Save();
         }
 
-        private void FinishMatch(Match match)
+        private DialogResult FinishMatch(Match match)
         {
             using var finishMatchDialog = new FinishMatchDialog(match);
 
-            if (finishMatchDialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
+            var dialogResult = finishMatchDialog.ShowDialog();
 
-            if (finishMatchDialog.MatchAbandoned)
+            if (dialogResult == DialogResult.Abort)
             {
                 Session.AbandonMatch(match);
             }
-            else
+            else if (dialogResult == DialogResult.OK)
             {
                 Session.FinishMatch(match);
             }
 
-            EnableOrDisableGenerateGameButtons();
+            return dialogResult;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -4,9 +4,7 @@ namespace Badminton.Dialogs
 {
     public partial class FinishMatchDialog : Form
     {
-        private Match _match;
-
-        public bool MatchAbandoned { get; set; }
+        private readonly Match _match;
 
         public FinishMatchDialog(Match match)
         {
@@ -19,34 +17,28 @@ namespace Badminton.Dialogs
             labelTeam2Players.Text = string.Join(" && ", _match.Team2Players.Select(p => p.FullName));
         }
 
-        private void textBoxTeam1Score_TextChanged(object sender, EventArgs e)
-        {
-            // TODO are the scores equal?
-        }
-
-        private void textBoxTeam2Score_TextChanged(object sender, EventArgs e)
-        {
-            // TODO are the scores equal?
-        }
-
         private void buttonAbandon_Click(object sender, EventArgs e)
         {
-            MatchAbandoned = true;
+            var confirmResult = MessageBox.Show("Are you sure you want to abandon the match?", "Confirm Abandon", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmResult != DialogResult.Yes)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void buttonFinish_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBoxTeam1Score.Text, out var Team1Score))
+            if (!int.TryParse(textBoxTeam1Score.Text, out var team1Score))
             {
                 return;
             }
-            if (!int.TryParse(textBoxTeam2Score.Text, out var Team2Score))
+            if (!int.TryParse(textBoxTeam2Score.Text, out var team2Score))
             {
                 return;
             }
 
-            _match.Team1Score = Team1Score;
-            _match.Team2Score = Team2Score;
+            _match.Team1Score = team1Score;
+            _match.Team2Score = team2Score;
             _match.EloNotAffected = checkBoxNoElo.Checked;
         }
     }
