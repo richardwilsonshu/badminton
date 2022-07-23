@@ -25,6 +25,8 @@ namespace Badminton.Classes
         [IgnoreDataMember]
         public int[] CourtsInUse => ActiveMatches.Select(m => m.CourtNumber).ToArray();
 
+        [IgnoreDataMember] public bool AllCourtsInUse => ActiveMatches.Count == CourtsAvailable;
+
         [IgnoreDataMember]
         public List<Player> PlayersInSession => WaitingPlayers
             .Concat(RestingPlayers)

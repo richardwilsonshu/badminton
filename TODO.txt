@@ -15,4 +15,3 @@ Badminton Tasks to do before V1 (Deadline by end of 24th)
 
 - Saving - don't duplicate the players (may mess up with querying by Player reference)
 - Deployment - single Exe?
-- Courts Available dropdown (must finish match e.g. if all in use before changing to only 3 available)

@@ -675,6 +675,7 @@
             this.comboBoxCourtsAvailable.Name = "comboBoxCourtsAvailable";
             this.comboBoxCourtsAvailable.Size = new System.Drawing.Size(121, 23);
             this.comboBoxCourtsAvailable.TabIndex = 38;
+            this.comboBoxCourtsAvailable.SelectedIndexChanged += new System.EventHandler(this.comboBoxCourtsAvailable_SelectedIndexChanged);
             // 
             // SessionControl
             // 

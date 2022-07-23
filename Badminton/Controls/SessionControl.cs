@@ -395,6 +395,12 @@ namespace Badminton.Controls
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
+            if (Session.AllCourtsInUse)
+            {
+                MessageBox.Show($"All courts are in use. Please wait for a match to finish!", "No Court Available", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var match = Session.MatchPreview;
 
             Session.StartMatch();
@@ -437,6 +443,20 @@ namespace Badminton.Controls
 
             //Session.MatchPreview.Team1Players.Clear();
             //Session.MatchPreview.Team1Players.Add(Session.WaitingPlayers[0]);
+        }
+
+        private void comboBoxCourtsAvailable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var currentNumber = Session.CourtsAvailable;
+            var newNumber = comboBoxCourtsAvailable.SelectedIndex + 1;
+
+            if (newNumber < currentNumber && Session.ActiveMatches.Count > newNumber)
+            {
+                MessageBox.Show($"Please finish {(newNumber - currentNumber)} match(es) first!", "Court Availability Change", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Session.CourtsAvailable = newNumber;
         }
     }
 }
