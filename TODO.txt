@@ -11,9 +11,10 @@ High score = bad...
 
 
 
-Badminton Tasks to do before V1
+Badminton Tasks to do before V1 (Deadline by end of 24th)
 
-- The case of the vanishing players when abandoning
-- Match time not updating
+- The case of the vanishing players when abandoning a Match
 - Saving - don't duplicate the players (may mess up with querying by Player reference)
+- Deployment - single Exe?
+- Match time not updating
 - Courts Available dropdown (must finish match e.g. if all in use before changing to only 3 available)
