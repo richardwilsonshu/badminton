@@ -2,7 +2,7 @@
 {
     public class EloCalculator
     {
-        public void UpdateElo(Match match)
+        public static void UpdateElo(Match match)
         {
             int K = 20;
             double Ea = 0.0;

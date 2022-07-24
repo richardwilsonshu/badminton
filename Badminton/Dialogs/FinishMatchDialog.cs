@@ -28,11 +28,11 @@ namespace Badminton.Dialogs
 
         private void buttonFinish_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBoxTeam1Score.Text, out var team1Score))
+            if (!int.TryParse(textBoxTeam1Score.Text, out var team1Score) || team1Score < 0)
             {
                 return;
             }
-            if (!int.TryParse(textBoxTeam2Score.Text, out var team2Score))
+            if (!int.TryParse(textBoxTeam2Score.Text, out var team2Score) || team2Score < 0)
             {
                 return;
             }

@@ -80,8 +80,7 @@ namespace Badminton.Classes
 
             if (!match.EloNotAffected)
             {
-                var eloCalculator = new EloCalculator();
-                eloCalculator.UpdateElo(match);
+                EloCalculator.UpdateElo(match);
             }
 
             match.Players.ForEach(player => WaitingPlayers.Add(player));
