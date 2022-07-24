@@ -16,7 +16,7 @@ namespace Badminton.Classes
 
         public void EndCurrentSession()
         {
-            foreach (var player in CurrentSession.PlayersInSession)
+            foreach (var player in CurrentSession.Players)
             {
                 Players.Add(player);
             }
@@ -33,7 +33,10 @@ namespace Badminton.Classes
             try
             {
                 using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
-                writer.Write(JsonConvert.SerializeObject(this));
+                writer.Write(JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }));
             }
             catch (Exception ex)
             {
@@ -49,7 +52,10 @@ namespace Badminton.Classes
                 if (File.Exists(Constants.FileName))
                 {
                     using var reader = new StreamReader(File.OpenRead(Constants.FileName));
-                    return JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd())!;
+                    return JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd(), new JsonSerializerSettings()
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    })!;
                 }
             }
             catch (Exception ex)
@@ -62,7 +68,7 @@ namespace Badminton.Classes
 
         public bool PlayerAlreadyExists(string fullName)
         {
-            return CurrentSession.PlayersInSession
+            return CurrentSession.Players
                 .Concat(Players)
                 .Any(player => player.FullName.ToLower() == fullName.ToLower());
         }

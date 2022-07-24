@@ -24,19 +24,26 @@ namespace Badminton.Controls
 
         private void InitializeCustomControls()
         {
-            listBoxWaitingPlayers.Bind(Session.WaitingPlayers, nameof(Player.Display), nameof(Player.Id));
+            listBoxWaitingPlayers.Bind(Session.WaitingPlayers, nameof(Player.Display), nameof(Player.FullName));
             listBoxRestingPlayers.BindPlayers(Session.RestingPlayers);
-
-            BindCourt1();
-            BindCourt2();
 
             listBoxWaitingPlayers.CustomTabOffsets.Add(50);
             listBoxWaitingPlayers.UseCustomTabOffsets = true;
 
-            comboBoxCourtsAvailable.SelectedIndex = comboBoxCourtsAvailable.Items.Count - 1;
-
             listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
             listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
+
+            buttonStartSession.Enabled = !Session.Started;
+            buttonEndSession.Enabled = Session.Started;
+
+            UpdateMatchPreviewState();
+
+            BindCourt1();
+            BindCourt2();
+            BindCourt3();
+            BindCourt4();
+
+            comboBoxCourtsAvailable.SelectedIndex = Session.CourtsAvailable - 1;
         }
 
         private void BindCourt1()
@@ -113,7 +120,7 @@ namespace Badminton.Controls
                 Session.WaitingPlayers.Remove(player);
                 _badmintonClub.Players.Add(player);
 
-                _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+                Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
             }
         }
 
@@ -294,18 +301,14 @@ namespace Badminton.Controls
         {
             var numberOfCourts = comboBoxCourtsAvailable.SelectedIndex + 1;
 
-            _badmintonClub.CurrentSession.CourtsAvailable = numberOfCourts;
-            _badmintonClub.CurrentSession.Start();
+            Session.CourtsAvailable = numberOfCourts;
+            Session.Start();
+            _badmintonClub.Save();
 
-            buttonStartSession.Enabled = false;
-            buttonEndSession.Enabled = true;
+            UpdateMatchPreviewState();
 
-            buttonAddToTeam1.Enabled = true;
-            buttonAddToTeam2.Enabled = true;
-
-            panelMatchPreview.Enabled = true;
-
-            buttonFindGenderless.Enabled = true;
+            buttonStartSession.Enabled = !Session.Started;
+            buttonEndSession.Enabled = Session.Started;
         }
 
         private void buttonEndSession_Click(object sender, EventArgs e)
@@ -382,13 +385,20 @@ namespace Badminton.Controls
 
         private void UpdateMatchPreviewState()
         {
-            buttonAddToTeam1.Enabled = Session.MatchPreview.Team1Players.Count < 2;
-            buttonMatchPreviewTeam1RemovePlayer.Enabled = Session.MatchPreview.Team1Players.Count > 0;
+            // Enable / Disable controls based on Match Preview
+            buttonAddToTeam1.Enabled = Session.Started && Session.MatchPreview.Team1Players.Count < 2;
+            buttonAddToTeam2.Enabled = Session.Started && Session.MatchPreview.Team2Players.Count < 2;
 
-            buttonAddToTeam2.Enabled = Session.MatchPreview.Team2Players.Count < 2;
+            buttonFindGenderless.Enabled = Session.Started;
+
+            // Enable / Disable Match Preview Panel controls
+
+            panelMatchPreview.Enabled = Session.Started;
+
+            buttonMatchPreviewTeam1RemovePlayer.Enabled = Session.MatchPreview.Team1Players.Count > 0;
             buttonMatchPreviewTeam2RemovePlayer.Enabled = Session.MatchPreview.Team2Players.Count > 0;
 
-            buttonStartGame.Enabled = 
+            buttonStartGame.Enabled =
                 Session.MatchPreview.Team1Players.Count == 2 &&
                 Session.MatchPreview.Team2Players.Count == 2;
         }

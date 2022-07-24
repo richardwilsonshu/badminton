@@ -41,5 +41,10 @@ namespace Badminton.Forms
         {
 
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _badmintonClub.Save();
+        }
     }
 }

@@ -5,9 +5,6 @@ namespace Badminton.Classes
 {
     public class Player
     {
-        private static int UId = 0;
-
-        public int Id { get; }
         public string FullName { get; set; }
         public Gender Gender { get; set; }
         public int Elo { get; set; }
@@ -23,7 +20,6 @@ namespace Badminton.Classes
 
         public Player(string fullName, Gender gender)
         {
-            Id = ++UId;
             FullName = fullName;
             Gender = gender;
             Elo = 1600;

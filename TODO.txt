@@ -1,29 +1,3 @@
-FYI - Deployment:
-
-https://www.hanselman.com/blog/how-to-make-a-winforms-app-with-net-5-entirely-from-the-command-line-and-publish-as-one-selfcontained-file
-
--== Option 1 (Visual Studio) ==-
-Just right-click "Badminton" project -> Publish -> click "Publish" on FolderProfile.pubxml
-
-Output: \bin\Release\net6.0-windows\publish\win-x64
-
--== Option 2 (Command Line) ==-
-```
-dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true --self-contained true
-```
-
-Output: \bin\Release\net6.0-windows\win-x64\publish
-
--------------------------------
-
-Note that it is a big exe (~150MB) since it includes the whole runtime and cannot be trimmed.
-It is a self-contained exe.
-
-!! Note !!
-Regarding losing data / recovery - I'd recommend using a free tier Dropbox account to host the exe and badminton.json
-
-
-
 // Adam's Match Score Algorithm
 Have they played together?
 Team A (Side A) = 0 & 1
@@ -39,5 +13,4 @@ High score = bad...
 
 Badminton Tasks to do before V1 (Deadline by end of 24th)
 
-- Saving - don't duplicate the players (may mess up with querying by Player reference)
 - Integrate Adam's matchfinding code

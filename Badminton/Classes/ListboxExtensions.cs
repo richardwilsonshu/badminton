@@ -6,7 +6,7 @@ namespace Badminton.Classes
     {
         public static void BindPlayers(this ListBox listBox, IBindingList players)
         {
-            Bind(listBox, players, nameof(Player.FullName), nameof(Player.Id));
+            Bind(listBox, players, nameof(Player.FullName), nameof(Player.FullName));
         }
 
         public static void Bind(this ListBox listBox, IBindingList bindingList, string displayMember, string valueMember)

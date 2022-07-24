@@ -19,6 +19,8 @@ namespace Badminton.Classes
             CourtsAvailable = numberOfCourts;
         }
 
+        [IgnoreDataMember] public bool Started => StartDate.HasValue;
+        [IgnoreDataMember] public bool Ended => EndDate.HasValue;
         [IgnoreDataMember]
         public List<Match> ActiveMatches => Matches.Where(m => m.Started && !m.Finished).ToList();
 
@@ -28,7 +30,7 @@ namespace Badminton.Classes
         [IgnoreDataMember] public bool AllCourtsInUse => ActiveMatches.Count == CourtsAvailable;
 
         [IgnoreDataMember]
-        public List<Player> PlayersInSession => WaitingPlayers
+        public List<Player> Players => WaitingPlayers
             .Concat(RestingPlayers)
             .Concat(ActiveMatches.SelectMany(m => m.Players))
             .Concat(MatchPreview.Players)
