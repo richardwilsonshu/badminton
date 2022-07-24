@@ -346,6 +346,7 @@
             this.buttonFindMens.TabIndex = 29;
             this.buttonFindMens.Text = "Find Mens";
             this.buttonFindMens.UseVisualStyleBackColor = true;
+            this.buttonFindMens.Click += new System.EventHandler(this.buttonFindMens_Click);
             // 
             // panelMatchPreview
             // 
@@ -462,6 +463,7 @@
             this.buttonFindWomens.TabIndex = 30;
             this.buttonFindWomens.Text = "Find Womens";
             this.buttonFindWomens.UseVisualStyleBackColor = true;
+            this.buttonFindWomens.Click += new System.EventHandler(this.buttonFindWomens_Click);
             // 
             // buttonFindMixed
             // 
@@ -472,6 +474,7 @@
             this.buttonFindMixed.TabIndex = 31;
             this.buttonFindMixed.Text = "Find Mixed";
             this.buttonFindMixed.UseVisualStyleBackColor = true;
+            this.buttonFindMixed.Click += new System.EventHandler(this.buttonFindMixed_Click);
             // 
             // buttonFindGenderless
             // 

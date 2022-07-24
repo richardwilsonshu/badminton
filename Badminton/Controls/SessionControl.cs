@@ -272,6 +272,8 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
+            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+
             // TODO perhaps find a less repetitive way with lists?
             foreach (var match in Session.ActiveMatches)
             {
@@ -390,6 +392,9 @@ namespace Badminton.Controls
             buttonAddToTeam2.Enabled = Session.Started && Session.MatchPreview.Team2Players.Count < 2;
 
             buttonFindGenderless.Enabled = Session.Started;
+            buttonFindMens.Enabled = Session.Started;
+            buttonFindWomens.Enabled = Session.Started;
+            buttonFindMixed.Enabled = Session.Started;
 
             // Enable / Disable Match Preview Panel controls
 
@@ -437,24 +442,6 @@ namespace Badminton.Controls
             }
         }
 
-        private void buttonFindGenderless_Click(object sender, EventArgs e)
-        {
-            foreach (var player in Session.WaitingPlayers)
-            {
-                var playedWith = player.GetPlayedWith(Session);
-                var playedAgainst = player.GetPlayedAgainst(Session);
-
-                //playedWith[1].Count
-                //if (playedWith[1].Player == Session.WaitingPlayers[2])
-                //{
-
-                //}
-            }
-
-            //Session.MatchPreview.Team1Players.Clear();
-            //Session.MatchPreview.Team1Players.Add(Session.WaitingPlayers[0]);
-        }
-
         private void comboBoxCourtsAvailable_SelectedIndexChanged(object sender, EventArgs e)
         {
             var currentNumber = Session.CourtsAvailable;
@@ -468,6 +455,42 @@ namespace Badminton.Controls
             }
 
             Session.CourtsAvailable = newNumber;
+        }
+
+        private void buttonFindGenderless_Click(object sender, EventArgs e)
+        {
+            var matchPicker = new MatchPicker();
+
+            matchPicker.PickMatch(null, Session);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonFindMens_Click(object sender, EventArgs e)
+        {
+            var matchPicker = new MatchPicker();
+
+            matchPicker.PickMatch("M", Session);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonFindWomens_Click(object sender, EventArgs e)
+        {
+            var matchPicker = new MatchPicker();
+
+            matchPicker.PickMatch("F", Session);
+
+            UpdateMatchPreviewState();
+        }
+
+        private void buttonFindMixed_Click(object sender, EventArgs e)
+        {
+            var matchPicker = new MatchPicker();
+
+            matchPicker.PickMatch("X", Session);
+
+            UpdateMatchPreviewState();
         }
     }
 }
