@@ -15,6 +15,12 @@ namespace Badminton.Forms
                 _badmintonClub = loadedBadmintonClub;
             }
 
+            if (!_badmintonClub.Sessions.Any())
+            {
+                var placeholderSession = new Session(4);
+                _badmintonClub.Sessions.Add(placeholderSession);
+            }
+
             InitializeComponent();
             InitializeCustomControls();
         }
