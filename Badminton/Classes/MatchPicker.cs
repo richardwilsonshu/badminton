@@ -141,7 +141,7 @@ namespace Badminton.Classes
 
             for (i = 0; i < 4; i++)
             {
-                Score -= testPlayers[i].MinutesWaiting * 5;
+                Score -= testPlayers[i].MinutesWaiting * 15;
             }
             Score += Math.Abs((testPlayers[0].Elo + testPlayers[1].Elo) - (testPlayers[2].Elo + testPlayers[3].Elo));
             return Score;
