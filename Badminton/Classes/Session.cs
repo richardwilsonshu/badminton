@@ -59,7 +59,7 @@ namespace Badminton.Classes
             match.StartDate = DateTime.Now;
             match.CourtNumber = courtNumber;
             match.Players.ForEach(player => WaitingPlayers.Remove(player));
-            WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
             Matches.Add(match);
             MatchPreview = new Match();
         }
@@ -84,13 +84,13 @@ namespace Badminton.Classes
             }
 
             match.Players.ForEach(player => WaitingPlayers.Add(player));
-            WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         public void AbandonMatch(Match match)
         {
             match.Players.ForEach(player => WaitingPlayers.Add(player));
-            WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
 
             Matches.Remove(match);
         }

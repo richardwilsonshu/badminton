@@ -67,7 +67,7 @@ namespace Badminton.Dialogs
             player.WaitingSinceDate = DateTime.Now;
             _badmintonClub.CurrentSession.WaitingPlayers.Add(player);
 
-            _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void textBoxPlayerName_TextChanged(object sender, EventArgs e)

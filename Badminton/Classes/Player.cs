@@ -29,6 +29,7 @@ namespace Badminton.Classes
         [IgnoreDataMember] public string Display => $"[{Elo}]  {MinutesDisplay}  {GenderDisplay}\t{FullName}";
         /// <remarks>using int.MaxValue so that players that haven't played yet are prioritized and ordered first</remarks>
         [IgnoreDataMember] public int MinutesWaiting => WaitingSinceDate.HasValue ? (int)(DateTime.Now - WaitingSinceDate.Value).TotalMinutes : int.MaxValue;
+        [IgnoreDataMember] public int SecondsWaiting => WaitingSinceDate.HasValue ? (int)(DateTime.Now - WaitingSinceDate.Value).TotalSeconds : int.MaxValue;
         [IgnoreDataMember] public string MinutesDisplay => MinutesWaiting == int.MaxValue ? "" : $"{MinutesWaiting}m";
         [IgnoreDataMember] public string GenderDisplay => Gender == Gender.Male ? "M" : "F";
 

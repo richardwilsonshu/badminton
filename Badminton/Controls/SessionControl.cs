@@ -34,7 +34,9 @@ namespace Badminton.Controls
             listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
 
             buttonStartSession.Enabled = !Session.Started;
+            buttonStartSession.BackColor = Session.Started ? Color.Empty : Color.FromArgb(157, 255, 165);
             buttonEndSession.Enabled = Session.Started;
+            buttonEndSession.BackColor = Session.Started ? Color.Red : Color.Empty;
 
             UpdateMatchPreviewState();
 
@@ -120,7 +122,7 @@ namespace Badminton.Controls
                 Session.WaitingPlayers.Remove(player);
                 _badmintonClub.Players.Add(player);
 
-                Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+                Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
             }
         }
 
@@ -134,8 +136,8 @@ namespace Badminton.Controls
             Session.RestingPlayers.Remove(player);
             Session.WaitingPlayers.Add(player);
 
-            Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
-            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void buttonRestPlayer_Click(object sender, EventArgs e)
@@ -148,8 +150,8 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Remove(player);
             Session.RestingPlayers.Add(player);
 
-            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
-            Session.RestingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
@@ -272,7 +274,7 @@ namespace Badminton.Controls
             listBoxWaitingPlayers.DisplayMember = "";
             listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
 
-            Session.WaitingPlayers.ApplySort(nameof(Player.MinutesWaiting), ListSortDirection.Descending);
+            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
 
             // TODO perhaps find a less repetitive way with lists?
             foreach (var match in Session.ActiveMatches)
@@ -310,7 +312,9 @@ namespace Badminton.Controls
             UpdateMatchPreviewState();
 
             buttonStartSession.Enabled = !Session.Started;
+            buttonStartSession.BackColor = Session.Started ? Color.Empty : Color.FromArgb(157, 255, 165);
             buttonEndSession.Enabled = Session.Started;
+            buttonEndSession.BackColor = Session.Started ? Color.Red : Color.Empty;
         }
 
         private void buttonEndSession_Click(object sender, EventArgs e)
@@ -343,6 +347,7 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Remove(player);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: false);
         }
 
         private void buttonAddToTeam2_Click(object sender, EventArgs e)
@@ -357,6 +362,7 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Remove(player);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: false);
         }
 
         private void buttonMatchPreviewTeam1RemovePlayer_Click(object sender, EventArgs e)
@@ -370,6 +376,7 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Add(player);
 
             UpdateMatchPreviewState();
+            labelMatchMessage.Text = "";
         }
 
         private void buttonMatchPreviewTeam2RemovePlayer_Click(object sender, EventArgs e)
@@ -383,6 +390,7 @@ namespace Badminton.Controls
             Session.WaitingPlayers.Add(player);
 
             UpdateMatchPreviewState();
+            labelMatchMessage.Text = "";
         }
 
         private void UpdateMatchPreviewState()
@@ -408,6 +416,89 @@ namespace Badminton.Controls
                 Session.MatchPreview.Team2Players.Count == 2;
         }
 
+        private void SetMatchPreviewMessage(bool fromMatchPicker)
+        {
+            if (Session.MatchPreview.Players.Count != 4)
+            {
+                if (fromMatchPicker)
+                {
+                    labelMatchMessage.Text = "Not Enough Players for this Game Type";
+                }
+
+                return;
+            }
+
+            var message = "";
+
+            var team1PlayedWith = Session.MatchPreview.Team1Players[0]
+                .GetPlayedWith(Session)
+                .Where(pc => pc.Player == Session.MatchPreview.Team1Players[1])
+                .Sum(pc => pc.Count);
+
+            if (team1PlayedWith > 0)
+            {
+                message += $"{Session.MatchPreview.Team1Players[0].FullName} has played with {Session.MatchPreview.Team1Players[1].FullName} -> {team1PlayedWith} time(s)";
+            }
+
+            var team2PlayedWith = Session.MatchPreview.Team2Players[0]
+                .GetPlayedWith(Session)
+                .Where(pc => pc.Player == Session.MatchPreview.Team2Players[1])
+                .Sum(pc => pc.Count);
+
+            if (team2PlayedWith > 0)
+            {
+                message += Environment.NewLine + $"{Session.MatchPreview.Team2Players[0].FullName} has played with {Session.MatchPreview.Team2Players[1].FullName} -> {team2PlayedWith} time(s)";
+            }
+
+            var team1Player1Against = Session.MatchPreview.Team1Players[0]
+                .GetPlayedAgainst(Session);
+
+            var team1Player1AgainstTeam2Player1 = team1Player1Against
+                .Where(pc => pc.Player == Session.MatchPreview.Team2Players[0])
+                .Sum(pc => pc.Count);
+
+            if (team1Player1AgainstTeam2Player1 > 0)
+            {
+                message += Environment.NewLine + $"{Session.MatchPreview.Team1Players[0].FullName} has played against {Session.MatchPreview.Team2Players[0].FullName} -> {team1Player1AgainstTeam2Player1} time(s)";
+            }
+
+            var team1Player1AgainstTeam2Player2 = team1Player1Against
+                .Where(pc => pc.Player == Session.MatchPreview.Team2Players[1])
+                .Sum(pc => pc.Count);
+
+            if (team1Player1AgainstTeam2Player2 > 0)
+            {
+                message += Environment.NewLine + $"{Session.MatchPreview.Team1Players[0].FullName} has played against {Session.MatchPreview.Team2Players[1].FullName} -> {team1Player1AgainstTeam2Player2} time(s)";
+            }
+
+            var team1Player2Against = Session.MatchPreview.Team1Players[1].GetPlayedAgainst(Session);
+
+            var team1Player2AgainstTeam2Player1 = team1Player2Against
+                .Where(pc => pc.Player == Session.MatchPreview.Team2Players[0])
+                .Sum(pc => pc.Count);
+
+            if (team1Player2AgainstTeam2Player1 > 0)
+            {
+                message += Environment.NewLine + $"{Session.MatchPreview.Team1Players[1].FullName} has played against {Session.MatchPreview.Team2Players[0].FullName} -> {team1Player2AgainstTeam2Player1} time(s)";
+            }
+
+            var team1Player2AgainstTeam2Player2 = team1Player2Against
+                .Where(pc => pc.Player == Session.MatchPreview.Team2Players[1])
+                .Sum(pc => pc.Count);
+
+            if (team1Player2AgainstTeam2Player2 > 0)
+            {
+                message += Environment.NewLine + $"{Session.MatchPreview.Team1Players[1].FullName} has played against {Session.MatchPreview.Team2Players[1].FullName} -> {team1Player2AgainstTeam2Player2} time(s)";
+            }
+
+            //            var message = $@"
+            //{Session.MatchPreview.Team1Players[0]} has played with {Session.MatchPreview.Team1Players[1]} -> {team1PlayedWith} time(s)
+            //{Session.MatchPreview.Team2Players[0]} has played with {Session.MatchPreview.Team2Players[1]} -> {team2PlayedWith} time(s)
+            //";
+
+            labelMatchMessage.Text = message;
+        }
+
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
             if (Session.AllCourtsInUse)
@@ -420,6 +511,7 @@ namespace Badminton.Controls
 
             Session.StartMatch();
             UpdateMatchPreviewState();
+            labelMatchMessage.Text = "";
 
             listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
             listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
@@ -464,6 +556,7 @@ namespace Badminton.Controls
             matchPicker.PickMatch(null, Session);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: true);
         }
 
         private void buttonFindMens_Click(object sender, EventArgs e)
@@ -473,6 +566,7 @@ namespace Badminton.Controls
             matchPicker.PickMatch("M", Session);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: true);
         }
 
         private void buttonFindWomens_Click(object sender, EventArgs e)
@@ -482,6 +576,7 @@ namespace Badminton.Controls
             matchPicker.PickMatch("F", Session);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: true);
         }
 
         private void buttonFindMixed_Click(object sender, EventArgs e)
@@ -491,6 +586,7 @@ namespace Badminton.Controls
             matchPicker.PickMatch("X", Session);
 
             UpdateMatchPreviewState();
+            SetMatchPreviewMessage(fromMatchPicker: true);
         }
     }
 }

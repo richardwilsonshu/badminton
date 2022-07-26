@@ -85,6 +85,7 @@
             this.labelCourt4Vs = new System.Windows.Forms.Label();
             this.buttonStartSession = new System.Windows.Forms.Button();
             this.comboBoxCourtsAvailable = new System.Windows.Forms.ComboBox();
+            this.labelMatchMessage = new System.Windows.Forms.Label();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
@@ -328,13 +329,16 @@
             // 
             // buttonEndSession
             // 
+            this.buttonEndSession.BackColor = System.Drawing.Color.Red;
             this.buttonEndSession.Enabled = false;
-            this.buttonEndSession.Location = new System.Drawing.Point(461, 9);
+            this.buttonEndSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonEndSession.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonEndSession.Location = new System.Drawing.Point(360, 9);
             this.buttonEndSession.Name = "buttonEndSession";
             this.buttonEndSession.Size = new System.Drawing.Size(129, 31);
             this.buttonEndSession.TabIndex = 28;
             this.buttonEndSession.Text = "End Session";
-            this.buttonEndSession.UseVisualStyleBackColor = true;
+            this.buttonEndSession.UseVisualStyleBackColor = false;
             this.buttonEndSession.Click += new System.EventHandler(this.buttonEndSession_Click);
             // 
             // buttonFindMens
@@ -657,12 +661,14 @@
             // 
             // buttonStartSession
             // 
-            this.buttonStartSession.Location = new System.Drawing.Point(294, 9);
+            this.buttonStartSession.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(255)))), ((int)(((byte)(165)))));
+            this.buttonStartSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonStartSession.Location = new System.Drawing.Point(219, 9);
             this.buttonStartSession.Name = "buttonStartSession";
             this.buttonStartSession.Size = new System.Drawing.Size(135, 31);
             this.buttonStartSession.TabIndex = 37;
             this.buttonStartSession.Text = "Start Session";
-            this.buttonStartSession.UseVisualStyleBackColor = true;
+            this.buttonStartSession.UseVisualStyleBackColor = false;
             this.buttonStartSession.Click += new System.EventHandler(this.buttonStartSession_Click);
             // 
             // comboBoxCourtsAvailable
@@ -674,17 +680,26 @@
             "2 Courts Available",
             "3 Courts Available",
             "4 Courts Available"});
-            this.comboBoxCourtsAvailable.Location = new System.Drawing.Point(510, 472);
+            this.comboBoxCourtsAvailable.Location = new System.Drawing.Point(510, 9);
             this.comboBoxCourtsAvailable.Name = "comboBoxCourtsAvailable";
             this.comboBoxCourtsAvailable.Size = new System.Drawing.Size(121, 23);
             this.comboBoxCourtsAvailable.TabIndex = 38;
             this.comboBoxCourtsAvailable.SelectedIndexChanged += new System.EventHandler(this.comboBoxCourtsAvailable_SelectedIndexChanged);
+            // 
+            // labelMatchMessage
+            // 
+            this.labelMatchMessage.AutoSize = true;
+            this.labelMatchMessage.Location = new System.Drawing.Point(222, 403);
+            this.labelMatchMessage.Name = "labelMatchMessage";
+            this.labelMatchMessage.Size = new System.Drawing.Size(0, 15);
+            this.labelMatchMessage.TabIndex = 39;
             // 
             // SessionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.labelMatchMessage);
             this.Controls.Add(this.comboBoxCourtsAvailable);
             this.Controls.Add(this.buttonStartSession);
             this.Controls.Add(this.panelCourt4);
@@ -782,5 +797,6 @@
         private Label labelCourt4Vs;
         private Button buttonStartSession;
         private ComboBox comboBoxCourtsAvailable;
+        private Label labelMatchMessage;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Badminton.Enums;
+using System.ComponentModel;
 
 namespace Badminton.Classes
 {
@@ -10,6 +11,8 @@ namespace Badminton.Classes
             {
                 session.WaitingPlayers.Add(player);
             }
+
+            session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
 
             session.MatchPreview.Team1Players.Clear();
             session.MatchPreview.Team2Players.Clear();
@@ -104,6 +107,8 @@ namespace Badminton.Classes
             session.WaitingPlayers.Remove(team1player2);
             session.WaitingPlayers.Remove(team2player1);
             session.WaitingPlayers.Remove(team2player2);
+
+            session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         public int MatchScoreTest(List<Player> testPlayers, Session session)
