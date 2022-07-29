@@ -7,6 +7,7 @@ namespace Badminton.Classes
     public class BadmintonClub
     {
         public SortableBindingList<Player> Players { get; set; } = new SortableBindingList<Player>();
+        public SortableBindingList<Player> DeletedPlayers { get; set; } = new SortableBindingList<Player>();
         public List<Session> Sessions { get; set; } = new List<Session>();
 
         [IgnoreDataMember] public Session CurrentSession => Sessions.Last();
@@ -66,6 +67,20 @@ namespace Badminton.Classes
             return CurrentSession.Players
                 .Concat(Players)
                 .Any(player => player.FullName.ToLower() == fullName.ToLower());
+        }
+
+        public void RemovePlayer(Player player)
+        {
+            if (!Players.Contains(player))
+            {
+                return;
+            }
+
+            player.IsDeleted = true;
+            player.DeletedDate = DateTime.Now;
+
+            DeletedPlayers.Add(player);
+            Players.Remove(player);
         }
     }
 }

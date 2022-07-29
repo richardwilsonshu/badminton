@@ -23,8 +23,10 @@ namespace Badminton.Dialogs
 
             var genderOptions = Enum
                 .GetNames<Gender>()
-                .Select(g => new { Text = g, Value = Enum.Parse<Gender>(g) })
+                .Select(g => new { Text = g, Value = (Gender?)Enum.Parse<Gender>(g) })
                 .ToList();
+
+            genderOptions.Insert(0, new { Text = "Please Select", Value = (Gender?)null });
 
             comboBoxGender.DisplayMember = "Text";
             comboBoxGender.ValueMember = "Value";
@@ -34,9 +36,9 @@ namespace Badminton.Dialogs
         private void buttonAddNewPlayer_Click(object sender, EventArgs e)
         {
             var fullName = textBoxPlayerName.Text;
-            var gender = (Gender)comboBoxGender.SelectedValue;
+            var gender = (Gender?)comboBoxGender.SelectedValue;
 
-            if (string.IsNullOrWhiteSpace(fullName))
+            if (string.IsNullOrWhiteSpace(fullName) || gender == null)
             {
                 return;
             }
@@ -47,11 +49,12 @@ namespace Badminton.Dialogs
                 return;
             }
 
-            var newPlayer = new Player(fullName, gender);
+            var newPlayer = new Player(fullName, gender.Value);
 
             _badmintonClub.Players.Add(newPlayer);
 
             textBoxPlayerName.Text = "";
+            comboBoxGender.SelectedIndex = 0;
         }
 
         private void buttonAddToSession_Click(object sender, EventArgs e)
@@ -72,7 +75,36 @@ namespace Badminton.Dialogs
 
         private void textBoxPlayerName_TextChanged(object sender, EventArgs e)
         {
-            buttonAddNewPlayer.Enabled = textBoxPlayerName.TextLength > 0;
+            //buttonAddNewPlayer.Enabled = textBoxPlayerName.TextLength > 0;
         }
+
+        private void buttonEditPlayer_Click(object sender, EventArgs e)
+        {
+            if (listBoxPlayers.SelectedItem is not Player player)
+            {
+                return;
+            }
+
+            using var editPlayerDialog = new EditPlayerDialog(_badmintonClub, player);
+            editPlayerDialog.ShowDialog();
+
+            listBoxPlayers.DisplayMember = "";
+            listBoxPlayers.DisplayMember = nameof(Player.FullName);
+        }
+
+        private void buttonDeletePlayer_Click(object sender, EventArgs e)
+        {
+            if (listBoxPlayers.SelectedItem is not Player player)
+            {
+                return;
+            }
+
+            var confirmResult = MessageBox.Show("Remove this player from the club?", "Confirm Remove", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.Yes)
+            {
+                _badmintonClub.RemovePlayer(player);
+            }
+        }
+
     }
 }

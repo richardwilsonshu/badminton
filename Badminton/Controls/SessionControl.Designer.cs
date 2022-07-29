@@ -365,7 +365,7 @@
             this.panelMatchPreview.Controls.Add(this.listBoxMatchPreviewTeam1);
             this.panelMatchPreview.Controls.Add(this.labelMatchPreviewVs);
             this.panelMatchPreview.Enabled = false;
-            this.panelMatchPreview.Location = new System.Drawing.Point(294, 183);
+            this.panelMatchPreview.Location = new System.Drawing.Point(294, 220);
             this.panelMatchPreview.Name = "panelMatchPreview";
             this.panelMatchPreview.Size = new System.Drawing.Size(296, 169);
             this.panelMatchPreview.TabIndex = 23;
@@ -472,7 +472,7 @@
             // buttonFindMixed
             // 
             this.buttonFindMixed.Enabled = false;
-            this.buttonFindMixed.Location = new System.Drawing.Point(294, 358);
+            this.buttonFindMixed.Location = new System.Drawing.Point(294, 183);
             this.buttonFindMixed.Name = "buttonFindMixed";
             this.buttonFindMixed.Size = new System.Drawing.Size(135, 31);
             this.buttonFindMixed.TabIndex = 31;
@@ -483,7 +483,7 @@
             // buttonFindGenderless
             // 
             this.buttonFindGenderless.Enabled = false;
-            this.buttonFindGenderless.Location = new System.Drawing.Point(461, 358);
+            this.buttonFindGenderless.Location = new System.Drawing.Point(461, 183);
             this.buttonFindGenderless.Name = "buttonFindGenderless";
             this.buttonFindGenderless.Size = new System.Drawing.Size(129, 31);
             this.buttonFindGenderless.TabIndex = 32;

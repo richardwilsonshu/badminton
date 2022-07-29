@@ -36,6 +36,8 @@
             this.panelNewPlayer = new System.Windows.Forms.Panel();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.labelNewPlayerGender = new System.Windows.Forms.Label();
+            this.buttonEditPlayer = new System.Windows.Forms.Button();
+            this.buttonDeletePlayer = new System.Windows.Forms.Button();
             this.panelNewPlayer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,6 +121,26 @@
             this.labelNewPlayerGender.TabIndex = 30;
             this.labelNewPlayerGender.Text = "New Player Gender";
             // 
+            // buttonEditPlayer
+            // 
+            this.buttonEditPlayer.Location = new System.Drawing.Point(222, 232);
+            this.buttonEditPlayer.Name = "buttonEditPlayer";
+            this.buttonEditPlayer.Size = new System.Drawing.Size(115, 23);
+            this.buttonEditPlayer.TabIndex = 31;
+            this.buttonEditPlayer.Text = "Edit";
+            this.buttonEditPlayer.UseVisualStyleBackColor = true;
+            this.buttonEditPlayer.Click += new System.EventHandler(this.buttonEditPlayer_Click);
+            // 
+            // buttonDeletePlayer
+            // 
+            this.buttonDeletePlayer.Location = new System.Drawing.Point(222, 261);
+            this.buttonDeletePlayer.Name = "buttonDeletePlayer";
+            this.buttonDeletePlayer.Size = new System.Drawing.Size(115, 23);
+            this.buttonDeletePlayer.TabIndex = 32;
+            this.buttonDeletePlayer.Text = "Delete";
+            this.buttonDeletePlayer.UseVisualStyleBackColor = true;
+            this.buttonDeletePlayer.Click += new System.EventHandler(this.buttonDeletePlayer_Click);
+            // 
             // ManagePlayersDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -126,6 +148,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(349, 393);
+            this.Controls.Add(this.buttonDeletePlayer);
+            this.Controls.Add(this.buttonEditPlayer);
             this.Controls.Add(this.panelNewPlayer);
             this.Controls.Add(this.listBoxPlayers);
             this.Controls.Add(this.buttonAddToSession);
@@ -151,5 +175,7 @@
         private Panel panelNewPlayer;
         private ComboBox comboBoxGender;
         private Label labelNewPlayerGender;
+        private Button buttonEditPlayer;
+        private Button buttonDeletePlayer;
     }
 }
