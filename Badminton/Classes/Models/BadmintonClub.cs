@@ -1,11 +1,17 @@
 ﻿using KGySoft.ComponentModel;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Badminton.Classes
 {
     public class BadmintonClub
     {
+        // Edit/Delete/Rename of any data model class/property will require a migration
+        // And incrementing this number
+        public static int LatestModelVersion = 2;
+
+        public int ModelVersion { get; set; }
         public SortableBindingList<Player> Players { get; set; } = new SortableBindingList<Player>();
         public SortableBindingList<Player> DeletedPlayers { get; set; } = new SortableBindingList<Player>();
         public List<Session> Sessions { get; set; } = new List<Session>();
@@ -29,6 +35,8 @@ namespace Badminton.Classes
         {
             try
             {
+                ModelVersion = LatestModelVersion;
+
                 using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
                 writer.Write(JsonConvert.SerializeObject(this, new JsonSerializerSettings()
                 {
@@ -48,7 +56,22 @@ namespace Badminton.Classes
                 if (File.Exists(Constants.FileName))
                 {
                     using var reader = new StreamReader(File.OpenRead(Constants.FileName));
-                    return JsonConvert.DeserializeObject<BadmintonClub>(reader.ReadToEnd(), new JsonSerializerSettings()
+
+                    var json = reader.ReadToEnd();
+
+                    var versionMatch = Regex.Match(json, "\"ModelVersion\":(\\d+),");
+
+                    if (versionMatch.Success)
+                    {
+                        var version = int.Parse(versionMatch.Groups[1].Value);
+
+                        if (version != LatestModelVersion)
+                        {
+                            Migrator.MigrateToLatest();
+                        }
+                    }
+
+                    return JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
                     {
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects
                     })!;
@@ -57,6 +80,7 @@ namespace Badminton.Classes
             catch (Exception ex)
             {
                 MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
 
             return null;

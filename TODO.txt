@@ -1,1 +1,2 @@
 - Sort Players list by those that play most often at the top, those that never turn up at the bottom
+- badminton_lastsession.json

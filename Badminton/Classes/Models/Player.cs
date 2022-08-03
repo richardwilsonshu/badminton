@@ -16,7 +16,7 @@ namespace Badminton.Classes
         public bool IsDeleted { get; set; }
         public DateTime? DeletedDate { get; set; }
 
-        public Dictionary<Session, List<EloResult>> EloResults { get; set; } = new Dictionary<Session, List<EloResult>>();
+        public List<EloResult> EloResults { get; set; } = new List<EloResult>();
 
         public Player(string fullName, Gender gender)
         {
