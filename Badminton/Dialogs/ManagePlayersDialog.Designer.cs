@@ -63,7 +63,7 @@
             // 
             // buttonAddNewPlayer
             // 
-            this.buttonAddNewPlayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddNewPlayer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddNewPlayer.Location = new System.Drawing.Point(9, 56);
             this.buttonAddNewPlayer.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddNewPlayer.Name = "buttonAddNewPlayer";

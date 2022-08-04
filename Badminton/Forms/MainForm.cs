@@ -27,6 +27,8 @@ namespace Badminton.Forms
 
         private void InitializeCustomControls()
         {
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular);
+
             sessionControl.SetBadmintonClub(_badmintonClub);
             sessionControl.SessionFinished += SessionControl_SessionFinished;
         }
@@ -51,6 +53,22 @@ namespace Badminton.Forms
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _badmintonClub.Save();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            // Set fullscreen on startup
+            this.TopMost = true;
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            // And scale based on screen size
+            float scaleX = ((float)Screen.PrimaryScreen.WorkingArea.Width / 1024);
+            float scaleY = ((float)Screen.PrimaryScreen.WorkingArea.Height / 768);
+            SizeF aSf = new SizeF(scaleX * 0.84f, scaleY * 1.1f);
+            this.Scale(aSf);
+
+            //this.Scale(new SizeF(1.4f, 1.4f));
         }
     }
 }

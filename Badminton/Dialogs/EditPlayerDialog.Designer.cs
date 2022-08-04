@@ -39,7 +39,7 @@
             // 
             // buttonSaveEdit
             // 
-            this.buttonSaveEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonSaveEdit.Location = new System.Drawing.Point(212, 145);
             this.buttonSaveEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSaveEdit.Name = "buttonSaveEdit";
@@ -85,7 +85,7 @@
             // 
             // buttonCancelEdit
             // 
-            this.buttonCancelEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonCancelEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonCancelEdit.Location = new System.Drawing.Point(12, 145);
             this.buttonCancelEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonCancelEdit.Name = "buttonCancelEdit";

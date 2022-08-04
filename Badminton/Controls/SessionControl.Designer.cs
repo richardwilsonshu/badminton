@@ -139,7 +139,7 @@
             // labelCourt1
             // 
             this.labelCourt1.AutoSize = true;
-            this.labelCourt1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCourt1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt1.Location = new System.Drawing.Point(125, 7);
             this.labelCourt1.Name = "labelCourt1";
             this.labelCourt1.Size = new System.Drawing.Size(48, 15);
@@ -220,7 +220,7 @@
             // labelCourt2
             // 
             this.labelCourt2.AutoSize = true;
-            this.labelCourt2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCourt2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt2.Location = new System.Drawing.Point(125, 7);
             this.labelCourt2.Name = "labelCourt2";
             this.labelCourt2.Size = new System.Drawing.Size(48, 15);
@@ -257,7 +257,7 @@
             // 
             // buttonRestPlayer
             // 
-            this.buttonRestPlayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRestPlayer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonRestPlayer.Location = new System.Drawing.Point(12, 342);
             this.buttonRestPlayer.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRestPlayer.Name = "buttonRestPlayer";
@@ -278,7 +278,7 @@
             // 
             // buttonEndRest
             // 
-            this.buttonEndRest.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonEndRest.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonEndRest.Location = new System.Drawing.Point(117, 342);
             this.buttonEndRest.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEndRest.Name = "buttonEndRest";
@@ -290,7 +290,7 @@
             // 
             // buttonAddPlayerToSession
             // 
-            this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddPlayerToSession.Location = new System.Drawing.Point(12, 9);
             this.buttonAddPlayerToSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddPlayerToSession.Name = "buttonAddPlayerToSession";
@@ -311,7 +311,7 @@
             // 
             // buttonRemovePlayerFromSession
             // 
-            this.buttonRemovePlayerFromSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRemovePlayerFromSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(117, 9);
             this.buttonRemovePlayerFromSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRemovePlayerFromSession.Name = "buttonRemovePlayerFromSession";
@@ -331,7 +331,7 @@
             // 
             this.buttonEndSession.BackColor = System.Drawing.Color.Red;
             this.buttonEndSession.Enabled = false;
-            this.buttonEndSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonEndSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonEndSession.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonEndSession.Location = new System.Drawing.Point(360, 9);
             this.buttonEndSession.Name = "buttonEndSession";
@@ -433,7 +433,7 @@
             // labelMatchPreview
             // 
             this.labelMatchPreview.AutoSize = true;
-            this.labelMatchPreview.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelMatchPreview.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelMatchPreview.Location = new System.Drawing.Point(105, 10);
             this.labelMatchPreview.Name = "labelMatchPreview";
             this.labelMatchPreview.Size = new System.Drawing.Size(91, 15);
@@ -472,6 +472,7 @@
             // buttonFindMixed
             // 
             this.buttonFindMixed.Enabled = false;
+            this.buttonFindMixed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonFindMixed.Location = new System.Drawing.Point(294, 183);
             this.buttonFindMixed.Name = "buttonFindMixed";
             this.buttonFindMixed.Size = new System.Drawing.Size(135, 31);
@@ -494,7 +495,7 @@
             // buttonAddToTeam1
             // 
             this.buttonAddToTeam1.Enabled = false;
-            this.buttonAddToTeam1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddToTeam1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddToTeam1.Location = new System.Drawing.Point(219, 68);
             this.buttonAddToTeam1.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddToTeam1.Name = "buttonAddToTeam1";
@@ -507,7 +508,7 @@
             // buttonAddToTeam2
             // 
             this.buttonAddToTeam2.Enabled = false;
-            this.buttonAddToTeam2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddToTeam2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddToTeam2.Location = new System.Drawing.Point(219, 98);
             this.buttonAddToTeam2.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddToTeam2.Name = "buttonAddToTeam2";
@@ -563,7 +564,7 @@
             // labelCourt3
             // 
             this.labelCourt3.AutoSize = true;
-            this.labelCourt3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCourt3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt3.Location = new System.Drawing.Point(125, 7);
             this.labelCourt3.Name = "labelCourt3";
             this.labelCourt3.Size = new System.Drawing.Size(48, 15);
@@ -634,7 +635,7 @@
             // labelCourt4
             // 
             this.labelCourt4.AutoSize = true;
-            this.labelCourt4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCourt4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt4.Location = new System.Drawing.Point(125, 7);
             this.labelCourt4.Name = "labelCourt4";
             this.labelCourt4.Size = new System.Drawing.Size(48, 15);
@@ -662,7 +663,7 @@
             // buttonStartSession
             // 
             this.buttonStartSession.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(255)))), ((int)(((byte)(165)))));
-            this.buttonStartSession.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonStartSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonStartSession.Location = new System.Drawing.Point(219, 9);
             this.buttonStartSession.Name = "buttonStartSession";
             this.buttonStartSession.Size = new System.Drawing.Size(135, 31);
