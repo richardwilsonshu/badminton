@@ -13,10 +13,9 @@ namespace Badminton.Classes
         // For reporting / statistics we will want to keep the player
         // If the player has not participated in any matches etc, then we can consider hard deleting them instead
         public DateTime? WaitingSinceDate { get; set; }
-        public bool IsDeleted { get; set; }
         public DateTime? DeletedDate { get; set; }
 
-        public List<EloResult> EloResults { get; set; } = new List<EloResult>();
+        public List<EloResult> EloResults { get; set; } = new();
 
         public Player(string fullName, Gender gender)
         {

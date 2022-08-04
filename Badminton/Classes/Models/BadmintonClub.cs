@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
+using Badminton.Classes.Models;
 
 namespace Badminton.Classes
 {
@@ -12,11 +13,11 @@ namespace Badminton.Classes
         public static int LatestModelVersion = 2;
 
         public int ModelVersion { get; set; }
-        public SortableBindingList<Player> Players { get; set; } = new SortableBindingList<Player>();
-        public SortableBindingList<Player> DeletedPlayers { get; set; } = new SortableBindingList<Player>();
-        public List<Session> Sessions { get; set; } = new List<Session>();
+        public SortableBindingList<Player> Players { get; set; } = new();
+        public SortableBindingList<Player> DeletedPlayers { get; set; } = new();
+        public List<Session> Sessions { get; set; } = new();
 
-        [IgnoreDataMember] public Session CurrentSession => Sessions.Last();
+        [IgnoreDataMember] public Session CurrentSession => Sessions.LastOrDefault() ?? new Session(4);
 
         public void EndCurrentSession()
         {
@@ -51,39 +52,39 @@ namespace Badminton.Classes
 
         public static BadmintonClub? Load()
         {
+            if (!File.Exists(Constants.FileName))
+            {
+                return null;
+            }
+
             try
             {
-                if (File.Exists(Constants.FileName))
+                using var reader = new StreamReader(File.OpenRead(Constants.FileName));
+
+                var json = reader.ReadToEnd();
+                var versionMatch = Regex.Match(json, @"""ModelVersion"":(\d+),");
+                var jsonModelVersion = 1;
+
+                if (versionMatch.Success)
                 {
-                    using var reader = new StreamReader(File.OpenRead(Constants.FileName));
-
-                    var json = reader.ReadToEnd();
-
-                    var versionMatch = Regex.Match(json, "\"ModelVersion\":(\\d+),");
-
-                    if (versionMatch.Success)
-                    {
-                        var version = int.Parse(versionMatch.Groups[1].Value);
-
-                        if (version != LatestModelVersion)
-                        {
-                            Migrator.MigrateToLatest();
-                        }
-                    }
-
-                    return JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
-                    {
-                        PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                    })!;
+                    jsonModelVersion = int.Parse(versionMatch.Groups[1].Value);
                 }
+
+                if (jsonModelVersion != LatestModelVersion)
+                {
+                    json = Migrator.MigrateToLatest(json, jsonModelVersion);
+                }
+
+                return JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                })!;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
-
-            return null;
         }
 
         public bool PlayerAlreadyExists(string fullName)
@@ -100,7 +101,6 @@ namespace Badminton.Classes
                 return;
             }
 
-            player.IsDeleted = true;
             player.DeletedDate = DateTime.Now;
 
             DeletedPlayers.Add(player);

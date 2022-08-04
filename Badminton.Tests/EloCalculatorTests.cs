@@ -24,7 +24,7 @@ namespace Badminton.Tests
                 Team2Score = 19,
             };
 
-            eloCalculator.UpdateElo(match);
+            EloCalculator.UpdateElo(match);
 
             Assert.Equal(1610, team1Player1.Elo);
             Assert.Equal(1610, team1Player2.Elo);

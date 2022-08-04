@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Badminton.Classes.Models
 {
     public static class Migrator
     {
-        public static void MigrateToLatest(string json)
+        public static string MigrateToLatest(string json, int jsonModelVersion)
         {
+            if (jsonModelVersion == 1 && BadmintonClub.LatestModelVersion == 2)
+            {
+                json = Regex.Replace(json, @",""EloResults"":{""\$id"":""\d+""}", "");
+                json = json.Replace(@",""DeletedPlayers""", @",""ModelVersion"":2,""DeletedPlayers""");
+            }
 
+            return json;
         }
     }
 }
