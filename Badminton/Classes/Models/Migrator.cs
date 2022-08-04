@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ClosedXML.Excel;
+using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
 namespace Badminton.Classes.Models
@@ -56,18 +57,103 @@ namespace Badminton.Classes.Models
 
                     foreach (var match in finishedRankedMatches)
                     {
+                        foreach (var player in match.Players)
+                        {
+                            player.EloResults.Add(new EloResult(player.Elo, match, -1));
+                        }
+
                         EloCalculator.UpdateElo(match);
 
                         foreach (var player in match.Players)
                         {
-                            player.EloResults.Add(new EloResult(match, player.Elo));
+                            player.EloResults.Single(er => er.Match == match).EloAfter = player.Elo;
                         }
                     }
                 }
 
                 // Generate Reports
+                #region Reports
 
+                using var workbook = new XLWorkbook();
 
+                var worksheet = workbook.Worksheets.Add("Session Report");
+
+                var header = worksheet.Row(1);
+                header.Style.Font.Bold = true;
+                header.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                header.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+
+                worksheet.Range("B1", "F1").Merge();
+                worksheet.Range("G1", "I1").Merge();
+
+                worksheet.Cell("A1").Value = "Session 1";
+                worksheet.Cell("B1").Value = "Match";
+                worksheet.Cell("G1").Value = "Score";
+                worksheet.Cell("J1").Value = "Elo";
+                worksheet.Cell("K1").Value = "Elo Change";
+
+                var sessionNumber = 0;
+                var rowNumber = 2;
+                var finishedSessions = badmintonClub.Sessions.Where(session => session.Ended).ToList();
+
+                foreach (var session in finishedSessions)
+                {
+                    sessionNumber++;
+
+                    foreach (var player in session.Players)
+                    {
+                        var matchesPlayed = session.Matches
+                            .Where(m => m.Finished && m.Players.Contains(player))
+                            .OrderBy(m => m.EndDate)
+                            .ToList();
+
+                        var startingElo = 0;
+                        var endingElo = 0;
+
+                        if (matchesPlayed.Any())
+                        {
+                            startingElo = player.EloResults.Single(er => er.Match == matchesPlayed.First()).EloBefore;
+                            endingElo = player.EloResults.Single(er => er.Match == matchesPlayed.Last()).EloAfter;
+                        }
+
+                        var sessionReportPlayer = new SessionReportPlayer(player)
+                        {
+                            Played = matchesPlayed.Count,
+                            Wins = matchesPlayed.Count(m => m.Team1Players.Contains(player) && m.Team1Score > m.Team2Score),
+                            Losses = matchesPlayed.Count(m => m.Team1Players.Contains(player) && m.Team1Score < m.Team2Score),
+                            EloChange = endingElo - startingElo
+                        };
+                    }
+
+                    var matchNumber = 0;
+                    var finishedMatches = session.Matches.Where(m => m.Finished).ToList();
+
+                    foreach (var match in finishedMatches)
+                    {
+                        matchNumber++;
+
+                        worksheet.Cell($"A{rowNumber++}").Value = $"Match {matchNumber}";
+                        //match.Team1Players[0].FullName
+                        //match.Team1Players[1].FullName
+                        //vs
+                        //match.Team2Players[0].FullName
+                        //match.Team2Players[1].FullName
+                        //match.Team1Score
+                        //-
+                        //match.Team2Score
+                        var matchEloAverage = match.Players.Sum(p => p.EloResults.Single(er => er.Match == match).EloAfter) / match.Players.Count;
+
+                        // NOTE: All Elos get the same change
+                        var team1player1Result = match.Team1Players[0].EloResults.Single(er => er.Match == match);
+                        var eloChange = team1player1Result.EloAfter - team1player1Result.EloBefore;
+                    }
+                }
+
+                worksheet.Columns().AdjustToContents();
+
+                workbook.SaveAs($"Report_{DateTime.Now:yyyyMMddTHHmmss}.xlsx");
+
+                #endregion
             }
         }
     }
