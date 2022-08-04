@@ -75,10 +75,17 @@ namespace Badminton.Classes
                     json = Migrator.MigrateToLatest(json, jsonModelVersion);
                 }
 
-                return JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
+                var badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects
                 })!;
+
+                if (jsonModelVersion != LatestModelVersion)
+                {
+                    Migrator.MigrateToLatest(badmintonClub, jsonModelVersion);
+                }
+
+                return badmintonClub;
             }
             catch (Exception ex)
             {

@@ -11,7 +11,7 @@ namespace Badminton.Classes
         public SortableBindingList<Player> WaitingPlayers { get; set; } = new SortableBindingList<Player> { };
         public SortableBindingList<Player> RestingPlayers { get; set; } = new SortableBindingList<Player> { };
         public List<Match> Matches { get; set; } = new List<Match> { };
-        public Match MatchPreview { get; set; } = new Match();
+        public Match MatchPreview { get; set; } = new();
         public int CourtsAvailable { get; set; }
 
         public Session(int numberOfCourts)
@@ -61,7 +61,7 @@ namespace Badminton.Classes
             match.Players.ForEach(player => WaitingPlayers.Remove(player));
             WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
             Matches.Add(match);
-            MatchPreview = new Match();
+            MatchPreview = new();
         }
 
         public void FinishMatch(Match match)
@@ -80,16 +80,11 @@ namespace Badminton.Classes
 
             if (!match.EloNotAffected)
             {
-                foreach (var player in match.Players)
-                {
-                    player.EloResults.Add(new EloResult(this, match, player.Elo, -1));
-                }
-
                 EloCalculator.UpdateElo(match);
 
                 foreach (var player in match.Players)
                 {
-                    player.EloResults.Single(e => e.Match == match).EloAfter = player.Elo;
+                    player.EloResults.Add(new EloResult(match, player.Elo));
                 }
             }
 

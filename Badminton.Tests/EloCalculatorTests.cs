@@ -9,12 +9,12 @@ namespace Badminton.Tests
         [Fact]
         public void When_AllPlayersHaveSameElo_EloChangesBy10()
         {
-            var eloCalculator = new EloCalculator();
-
             var team1Player1 = new Player("team1Player1", Enums.Gender.Male) { Elo = 1600 };
             var team1Player2 = new Player("team1Player2", Enums.Gender.Male) { Elo = 1600 };
             var team2Player1 = new Player("team2Player1", Enums.Gender.Male) { Elo = 1600 };
             var team2Player2 = new Player("team2Player2", Enums.Gender.Male) { Elo = 1600 };
+
+            var session = new Session(4);
 
             var match = new Match
             {
