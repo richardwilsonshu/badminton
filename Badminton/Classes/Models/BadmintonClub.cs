@@ -28,6 +28,8 @@ namespace Badminton.Classes
 
             CurrentSession.EndDate = DateTime.Now;
 
+            Migrator.GenerateReports(this); // TODO
+
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
             Sessions.Add(placeholderSession);
         }

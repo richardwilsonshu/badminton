@@ -86,6 +86,7 @@
             this.buttonStartSession = new System.Windows.Forms.Button();
             this.comboBoxCourtsAvailable = new System.Windows.Forms.ComboBox();
             this.labelMatchMessage = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
@@ -694,6 +695,16 @@
             this.labelMatchMessage.Name = "labelMatchMessage";
             this.labelMatchMessage.Size = new System.Drawing.Size(0, 15);
             this.labelMatchMessage.TabIndex = 39;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(569, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SessionControl
             // 

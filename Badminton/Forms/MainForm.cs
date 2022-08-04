@@ -58,14 +58,14 @@ namespace Badminton.Forms
         private void MainForm_Shown(object sender, EventArgs e)
         {
             // Set fullscreen on startup
-            this.TopMost = true;
+            //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 
             // And scale based on screen size
-            float scaleX = ((float)Screen.PrimaryScreen.WorkingArea.Width / 1024);
-            float scaleY = ((float)Screen.PrimaryScreen.WorkingArea.Height / 768);
-            SizeF aSf = new SizeF(scaleX * 0.84f, scaleY * 1.1f);
+            float scaleX = ((float)Screen.PrimaryScreen.WorkingArea.Width / 1095);
+            float scaleY = ((float)Screen.PrimaryScreen.WorkingArea.Height / 723);
+            SizeF aSf = new SizeF(scaleX * 0.75f, scaleY * 0.75f);
             this.Scale(aSf);
 
             //this.Scale(new SizeF(1.4f, 1.4f));

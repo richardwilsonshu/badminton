@@ -1,6 +1,7 @@
 ﻿using Badminton.Classes;
 using Badminton.Dialogs;
 using System.ComponentModel;
+using Badminton.Classes.Models;
 
 namespace Badminton.Controls
 {
@@ -587,6 +588,11 @@ namespace Badminton.Controls
 
             UpdateMatchPreviewState();
             SetMatchPreviewMessage(fromMatchPicker: true);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Migrator.GenerateReports(_badmintonClub);
         }
     }
 }
