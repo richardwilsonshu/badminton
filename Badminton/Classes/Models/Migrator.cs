@@ -21,128 +21,153 @@ namespace Badminton.Classes.Models
         {
             if (modelVersion == 1 && BadmintonClub.LatestModelVersion == 2)
             {
-                // Create backup of V1 just in case...
-                var backupFileName = $"V1_before_V2_migration_{Constants.FileName}";
+                CreateBackupBeforeMigration(badmintonClub, modelVersion, BadmintonClub.LatestModelVersion);
 
-                try
-                {
-                    badmintonClub.ModelVersion = BadmintonClub.LatestModelVersion;
+                RegenerateAllElos(badmintonClub);
 
-                    using var writer = new StreamWriter(File.Open(backupFileName, FileMode.Create));
-                    writer.Write(JsonConvert.SerializeObject(badmintonClub, new JsonSerializerSettings()
-                    {
-                        PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"File '{backupFileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                // ! Re-calculate ALL Elos !
-
-                var allPlayers = badmintonClub.Players
-                    .Concat(badmintonClub.DeletedPlayers)
-                    .Concat(badmintonClub.CurrentSession.Players)
+                var sessionsToReport = badmintonClub.Sessions
+                    .Where(s => s.Ended)
+                    .Select((s, i) => new Tuple<int, Session>(i, s))
                     .ToList();
 
-                foreach (var player in allPlayers)
-                {
-                    player.Elo = 1600;
-                }
-
-                foreach (var session in badmintonClub.Sessions)
-                {
-                    var finishedRankedMatches = session.Matches.Where(m => m.Finished && !m.EloNotAffected);
-
-                    foreach (var match in finishedRankedMatches)
-                    {
-                        foreach (var player in match.Players)
-                        {
-                            player.EloResults.Add(new EloResult(player.Elo, match, -1));
-                        }
-
-                        EloCalculator.UpdateElo(match);
-
-                        foreach (var player in match.Players)
-                        {
-                            player.EloResults.Single(er => er.Match == match).EloAfter = player.Elo;
-                        }
-                    }
-                }
-
-                GenerateReports(badmintonClub);
+                GenerateReports(sessionsToReport);
             }
         }
 
-        public static void GenerateReports(BadmintonClub badmintonClub)
+        private static void CreateBackupBeforeMigration(BadmintonClub badmintonClub, int currentVersion, int nextVersion)
         {
-            // Generate Reports
-            #region Reports
+            var backupFileName = $"V{currentVersion}_before_V{nextVersion}_migration_{Constants.FileName}";
 
-            using var workbook = new XLWorkbook();
-
-            var worksheet = workbook.Worksheets.Add("Session Report");
-
-            var header = worksheet.Row(1);
-            header.Style.Font.Bold = true;
-            header.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            header.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-
-            worksheet.Range("B1", "F1").Merge();
-            worksheet.Range("G1", "I1").Merge();
-
-            worksheet.Cell("B1").Value = "Match";
-            worksheet.Cell("G1").Value = "Score";
-            worksheet.Cell("J1").Value = "Elo";
-            worksheet.Cell("K1").Value = "Elo Change";
-
-            var sessionNumber = 0;
-            var rowNumber = 0;
-            var finishedSessions = badmintonClub.Sessions.Where(session => session.Ended).ToList();
-
-            foreach (var session in finishedSessions)
+            try
             {
-                sessionNumber++;
-                rowNumber++;
+                badmintonClub.ModelVersion = BadmintonClub.LatestModelVersion;
 
-                worksheet.Cell(rowNumber, 1).Value = $"Session {sessionNumber}";
-
-                //foreach (var player in session.Players)
-                //{
-                //    //var matchesPlayed = session.Matches
-                //    //    .Where(m => m.Finished && m.Players.Contains(player))
-                //    //    .OrderBy(m => m.EndDate)
-                //    //    .ToList();
-
-                //    //var startingElo = 0;
-                //    //var endingElo = 0;
-
-                //    //if (matchesPlayed.Any())
-                //    //{
-                //    //    startingElo = player.EloResults.Single(er => er.Match == matchesPlayed.First()).EloBefore;
-                //    //    endingElo = player.EloResults.Single(er => er.Match == matchesPlayed.Last()).EloAfter;
-                //    //}
-
-                //    //var sessionReportPlayer = new SessionReportPlayer(player)
-                //    //{
-                //    //    Played = matchesPlayed.Count,
-                //    //    Wins = matchesPlayed.Count(m => m.Team1Players.Contains(player) && m.Team1Score > m.Team2Score),
-                //    //    Losses = matchesPlayed.Count(m => m.Team1Players.Contains(player) && m.Team1Score < m.Team2Score),
-                //    //    EloChange = endingElo - startingElo
-                //    //};
-                //}
-
-                var matchNumber = 0;
-                var finishedMatches = session.Matches.Where(m => m.Finished).ToList();
-
-                foreach (var match in finishedMatches)
+                using var writer = new StreamWriter(File.Open(backupFileName, FileMode.Create));
+                writer.Write(JsonConvert.SerializeObject(badmintonClub, new JsonSerializerSettings()
                 {
-                    matchNumber++;
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{backupFileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+        public static void RegenerateAllElos(BadmintonClub badmintonClub)
+        {
+            var allPlayers = badmintonClub.Players
+                .Concat(badmintonClub.DeletedPlayers)
+                .Concat(badmintonClub.CurrentSession.Players)
+                .ToList();
+
+            foreach (var player in allPlayers)
+            {
+                player.Elo = 1600;
+            }
+
+            foreach (var session in badmintonClub.Sessions)
+            {
+                var finishedRankedMatches = session.Matches.Where(m => m.Finished && !m.EloNotAffected);
+
+                foreach (var match in finishedRankedMatches)
+                {
+                    foreach (var player in match.Players)
+                    {
+                        player.EloResults.Add(new EloResult(player.Elo, match, -1));
+                    }
+
+                    EloCalculator.UpdateElo(match);
+
+                    foreach (var player in match.Players)
+                    {
+                        player.EloResults.Single(er => er.Match == match).EloAfter = player.Elo;
+                    }
+                }
+            }
+        }
+
+        public static void GenerateReports(List<Tuple<int, Session>> sessions)
+        {
+            var players = sessions
+                .SelectMany(s => s.Item2.FinishedMatches.SelectMany(m => m.Players))
+                .Concat(sessions.SelectMany(s => s.Item2.Players))
+                .Distinct()
+                .ToList();
+
+            foreach (var player in players)
+            {
+                GeneratePlayerReport(sessions, player);
+            }
+
+            // TODO Session Report "Sessions" -> 1 file per session, "Session_date.xlsx"
+        }
+
+        public static string ReplaceInvalidChars(string filename)
+        {
+            return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
+        }
+
+        private static void GeneratePlayerReport(List<Tuple<int, Session>> sessions, Player player)
+        {
+            Directory.CreateDirectory("Players");
+
+            var fileName = @$"Players\{ReplaceInvalidChars($"{player.FullName}.xlsx")}";
+            bool needsHeader = false;
+
+            using var workbook = File.Exists(fileName) 
+                ? new XLWorkbook(fileName) 
+                : new XLWorkbook();
+
+            if (!workbook.TryGetWorksheet("Session Report", out var worksheet))
+            {
+                worksheet = workbook.Worksheets.Add("Session Report");
+                needsHeader = true;
+            }
+
+            var rowNumber = worksheet.LastRowUsed()?.RowNumber() ?? 0;
+
+            if (rowNumber <= 0)
+            {
+                needsHeader = true;
+            }
+
+            if (needsHeader)
+            {
+                var header = worksheet.Row(1);
+                header.Style.Font.Bold = true;
+                header.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                header.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+
+                worksheet.Columns("B:K").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                worksheet.Range("B1", "F1").Merge();
+                worksheet.Range("G1", "I1").Merge();
+
+                worksheet.Cell("B1").Value = "Match";
+                worksheet.Cell("G1").Value = "Score";
+                worksheet.Cell("J1").Value = "Elo";
+                worksheet.Cell("K1").Value = "Elo Change";
+            }
+
+            foreach (var (sessionIndex, session) in sessions)
+            {
+                rowNumber++;
+                worksheet.Cell(rowNumber, 1).Value = $"Session {sessionIndex + 1}";
+                worksheet.Cell(rowNumber, 1).Style.Font.Bold = true;
+
+                var matches = session.Matches
+                    .Where(m => m.Finished && m.Players.Contains(player))
+                    .Select((m, i) => new Tuple<int, Match>(i, m))
+                    .ToList();
+
+                foreach (var (matchIndex, match) in matches)
+                {
                     rowNumber++;
                     var colNumber = 1;
+                    var eloResult = player.EloResults.SingleOrDefault(er => er.Match == match);
 
-                    worksheet.Cell(rowNumber, colNumber++).Value = $"Match {matchNumber}";
+                    worksheet.Cell(rowNumber, colNumber++).Value = $"Match {matchIndex + 1}";
                     worksheet.Cell(rowNumber, colNumber++).Value = match.Team1Players[0].FullName;
                     worksheet.Cell(rowNumber, colNumber++).Value = match.Team1Players[1].FullName;
                     worksheet.Cell(rowNumber, colNumber++).Value = "vs";
@@ -152,23 +177,17 @@ namespace Badminton.Classes.Models
                     worksheet.Cell(rowNumber, colNumber++).Value = "-";
                     worksheet.Cell(rowNumber, colNumber++).Value = match.Team2Score;
 
-                    var matchEloAverage = match.Players.Sum(p => p.EloResults.Single(er => er.Match == match).EloAfter) / match.Players.Count;
-
-                    worksheet.Cell(rowNumber, colNumber++).Value = matchEloAverage;
-
-                    // NOTE: All Elos get the same change
-                    var team1Player1Result = match.Team1Players[0].EloResults.Single(er => er.Match == match);
-                    var eloChange = team1Player1Result.EloAfter - team1Player1Result.EloBefore;
-
-                    worksheet.Cell(rowNumber, colNumber++).Value = eloChange;
+                    if (eloResult != null)
+                    {
+                        worksheet.Cell(rowNumber, colNumber++).Value = eloResult.EloAfter;
+                        worksheet.Cell(rowNumber, colNumber++).Value = eloResult.EloAfter - eloResult.EloBefore;
+                    }
                 }
             }
 
             worksheet.Columns().AdjustToContents();
 
-            workbook.SaveAs($"Report_{DateTime.Now:yyyyMMddTHHmmss}.xlsx");
-
-            #endregion
+            workbook.SaveAs(fileName);
         }
     }
 }

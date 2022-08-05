@@ -592,7 +592,17 @@ namespace Badminton.Controls
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Migrator.GenerateReports(_badmintonClub);
+            if (Directory.Exists("Players"))
+            {
+                Directory.Delete("Players");
+            }
+
+            var sessionsToReport = _badmintonClub.Sessions
+                .Where(s => s.Ended)
+                .Select((s, i) => new Tuple<int, Session>(i, s))
+                .ToList();
+
+            Migrator.GenerateReports(sessionsToReport);
         }
     }
 }

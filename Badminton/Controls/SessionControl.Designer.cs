@@ -143,7 +143,7 @@
             this.labelCourt1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt1.Location = new System.Drawing.Point(125, 7);
             this.labelCourt1.Name = "labelCourt1";
-            this.labelCourt1.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt1.Size = new System.Drawing.Size(65, 21);
             this.labelCourt1.TabIndex = 7;
             this.labelCourt1.Text = "Court 1";
             // 
@@ -224,7 +224,7 @@
             this.labelCourt2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt2.Location = new System.Drawing.Point(125, 7);
             this.labelCourt2.Name = "labelCourt2";
-            this.labelCourt2.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt2.Size = new System.Drawing.Size(65, 21);
             this.labelCourt2.TabIndex = 7;
             this.labelCourt2.Text = "Court 2";
             // 
@@ -437,7 +437,7 @@
             this.labelMatchPreview.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelMatchPreview.Location = new System.Drawing.Point(105, 10);
             this.labelMatchPreview.Name = "labelMatchPreview";
-            this.labelMatchPreview.Size = new System.Drawing.Size(91, 15);
+            this.labelMatchPreview.Size = new System.Drawing.Size(123, 21);
             this.labelMatchPreview.TabIndex = 7;
             this.labelMatchPreview.Text = "Match Preview";
             // 
@@ -568,7 +568,7 @@
             this.labelCourt3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt3.Location = new System.Drawing.Point(125, 7);
             this.labelCourt3.Name = "labelCourt3";
-            this.labelCourt3.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt3.Size = new System.Drawing.Size(65, 21);
             this.labelCourt3.TabIndex = 7;
             this.labelCourt3.Text = "Court 3";
             // 
@@ -639,7 +639,7 @@
             this.labelCourt4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCourt4.Location = new System.Drawing.Point(125, 7);
             this.labelCourt4.Name = "labelCourt4";
-            this.labelCourt4.Size = new System.Drawing.Size(48, 15);
+            this.labelCourt4.Size = new System.Drawing.Size(65, 21);
             this.labelCourt4.TabIndex = 7;
             this.labelCourt4.Text = "Court 4";
             // 
@@ -698,9 +698,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(569, 89);
+            this.button1.Location = new System.Drawing.Point(511, 83);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 40;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -711,6 +711,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelMatchMessage);
             this.Controls.Add(this.comboBoxCourtsAvailable);
             this.Controls.Add(this.buttonStartSession);
@@ -810,5 +811,6 @@
         private Button buttonStartSession;
         private ComboBox comboBoxCourtsAvailable;
         private Label labelMatchMessage;
+        private Button button1;
     }
 }

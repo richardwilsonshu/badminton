@@ -23,6 +23,8 @@ namespace Badminton.Classes
         [IgnoreDataMember] public bool Ended => EndDate.HasValue;
         [IgnoreDataMember]
         public List<Match> ActiveMatches => Matches.Where(m => m.Started && !m.Finished).ToList();
+        [IgnoreDataMember]
+        public List<Match> FinishedMatches => Matches.Where(m => m.Finished).ToList();
 
         [IgnoreDataMember]
         public int[] CourtsInUse => ActiveMatches.Select(m => m.CourtNumber).ToArray();

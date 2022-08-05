@@ -28,7 +28,12 @@ namespace Badminton.Classes
 
             CurrentSession.EndDate = DateTime.Now;
 
-            Migrator.GenerateReports(this); // TODO
+            var sessionsToReport = new List<Tuple<int, Session>>
+            {
+                new Tuple<int, Session>(Sessions.Count - 1, CurrentSession)
+            };
+
+            Migrator.GenerateReports(sessionsToReport); // TODO move me, perhaps add something in the UI to show progress?
 
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
             Sessions.Add(placeholderSession);
@@ -43,7 +48,8 @@ namespace Badminton.Classes
                 using var writer = new StreamWriter(File.Open(Constants.FileName, FileMode.Create));
                 writer.Write(JsonConvert.SerializeObject(this, new JsonSerializerSettings()
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    MaxDepth = null
                 }));
             }
             catch (Exception ex)
@@ -79,7 +85,8 @@ namespace Badminton.Classes
 
                 var badmintonClub = JsonConvert.DeserializeObject<BadmintonClub>(json, new JsonSerializerSettings()
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    MaxDepth = null
                 })!;
 
                 if (jsonModelVersion != LatestModelVersion)
