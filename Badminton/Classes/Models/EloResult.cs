@@ -3,13 +3,13 @@
     public class EloResult
     {
         public int EloBefore { get; set; }
-        public Match Match { get; set; }
+        public Player Player { get; set; }
         public int EloAfter { get; set; }
 
-        public EloResult(int eloBefore, Match match, int eloAfter)
+        public EloResult(int eloBefore, Player player, int eloAfter)
         {
             EloBefore = eloBefore;
-            Match = match;
+            Player = player;
             EloAfter = eloAfter;
         }
     }

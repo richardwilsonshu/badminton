@@ -15,8 +15,6 @@ namespace Badminton.Classes
         public DateTime? WaitingSinceDate { get; set; }
         public DateTime? DeletedDate { get; set; }
 
-        public List<EloResult> EloResults { get; set; } = new();
-
         public Player(string fullName, Gender gender)
         {
             FullName = fullName;

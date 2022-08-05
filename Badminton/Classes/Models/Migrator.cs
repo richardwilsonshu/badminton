@@ -73,17 +73,7 @@ namespace Badminton.Classes.Models
 
                 foreach (var match in finishedRankedMatches)
                 {
-                    foreach (var player in match.Players)
-                    {
-                        player.EloResults.Add(new EloResult(player.Elo, match, -1));
-                    }
-
                     EloCalculator.UpdateElo(match);
-
-                    foreach (var player in match.Players)
-                    {
-                        player.EloResults.Single(er => er.Match == match).EloAfter = player.Elo;
-                    }
                 }
             }
         }
@@ -101,7 +91,10 @@ namespace Badminton.Classes.Models
                 GeneratePlayerReport(sessions, player);
             }
 
-            // TODO Session Report "Sessions" -> 1 file per session, "Session_date.xlsx"
+            foreach (var (_, session) in sessions)
+            {
+                GenerateSessionReport(session);
+            }
         }
 
         public static string ReplaceInvalidChars(string filename)
@@ -114,7 +107,7 @@ namespace Badminton.Classes.Models
             Directory.CreateDirectory("Players");
 
             var fileName = @$"Players\{ReplaceInvalidChars($"{player.FullName}.xlsx")}";
-            bool needsHeader = false;
+            var needsHeader = false;
 
             using var workbook = File.Exists(fileName) 
                 ? new XLWorkbook(fileName) 
@@ -165,7 +158,7 @@ namespace Badminton.Classes.Models
                 {
                     rowNumber++;
                     var colNumber = 1;
-                    var eloResult = player.EloResults.SingleOrDefault(er => er.Match == match);
+                    var eloResult = match.EloResults.SingleOrDefault(er => er.Player == player);
 
                     worksheet.Cell(rowNumber, colNumber++).Value = $"Match {matchIndex + 1}";
                     worksheet.Cell(rowNumber, colNumber++).Value = match.Team1Players[0].FullName;
@@ -182,6 +175,78 @@ namespace Badminton.Classes.Models
                         worksheet.Cell(rowNumber, colNumber++).Value = eloResult.EloAfter;
                         worksheet.Cell(rowNumber, colNumber++).Value = eloResult.EloAfter - eloResult.EloBefore;
                     }
+                }
+            }
+
+            worksheet.Columns().AdjustToContents();
+
+            workbook.SaveAs(fileName);
+        }
+
+        private static void GenerateSessionReport(Session session)
+        {
+            Directory.CreateDirectory("Sessions");
+
+            var fileName = @$"Sessions\{ReplaceInvalidChars($"Session {session.StartDate:yyyy-MM-dd - ddd d MMMM yyyy}.xlsx")}";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            using var workbook = new XLWorkbook();
+
+            var worksheet = workbook.Worksheets.Add("Session Report");
+
+            var header = worksheet.Row(1);
+            header.Style.Font.Bold = true;
+
+            worksheet.Cell("A1").Value = "Player";
+            worksheet.Cell("B1").Value = "Played";
+            worksheet.Cell("C1").Value = "Wins";
+            worksheet.Cell("D1").Value = "Losses";
+            worksheet.Cell("E1").Value = "Elo";
+            worksheet.Cell("F1").Value = "Elo Change";
+
+            var players = session.FinishedMatches
+                .SelectMany(m => m.Players)
+                .Concat(session.Players)
+                .Distinct()
+                .ToList();
+
+            var rowNumber = 0;
+
+            foreach (var player in players)
+            {
+                rowNumber++;
+                var colNumber = 1;
+
+                var matches = session.Matches
+                    .Where(m => m.Finished && m.Players.Contains(player))
+                    .ToList();
+
+                var wins = matches.Count(m =>
+                    m.Team1Players.Contains(player) && m.Team1Score > m.Team2Score ||
+                    m.Team2Players.Contains(player) && m.Team2Score > m.Team1Score);
+
+                var losses = matches.Count(m =>
+                    m.Team1Players.Contains(player) && m.Team1Score < m.Team2Score ||
+                    m.Team2Players.Contains(player) && m.Team2Score < m.Team1Score);
+
+                worksheet.Cell(rowNumber, colNumber++).Value = player.FullName;
+                worksheet.Cell(rowNumber, colNumber++).Value = matches.Count;
+                worksheet.Cell(rowNumber, colNumber++).Value = wins;
+                worksheet.Cell(rowNumber, colNumber++).Value = losses;
+
+                var rankedMatches = matches.Where(m => !m.EloNotAffected).ToList();
+
+                if (rankedMatches.Any())
+                {
+                    var firstElo = matches.First().EloResults.Single(er => er.Player == player).EloBefore;
+                    var lastElo = matches.Last().EloResults.Single(er => er.Player == player).EloAfter;
+
+                    worksheet.Cell(rowNumber, colNumber++).Value = lastElo;
+                    worksheet.Cell(rowNumber, colNumber++).Value = lastElo - firstElo;
                 }
             }
 

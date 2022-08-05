@@ -26,18 +26,26 @@
 
             if (match.Team1Score > match.Team2Score)
             {
-                match.Team1Players[0].Elo += DeltaElo;
-                match.Team1Players[1].Elo += DeltaElo;
-                match.Team2Players[0].Elo -= DeltaElo;
-                match.Team2Players[1].Elo -= DeltaElo;
+                UpdatePlayerElo(match, match.Team1Players[0], DeltaElo);
+                UpdatePlayerElo(match, match.Team1Players[1], DeltaElo);
+                UpdatePlayerElo(match, match.Team2Players[0], -DeltaElo);
+                UpdatePlayerElo(match, match.Team2Players[1], -DeltaElo);
             }
             else
             {
-                match.Team1Players[0].Elo -= DeltaElo;
-                match.Team1Players[1].Elo -= DeltaElo;
-                match.Team2Players[0].Elo += DeltaElo;
-                match.Team2Players[1].Elo += DeltaElo;
+                UpdatePlayerElo(match, match.Team1Players[0], -DeltaElo);
+                UpdatePlayerElo(match, match.Team1Players[1], -DeltaElo);
+                UpdatePlayerElo(match, match.Team2Players[0], DeltaElo);
+                UpdatePlayerElo(match, match.Team2Players[1], DeltaElo);
             }
+        }
+
+        private static void UpdatePlayerElo(Match match, Player player, int deltaElo)
+        {
+            var eloResult = new EloResult(player.Elo, player, -1);
+            player.Elo += deltaElo;
+            eloResult.EloAfter = player.Elo;
+            match.EloResults.Add(eloResult);
         }
     }
 }
