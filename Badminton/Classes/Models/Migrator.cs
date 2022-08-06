@@ -214,7 +214,7 @@ namespace Badminton.Classes.Models
                 .Distinct()
                 .ToList();
 
-            var rowNumber = 0;
+            var rowNumber = 1;
 
             foreach (var player in players)
             {
@@ -249,6 +249,10 @@ namespace Badminton.Classes.Models
                     worksheet.Cell(rowNumber, colNumber++).Value = lastElo - firstElo;
                 }
             }
+
+            worksheet
+                .Range(firstCellRow: 2, firstCellColumn: 1, lastCellRow: rowNumber, lastCellColumn: 6)
+                .Sort(columnToSortBy: 6, XLSortOrder.Descending);
 
             worksheet.Columns().AdjustToContents();
 

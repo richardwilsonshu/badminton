@@ -594,7 +594,7 @@ namespace Badminton.Controls
         {
             if (Directory.Exists("Players"))
             {
-                Directory.Delete("Players");
+                Directory.Delete("Players", true);
             }
 
             var sessionsToReport = _badmintonClub.Sessions
