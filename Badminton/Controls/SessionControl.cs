@@ -2,6 +2,7 @@
 using Badminton.Dialogs;
 using System.ComponentModel;
 using Badminton.Classes.Models;
+using Badminton.Enums;
 
 namespace Badminton.Controls
 {
@@ -25,11 +26,8 @@ namespace Badminton.Controls
 
         private void InitializeCustomControls()
         {
-            listBoxWaitingPlayers.Bind(Session.WaitingPlayers, nameof(Player.Display), nameof(Player.FullName));
+            dataGridViewWaitingPlayers.DataSource = Session.WaitingPlayers;
             listBoxRestingPlayers.BindPlayers(Session.RestingPlayers);
-
-            listBoxWaitingPlayers.CustomTabOffsets.Add(50);
-            listBoxWaitingPlayers.UseCustomTabOffsets = true;
 
             listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
             listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
@@ -112,7 +110,8 @@ namespace Badminton.Controls
 
         private void buttonRemovePlayerFromSession_Click(object sender, EventArgs e)
         {
-            if (listBoxWaitingPlayers.SelectedItem is not Player player)
+            if (dataGridViewWaitingPlayers.SelectedRows.Count <= 0 ||
+                dataGridViewWaitingPlayers.SelectedRows[0].DataBoundItem is not Player player)
             {
                 return;
             }
@@ -143,7 +142,8 @@ namespace Badminton.Controls
 
         private void buttonRestPlayer_Click(object sender, EventArgs e)
         {
-            if (listBoxWaitingPlayers.SelectedItem is not Player player)
+            if (dataGridViewWaitingPlayers.SelectedRows.Count <= 0 ||
+                dataGridViewWaitingPlayers.SelectedRows[0].DataBoundItem is not Player player)
             {
                 return;
             }
@@ -271,11 +271,8 @@ namespace Badminton.Controls
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // See https://stackoverflow.com/a/519557
-            listBoxWaitingPlayers.DisplayMember = "";
-            listBoxWaitingPlayers.DisplayMember = nameof(Player.Display);
-
-            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            //Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            dataGridViewWaitingPlayers.Refresh();
 
             // TODO perhaps find a less repetitive way with lists?
             foreach (var match in Session.ActiveMatches)
@@ -338,7 +335,8 @@ namespace Badminton.Controls
 
         private void buttonAddToTeam1_Click(object sender, EventArgs e)
         {
-            if (listBoxWaitingPlayers.SelectedItem is not Player player ||
+            if (dataGridViewWaitingPlayers.SelectedRows.Count <= 0 ||
+                dataGridViewWaitingPlayers.SelectedRows[0].DataBoundItem is not Player player ||
                 Session.MatchPreview.Team1Players.Count >= 2)
             {
                 return;
@@ -353,7 +351,8 @@ namespace Badminton.Controls
 
         private void buttonAddToTeam2_Click(object sender, EventArgs e)
         {
-            if (listBoxWaitingPlayers.SelectedItem is not Player player ||
+            if (dataGridViewWaitingPlayers.SelectedRows.Count <= 0 ||
+                dataGridViewWaitingPlayers.SelectedRows[0].DataBoundItem is not Player player ||
                 Session.MatchPreview.Team2Players.Count >= 2)
             {
                 return;
@@ -603,6 +602,20 @@ namespace Badminton.Controls
                 .ToList();
 
             Migrator.GenerateReports(sessionsToReport);
+        }
+
+        private void dataGridViewWaitingPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var player = dataGridViewWaitingPlayers.Rows[e.RowIndex].DataBoundItem as Player;
+
+            if (player?.Gender == Gender.Male)
+            {
+                dataGridViewWaitingPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+            }
+            else
+            {
+                dataGridViewWaitingPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+            }
         }
     }
 }

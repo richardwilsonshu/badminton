@@ -23,12 +23,14 @@ namespace Badminton.Classes
             CreatedDate = DateTime.Now;
         }
 
-        [IgnoreDataMember] public string Display => $"[{Elo}]  {MinutesDisplay}  {GenderDisplay}\t{FullName}";
         /// <remarks>using int.MaxValue so that players that haven't played yet are prioritized and ordered first</remarks>
         [IgnoreDataMember] public int MinutesWaiting => WaitingSinceDate.HasValue ? (int)(DateTime.Now - WaitingSinceDate.Value).TotalMinutes : int.MaxValue;
         [IgnoreDataMember] public int SecondsWaiting => WaitingSinceDate.HasValue ? (int)(DateTime.Now - WaitingSinceDate.Value).TotalSeconds : int.MaxValue;
-        [IgnoreDataMember] public string MinutesDisplay => MinutesWaiting == int.MaxValue ? "" : $"{MinutesWaiting}m";
+        [IgnoreDataMember] public string MinutesDisplay => MinutesWaiting == int.MaxValue ? "" : $"{MinutesWaiting} mins";
         [IgnoreDataMember] public string GenderDisplay => Gender == Gender.Male ? "M" : "F";
+
+
+        //[IgnoreDataMember] public int AverageWaitTimeMins { get; set; } // TODO? - calculate every minute?
 
         public List<PlayerCount> GetPlayedAgainst(Session session)
         {
@@ -49,6 +51,34 @@ namespace Badminton.Classes
                 .Where(group => group.Key != this)
                 .Select(group => new PlayerCount(group.Key, group.Count()))
                 .ToList();
+        }
+
+        // TODO - not used, but could be useful later
+        public int GetAverageWaitTime(Session session)
+        {
+            var finishedMatches = session.FinishedMatches.Where(m => m.Players.Contains(this)).ToList();
+
+            if (!finishedMatches.Any())
+            {
+                return 0; // TODO large number?
+                //Match picking may want to heavily prioritise those that have not played any match in the current sesison?
+                // Or have another property "MatchesPlayedThisSession"? And other 'Sesison' variables that get updated on a timer / events and NOT persisted?
+            }
+
+            var totalWaitTime = -1D;
+
+            for (var i = 0; i < finishedMatches.Count; i++)
+            {
+                if (i == 0)
+                {
+                    totalWaitTime = (finishedMatches[i].StartDate!.Value - session.StartDate!.Value).TotalMinutes;
+                    continue;
+                }
+
+                totalWaitTime += (finishedMatches[i].StartDate!.Value - finishedMatches[i - 1].EndDate!.Value).TotalMinutes;
+            }
+
+            return (int)(totalWaitTime / finishedMatches.Count);
         }
     }
 }

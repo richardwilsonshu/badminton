@@ -46,7 +46,6 @@
             this.labelVsCourt2 = new System.Windows.Forms.Label();
             this.labelWaitingPlayers = new System.Windows.Forms.Label();
             this.buttonRestPlayer = new System.Windows.Forms.Button();
-            this.listBoxWaitingPlayers = new System.Windows.Forms.ListBox();
             this.buttonEndRest = new System.Windows.Forms.Button();
             this.buttonAddPlayerToSession = new System.Windows.Forms.Button();
             this.listBoxRestingPlayers = new System.Windows.Forms.ListBox();
@@ -87,11 +86,19 @@
             this.comboBoxCourtsAvailable = new System.Windows.Forms.ComboBox();
             this.labelMatchMessage = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataGridViewWaitingPlayers = new System.Windows.Forms.DataGridView();
+            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.minutesDisplayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genderDisplayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fullNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
             this.panelCourt3.SuspendLayout();
             this.panelCourt4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWaitingPlayers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelCourt1
@@ -267,15 +274,6 @@
             this.buttonRestPlayer.Text = "Rest Player";
             this.buttonRestPlayer.UseVisualStyleBackColor = true;
             this.buttonRestPlayer.Click += new System.EventHandler(this.buttonRestPlayer_Click);
-            // 
-            // listBoxWaitingPlayers
-            // 
-            this.listBoxWaitingPlayers.FormattingEnabled = true;
-            this.listBoxWaitingPlayers.ItemHeight = 15;
-            this.listBoxWaitingPlayers.Location = new System.Drawing.Point(12, 68);
-            this.listBoxWaitingPlayers.Name = "listBoxWaitingPlayers";
-            this.listBoxWaitingPlayers.Size = new System.Drawing.Size(204, 259);
-            this.listBoxWaitingPlayers.TabIndex = 17;
             // 
             // buttonEndRest
             // 
@@ -706,11 +704,76 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dataGridViewWaitingPlayers
+            // 
+            this.dataGridViewWaitingPlayers.AllowUserToAddRows = false;
+            this.dataGridViewWaitingPlayers.AllowUserToDeleteRows = false;
+            this.dataGridViewWaitingPlayers.AutoGenerateColumns = false;
+            this.dataGridViewWaitingPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewWaitingPlayers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewWaitingPlayers.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewWaitingPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWaitingPlayers.ColumnHeadersVisible = false;
+            this.dataGridViewWaitingPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.minutesDisplayDataGridViewTextBoxColumn,
+            this.eloDataGridViewTextBoxColumn,
+            this.genderDisplayDataGridViewTextBoxColumn,
+            this.fullNameDataGridViewTextBoxColumn});
+            this.dataGridViewWaitingPlayers.DataSource = this.playerBindingSource;
+            this.dataGridViewWaitingPlayers.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewWaitingPlayers.Location = new System.Drawing.Point(12, 68);
+            this.dataGridViewWaitingPlayers.MultiSelect = false;
+            this.dataGridViewWaitingPlayers.Name = "dataGridViewWaitingPlayers";
+            this.dataGridViewWaitingPlayers.ReadOnly = true;
+            this.dataGridViewWaitingPlayers.RowHeadersVisible = false;
+            this.dataGridViewWaitingPlayers.RowTemplate.Height = 25;
+            this.dataGridViewWaitingPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewWaitingPlayers.Size = new System.Drawing.Size(204, 259);
+            this.dataGridViewWaitingPlayers.TabIndex = 41;
+            this.dataGridViewWaitingPlayers.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewWaitingPlayers_RowPrePaint);
+            // 
+            // playerBindingSource
+            // 
+            this.playerBindingSource.DataSource = typeof(Badminton.Classes.Player);
+            // 
+            // minutesDisplayDataGridViewTextBoxColumn
+            // 
+            this.minutesDisplayDataGridViewTextBoxColumn.DataPropertyName = "MinutesDisplay";
+            this.minutesDisplayDataGridViewTextBoxColumn.HeaderText = "MinutesDisplay";
+            this.minutesDisplayDataGridViewTextBoxColumn.Name = "minutesDisplayDataGridViewTextBoxColumn";
+            this.minutesDisplayDataGridViewTextBoxColumn.ReadOnly = true;
+            this.minutesDisplayDataGridViewTextBoxColumn.Width = 5;
+            // 
+            // eloDataGridViewTextBoxColumn
+            // 
+            this.eloDataGridViewTextBoxColumn.DataPropertyName = "Elo";
+            this.eloDataGridViewTextBoxColumn.HeaderText = "Elo";
+            this.eloDataGridViewTextBoxColumn.Name = "eloDataGridViewTextBoxColumn";
+            this.eloDataGridViewTextBoxColumn.ReadOnly = true;
+            this.eloDataGridViewTextBoxColumn.Width = 5;
+            // 
+            // genderDisplayDataGridViewTextBoxColumn
+            // 
+            this.genderDisplayDataGridViewTextBoxColumn.DataPropertyName = "GenderDisplay";
+            this.genderDisplayDataGridViewTextBoxColumn.HeaderText = "GenderDisplay";
+            this.genderDisplayDataGridViewTextBoxColumn.Name = "genderDisplayDataGridViewTextBoxColumn";
+            this.genderDisplayDataGridViewTextBoxColumn.ReadOnly = true;
+            this.genderDisplayDataGridViewTextBoxColumn.Width = 5;
+            // 
+            // fullNameDataGridViewTextBoxColumn
+            // 
+            this.fullNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fullNameDataGridViewTextBoxColumn.DataPropertyName = "FullName";
+            this.fullNameDataGridViewTextBoxColumn.HeaderText = "FullName";
+            this.fullNameDataGridViewTextBoxColumn.Name = "fullNameDataGridViewTextBoxColumn";
+            this.fullNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // SessionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.dataGridViewWaitingPlayers);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelMatchMessage);
             this.Controls.Add(this.comboBoxCourtsAvailable);
@@ -730,7 +793,6 @@
             this.Controls.Add(this.panelCourt2);
             this.Controls.Add(this.labelWaitingPlayers);
             this.Controls.Add(this.buttonRestPlayer);
-            this.Controls.Add(this.listBoxWaitingPlayers);
             this.Controls.Add(this.buttonEndRest);
             this.Controls.Add(this.buttonAddPlayerToSession);
             this.Controls.Add(this.listBoxRestingPlayers);
@@ -747,6 +809,8 @@
             this.panelCourt3.PerformLayout();
             this.panelCourt4.ResumeLayout(false);
             this.panelCourt4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWaitingPlayers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -771,7 +835,6 @@
         private Label labelVsCourt2;
         private Label labelWaitingPlayers;
         private Button buttonRestPlayer;
-        private ListBox listBoxWaitingPlayers;
         private Button buttonEndRest;
         private Button buttonAddPlayerToSession;
         private ListBox listBoxRestingPlayers;
@@ -812,5 +875,11 @@
         private ComboBox comboBoxCourtsAvailable;
         private Label labelMatchMessage;
         private Button button1;
+        private DataGridView dataGridViewWaitingPlayers;
+        private BindingSource playerBindingSource;
+        private DataGridViewTextBoxColumn minutesDisplayDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eloDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn genderDisplayDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
     }
 }
