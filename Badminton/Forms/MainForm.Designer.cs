@@ -36,22 +36,25 @@
             this.sessionControl.AutoSize = true;
             this.sessionControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.sessionControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sessionControl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.sessionControl.Location = new System.Drawing.Point(0, 0);
+            this.sessionControl.Margin = new System.Windows.Forms.Padding(4);
             this.sessionControl.Name = "sessionControl";
-            this.sessionControl.Size = new System.Drawing.Size(942, 507);
+            this.sessionControl.Size = new System.Drawing.Size(1211, 710);
             this.sessionControl.TabIndex = 15;
             this.sessionControl.Load += new System.EventHandler(this.sessionControl_Load);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(942, 507);
+            this.ClientSize = new System.Drawing.Size(1211, 710);
             this.Controls.Add(this.sessionControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

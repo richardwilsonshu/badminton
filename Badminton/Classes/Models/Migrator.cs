@@ -242,8 +242,8 @@ namespace Badminton.Classes.Models
 
                 if (rankedMatches.Any())
                 {
-                    var firstElo = matches.First().EloResults.Single(er => er.Player == player).EloBefore;
-                    var lastElo = matches.Last().EloResults.Single(er => er.Player == player).EloAfter;
+                    var firstElo = rankedMatches.First().EloResults.Single(er => er.Player == player).EloBefore;
+                    var lastElo = rankedMatches.Last().EloResults.Single(er => er.Player == player).EloAfter;
 
                     worksheet.Cell(rowNumber, colNumber++).Value = lastElo;
                     worksheet.Cell(rowNumber, colNumber++).Value = lastElo - firstElo;

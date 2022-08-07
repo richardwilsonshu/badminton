@@ -43,10 +43,11 @@
             // buttonFinish
             // 
             this.buttonFinish.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonFinish.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonFinish.Location = new System.Drawing.Point(132, 235);
+            this.buttonFinish.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonFinish.Location = new System.Drawing.Point(170, 329);
+            this.buttonFinish.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonFinish.Name = "buttonFinish";
-            this.buttonFinish.Size = new System.Drawing.Size(75, 31);
+            this.buttonFinish.Size = new System.Drawing.Size(96, 43);
             this.buttonFinish.TabIndex = 5;
             this.buttonFinish.Text = "Finish";
             this.buttonFinish.UseVisualStyleBackColor = true;
@@ -55,8 +56,9 @@
             // labelCourtTitle
             // 
             this.labelCourtTitle.AutoSize = true;
-            this.labelCourtTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCourtTitle.Location = new System.Drawing.Point(77, 9);
+            this.labelCourtTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCourtTitle.Location = new System.Drawing.Point(103, 18);
+            this.labelCourtTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCourtTitle.Name = "labelCourtTitle";
             this.labelCourtTitle.Size = new System.Drawing.Size(74, 25);
             this.labelCourtTitle.TabIndex = 2;
@@ -65,59 +67,66 @@
             // labelTeam1Players
             // 
             this.labelTeam1Players.AutoSize = true;
-            this.labelTeam1Players.Location = new System.Drawing.Point(12, 49);
+            this.labelTeam1Players.Location = new System.Drawing.Point(15, 69);
+            this.labelTeam1Players.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTeam1Players.Name = "labelTeam1Players";
-            this.labelTeam1Players.Size = new System.Drawing.Size(105, 15);
+            this.labelTeam1Players.Size = new System.Drawing.Size(143, 21);
             this.labelTeam1Players.TabIndex = 3;
             this.labelTeam1Players.Text = "Player 1 && Player 2";
             // 
             // labelTeam1Score
             // 
             this.labelTeam1Score.AutoSize = true;
-            this.labelTeam1Score.Location = new System.Drawing.Point(17, 80);
+            this.labelTeam1Score.Location = new System.Drawing.Point(22, 112);
+            this.labelTeam1Score.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTeam1Score.Name = "labelTeam1Score";
-            this.labelTeam1Score.Size = new System.Drawing.Size(39, 15);
+            this.labelTeam1Score.Size = new System.Drawing.Size(52, 21);
             this.labelTeam1Score.TabIndex = 4;
             this.labelTeam1Score.Text = "Score:";
             // 
             // textBoxTeam1Score
             // 
-            this.textBoxTeam1Score.Location = new System.Drawing.Point(62, 77);
+            this.textBoxTeam1Score.Location = new System.Drawing.Point(80, 108);
+            this.textBoxTeam1Score.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxTeam1Score.Name = "textBoxTeam1Score";
-            this.textBoxTeam1Score.Size = new System.Drawing.Size(100, 23);
+            this.textBoxTeam1Score.Size = new System.Drawing.Size(127, 29);
             this.textBoxTeam1Score.TabIndex = 1;
             // 
             // textBoxTeam2Score
             // 
-            this.textBoxTeam2Score.Location = new System.Drawing.Point(62, 147);
+            this.textBoxTeam2Score.Location = new System.Drawing.Point(80, 206);
+            this.textBoxTeam2Score.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxTeam2Score.Name = "textBoxTeam2Score";
-            this.textBoxTeam2Score.Size = new System.Drawing.Size(100, 23);
+            this.textBoxTeam2Score.Size = new System.Drawing.Size(127, 29);
             this.textBoxTeam2Score.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 150);
+            this.label1.Location = new System.Drawing.Point(22, 210);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.Size = new System.Drawing.Size(52, 21);
             this.label1.TabIndex = 7;
             this.label1.Text = "Score:";
             // 
             // labelTeam2Players
             // 
             this.labelTeam2Players.AutoSize = true;
-            this.labelTeam2Players.Location = new System.Drawing.Point(12, 119);
+            this.labelTeam2Players.Location = new System.Drawing.Point(15, 167);
+            this.labelTeam2Players.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTeam2Players.Name = "labelTeam2Players";
-            this.labelTeam2Players.Size = new System.Drawing.Size(105, 15);
+            this.labelTeam2Players.Size = new System.Drawing.Size(143, 21);
             this.labelTeam2Players.TabIndex = 6;
             this.labelTeam2Players.Text = "Player 3 && Player 4";
             // 
             // checkBoxNoElo
             // 
             this.checkBoxNoElo.AutoSize = true;
-            this.checkBoxNoElo.Location = new System.Drawing.Point(12, 194);
+            this.checkBoxNoElo.Location = new System.Drawing.Point(15, 272);
+            this.checkBoxNoElo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBoxNoElo.Name = "checkBoxNoElo";
-            this.checkBoxNoElo.Size = new System.Drawing.Size(127, 19);
+            this.checkBoxNoElo.Size = new System.Drawing.Size(162, 25);
             this.checkBoxNoElo.TabIndex = 3;
             this.checkBoxNoElo.Text = "Not a ranked game";
             this.checkBoxNoElo.UseVisualStyleBackColor = true;
@@ -125,9 +134,10 @@
             // buttonAbandon
             // 
             this.buttonAbandon.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.buttonAbandon.Location = new System.Drawing.Point(12, 235);
+            this.buttonAbandon.Location = new System.Drawing.Point(15, 329);
+            this.buttonAbandon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAbandon.Name = "buttonAbandon";
-            this.buttonAbandon.Size = new System.Drawing.Size(75, 31);
+            this.buttonAbandon.Size = new System.Drawing.Size(96, 43);
             this.buttonAbandon.TabIndex = 8;
             this.buttonAbandon.Text = "Abandon";
             this.buttonAbandon.UseVisualStyleBackColor = true;
@@ -135,9 +145,9 @@
             // 
             // FinishMatchDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 278);
+            this.ClientSize = new System.Drawing.Size(282, 389);
             this.Controls.Add(this.buttonAbandon);
             this.Controls.Add(this.checkBoxNoElo);
             this.Controls.Add(this.textBoxTeam2Score);
@@ -148,7 +158,9 @@
             this.Controls.Add(this.labelTeam1Players);
             this.Controls.Add(this.labelCourtTitle);
             this.Controls.Add(this.buttonFinish);
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FinishMatchDialog";

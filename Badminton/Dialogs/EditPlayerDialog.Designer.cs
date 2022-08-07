@@ -40,10 +40,10 @@
             // buttonSaveEdit
             // 
             this.buttonSaveEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveEdit.Location = new System.Drawing.Point(212, 145);
+            this.buttonSaveEdit.Location = new System.Drawing.Point(273, 203);
             this.buttonSaveEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSaveEdit.Name = "buttonSaveEdit";
-            this.buttonSaveEdit.Size = new System.Drawing.Size(107, 26);
+            this.buttonSaveEdit.Size = new System.Drawing.Size(138, 36);
             this.buttonSaveEdit.TabIndex = 38;
             this.buttonSaveEdit.Text = "Save";
             this.buttonSaveEdit.UseVisualStyleBackColor = true;
@@ -53,43 +53,47 @@
             // 
             this.comboBoxEditGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEditGender.FormattingEnabled = true;
-            this.comboBoxEditGender.Location = new System.Drawing.Point(125, 83);
+            this.comboBoxEditGender.Location = new System.Drawing.Point(161, 116);
+            this.comboBoxEditGender.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxEditGender.Name = "comboBoxEditGender";
-            this.comboBoxEditGender.Size = new System.Drawing.Size(130, 23);
+            this.comboBoxEditGender.Size = new System.Drawing.Size(166, 29);
             this.comboBoxEditGender.TabIndex = 37;
             // 
             // labelEditPlayerGender
             // 
             this.labelEditPlayerGender.AutoSize = true;
-            this.labelEditPlayerGender.Location = new System.Drawing.Point(12, 86);
+            this.labelEditPlayerGender.Location = new System.Drawing.Point(15, 120);
+            this.labelEditPlayerGender.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEditPlayerGender.Name = "labelEditPlayerGender";
-            this.labelEditPlayerGender.Size = new System.Drawing.Size(103, 15);
+            this.labelEditPlayerGender.Size = new System.Drawing.Size(138, 21);
             this.labelEditPlayerGender.TabIndex = 36;
             this.labelEditPlayerGender.Text = "Edit Player Gender";
             // 
             // textBoxEditPlayerName
             // 
-            this.textBoxEditPlayerName.Location = new System.Drawing.Point(125, 54);
+            this.textBoxEditPlayerName.Location = new System.Drawing.Point(161, 76);
+            this.textBoxEditPlayerName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxEditPlayerName.Name = "textBoxEditPlayerName";
-            this.textBoxEditPlayerName.Size = new System.Drawing.Size(194, 23);
+            this.textBoxEditPlayerName.Size = new System.Drawing.Size(248, 29);
             this.textBoxEditPlayerName.TabIndex = 34;
             // 
             // labelEditPlayerName
             // 
             this.labelEditPlayerName.AutoSize = true;
-            this.labelEditPlayerName.Location = new System.Drawing.Point(18, 57);
+            this.labelEditPlayerName.Location = new System.Drawing.Point(23, 80);
+            this.labelEditPlayerName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEditPlayerName.Name = "labelEditPlayerName";
-            this.labelEditPlayerName.Size = new System.Drawing.Size(97, 15);
+            this.labelEditPlayerName.Size = new System.Drawing.Size(129, 21);
             this.labelEditPlayerName.TabIndex = 35;
             this.labelEditPlayerName.Text = "Edit Player Name";
             // 
             // buttonCancelEdit
             // 
             this.buttonCancelEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCancelEdit.Location = new System.Drawing.Point(12, 145);
+            this.buttonCancelEdit.Location = new System.Drawing.Point(15, 203);
             this.buttonCancelEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonCancelEdit.Name = "buttonCancelEdit";
-            this.buttonCancelEdit.Size = new System.Drawing.Size(107, 26);
+            this.buttonCancelEdit.Size = new System.Drawing.Size(138, 36);
             this.buttonCancelEdit.TabIndex = 33;
             this.buttonCancelEdit.Text = "Cancel";
             this.buttonCancelEdit.UseVisualStyleBackColor = true;
@@ -97,20 +101,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(125, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(161, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 21);
+            this.label1.Size = new System.Drawing.Size(101, 25);
             this.label1.TabIndex = 39;
             this.label1.Text = "Edit Player";
             // 
             // EditPlayerDialog
             // 
             this.AcceptButton = this.buttonSaveEdit;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancelEdit;
-            this.ClientSize = new System.Drawing.Size(328, 184);
+            this.ClientSize = new System.Drawing.Size(422, 258);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonSaveEdit);
             this.Controls.Add(this.comboBoxEditGender);
@@ -118,6 +123,8 @@
             this.Controls.Add(this.textBoxEditPlayerName);
             this.Controls.Add(this.labelEditPlayerName);
             this.Controls.Add(this.buttonCancelEdit);
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditPlayerDialog";

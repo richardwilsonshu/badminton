@@ -2,8 +2,6 @@
 using Badminton.Dialogs;
 using System.ComponentModel;
 using Badminton.Classes.Models;
-using Badminton.Enums;
-using Badminton.Forms;
 
 namespace Badminton.Controls
 {
@@ -29,7 +27,6 @@ namespace Badminton.Controls
         {
             dataGridViewWaitingPlayers.DataSource = Session.WaitingPlayers;
             dataGridViewRestingPlayers.DataSource = Session.RestingPlayers;
-            //dataGridViewRestingPlayers.sort
 
             dataGridViewMatchPreviewTeam1.DataSource = Session.MatchPreview.Team1Players;
             dataGridViewMatchPreviewTeam2.DataSource = Session.MatchPreview.Team2Players;
@@ -139,7 +136,7 @@ namespace Badminton.Controls
             Session.RestingPlayers.Remove(player);
             Session.WaitingPlayers.Add(player);
 
-            //Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
             Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
@@ -155,7 +152,7 @@ namespace Badminton.Controls
             Session.RestingPlayers.Add(player);
 
             Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
-            //Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
@@ -496,11 +493,6 @@ namespace Badminton.Controls
                 message += Environment.NewLine + $"{Session.MatchPreview.Team1Players[1].FullName} has played against {Session.MatchPreview.Team2Players[1].FullName} -> {team1Player2AgainstTeam2Player2} time(s)";
             }
 
-            //            var message = $@"
-            //{Session.MatchPreview.Team1Players[0]} has played with {Session.MatchPreview.Team1Players[1]} -> {team1PlayedWith} time(s)
-            //{Session.MatchPreview.Team2Players[0]} has played with {Session.MatchPreview.Team2Players[1]} -> {team2PlayedWith} time(s)
-            //";
-
             labelMatchMessage.Text = message;
         }
 
@@ -631,27 +623,27 @@ namespace Badminton.Controls
 
         //private static float FontSize = 9F;
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //this.ParentForm.PerformAutoScale();
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    //this.ParentForm.PerformAutoScale();
 
-            //this.ParentForm.Font = new Font("Segoe UI", this.ParentForm.Font.Size + 1, FontStyle.Regular);
+        //    //this.ParentForm.Font = new Font("Segoe UI", this.ParentForm.Font.Size + 1, FontStyle.Regular);
 
-            //this.ParentForm.Scale(new SizeF(1.1F, 1.1F));
-            if (this.ParentForm is MainForm mainForm)
-            {
-                mainForm.AdjustFontSize(ParentForm.Controls, 1);
-            }
-            //FontSize++;
-        }
+        //    //this.ParentForm.Scale(new SizeF(1.1F, 1.1F));
+        //    if (this.ParentForm is MainForm mainForm)
+        //    {
+        //        mainForm.AdjustFontSize(ParentForm.Controls, 1);
+        //    }
+        //    //FontSize++;
+        //}
 
-        private void buttonDecreaseFont_Click(object sender, EventArgs e)
-        {
-            if (this.ParentForm is MainForm mainForm)
-            {
-                mainForm.AdjustFontSize(ParentForm.Controls, -1);
-            }
-        }
+        //private void buttonDecreaseFont_Click(object sender, EventArgs e)
+        //{
+        //    if (this.ParentForm is MainForm mainForm)
+        //    {
+        //        mainForm.AdjustFontSize(ParentForm.Controls, -1);
+        //    }
+        //}
 
         private void buttonScaleDown_Click(object sender, EventArgs e)
         {

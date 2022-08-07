@@ -66,8 +66,6 @@ namespace Badminton.Forms
             InitialWidth = Width;
             InitialHeight = Height;
             LastWindowState = WindowState;
-
-            //WindowState = FormWindowState.Maximized;
         }
 
         public void AdjustFontSize(Control.ControlCollection controls, float amount)
@@ -101,11 +99,11 @@ namespace Badminton.Forms
 
             if (WindowState == FormWindowState.Maximized)
             {
-                //var scaleSize = new SizeF
-                //{
-                //    Width = Width / (float)InitialWidth,
-                //    Height = Height / (float)InitialHeight
-                //};
+                var scaleSize = new SizeF
+                {
+                    Width = Width / (float)InitialWidth,
+                    Height = Height / (float)InitialHeight
+                };
 
                 //var fontScale = scaleSize.Width < scaleSize.Height 
                 //    ? scaleSize.Width 
@@ -113,17 +111,17 @@ namespace Badminton.Forms
 
                 //AdjustFontSize(this.Controls, scaleSize.Width);
 
-                //Scale(scaleSize);
+                Scale(scaleSize);
 
-                this.SetAutoScrollMargin(Width, Height);
+                //this.SetAutoScrollMargin(Width, Height);
             }
             else if (WindowState == FormWindowState.Normal)
             {
-                //var scaleSize = new SizeF
-                //{
-                //    Width = InitialWidth / (float)Width,
-                //    Height = InitialHeight / (float)Height
-                //};
+                var scaleSize = new SizeF
+                {
+                    Width = InitialWidth / (float)Width,
+                    Height = InitialHeight / (float)Height
+                };
 
                 //var fontScale = scaleSize.Width < scaleSize.Height
                 //    ? scaleSize.Width
@@ -131,13 +129,24 @@ namespace Badminton.Forms
 
                 //AdjustFontSize(this.Controls, -scaleSize.Width);
 
-                //Scale(scaleSize);
+                Scale(scaleSize);
 
                 Width = InitialWidth;
                 Height = InitialHeight;
 
-                this.SetAutoScrollMargin(Width, Height);
+                //this.SetAutoScrollMargin(Width, Height);
             }
+
+            // For whatever reason, un-maximizing the window leaves a small area at the bottom
+            // that doesn't expand fully until the window is moved.
+            // The following did nothing to try resolve this:
+
+            //this.PerformAutoScale();
+            //this.PerformLayout();
+            //this.Refresh();
+            //this.OnResize(e);
+            //this.Size = this.Size;
+            //this.ResizeRedraw = true;
         }
     }
 }

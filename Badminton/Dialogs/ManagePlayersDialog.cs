@@ -67,7 +67,7 @@ namespace Badminton.Dialogs
 
             _badmintonClub.Players.Remove(player);
 
-            player.WaitingSinceDate = DateTime.Now;
+            player.WaitingSinceDate = DateTime.Now.AddMinutes(-99);
             _badmintonClub.CurrentSession.WaitingPlayers.Add(player);
 
             _badmintonClub.CurrentSession.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
