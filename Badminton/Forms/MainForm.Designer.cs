@@ -34,9 +34,11 @@
             // sessionControl
             // 
             this.sessionControl.AutoSize = true;
-            this.sessionControl.Location = new System.Drawing.Point(2, 2);
+            this.sessionControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.sessionControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sessionControl.Location = new System.Drawing.Point(0, 0);
             this.sessionControl.Name = "sessionControl";
-            this.sessionControl.Size = new System.Drawing.Size(936, 500);
+            this.sessionControl.Size = new System.Drawing.Size(942, 507);
             this.sessionControl.TabIndex = 15;
             this.sessionControl.Load += new System.EventHandler(this.sessionControl_Load);
             // 
@@ -44,6 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(942, 507);
@@ -53,9 +56,9 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Badminton";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

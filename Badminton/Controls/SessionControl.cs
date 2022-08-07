@@ -3,6 +3,7 @@ using Badminton.Dialogs;
 using System.ComponentModel;
 using Badminton.Classes.Models;
 using Badminton.Enums;
+using Badminton.Forms;
 
 namespace Badminton.Controls
 {
@@ -626,6 +627,40 @@ namespace Badminton.Controls
         private void dataGridViewMatchPreviewTeam2_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             DataGridViewHelpers.PlayerList_RowPrePaint(dataGridViewMatchPreviewTeam2, e);
+        }
+
+        //private static float FontSize = 9F;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //this.ParentForm.PerformAutoScale();
+
+            //this.ParentForm.Font = new Font("Segoe UI", this.ParentForm.Font.Size + 1, FontStyle.Regular);
+
+            //this.ParentForm.Scale(new SizeF(1.1F, 1.1F));
+            if (this.ParentForm is MainForm mainForm)
+            {
+                mainForm.AdjustFontSize(ParentForm.Controls, 1);
+            }
+            //FontSize++;
+        }
+
+        private void buttonDecreaseFont_Click(object sender, EventArgs e)
+        {
+            if (this.ParentForm is MainForm mainForm)
+            {
+                mainForm.AdjustFontSize(ParentForm.Controls, -1);
+            }
+        }
+
+        private void buttonScaleDown_Click(object sender, EventArgs e)
+        {
+            Scale(new SizeF(0.9F, 0.9F));
+        }
+
+        private void buttonScaleUp_Click(object sender, EventArgs e)
+        {
+            Scale(new SizeF(1.1F, 1.1F));
         }
     }
 }

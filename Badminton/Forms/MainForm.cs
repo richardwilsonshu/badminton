@@ -23,6 +23,8 @@ namespace Badminton.Forms
 
             InitializeComponent();
             InitializeCustomControls();
+
+            //IncreaseFontSize(Controls);
         }
 
         private void InitializeCustomControls()
@@ -55,20 +57,87 @@ namespace Badminton.Forms
             _badmintonClub.Save();
         }
 
+        private int InitialWidth = 0;
+        private int InitialHeight = 0;
+        private FormWindowState LastWindowState;
+
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            // Set fullscreen on startup
-            //this.TopMost = true;
-            //this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            InitialWidth = Width;
+            InitialHeight = Height;
+            LastWindowState = WindowState;
 
-            // And scale based on screen size
-            float scaleX = ((float)Screen.PrimaryScreen.WorkingArea.Width / 1095);
-            float scaleY = ((float)Screen.PrimaryScreen.WorkingArea.Height / 723);
-            SizeF aSf = new SizeF(scaleX * 0.75f, scaleY * 0.75f);
-            this.Scale(aSf);
+            //WindowState = FormWindowState.Maximized;
+        }
 
-            //this.Scale(new SizeF(1.4f, 1.4f));
+        public void AdjustFontSize(Control.ControlCollection controls, float amount)
+        {
+            foreach (Control c in controls)
+            {
+                if (c.Controls != null)
+                {
+                    AdjustFontSize(c.Controls, amount);
+                }
+
+                float size = c.Font.Size + amount;
+                c.Font = new Font("Segoe UI", size, c.Font.Style);
+
+                if (c is DataGridView dgv)
+                {
+                    dgv.PerformLayout();
+                    dgv.Refresh();
+                }
+            }
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == LastWindowState)
+            {
+                return;
+            }
+
+            LastWindowState = WindowState;
+
+            if (WindowState == FormWindowState.Maximized)
+            {
+                //var scaleSize = new SizeF
+                //{
+                //    Width = Width / (float)InitialWidth,
+                //    Height = Height / (float)InitialHeight
+                //};
+
+                //var fontScale = scaleSize.Width < scaleSize.Height 
+                //    ? scaleSize.Width 
+                //    : scaleSize.Height;
+
+                //AdjustFontSize(this.Controls, scaleSize.Width);
+
+                //Scale(scaleSize);
+
+                this.SetAutoScrollMargin(Width, Height);
+            }
+            else if (WindowState == FormWindowState.Normal)
+            {
+                //var scaleSize = new SizeF
+                //{
+                //    Width = InitialWidth / (float)Width,
+                //    Height = InitialHeight / (float)Height
+                //};
+
+                //var fontScale = scaleSize.Width < scaleSize.Height
+                //    ? scaleSize.Width
+                //    : scaleSize.Height;
+
+                //AdjustFontSize(this.Controls, -scaleSize.Width);
+
+                //Scale(scaleSize);
+
+                Width = InitialWidth;
+                Height = InitialHeight;
+
+                this.SetAutoScrollMargin(Width, Height);
+            }
         }
     }
 }

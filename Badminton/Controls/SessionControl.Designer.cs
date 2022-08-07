@@ -98,6 +98,10 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonIncreaseFont = new System.Windows.Forms.Button();
+            this.buttonDecreaseFont = new System.Windows.Forms.Button();
+            this.buttonScaleDown = new System.Windows.Forms.Button();
+            this.buttonScaleUp = new System.Windows.Forms.Button();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
@@ -120,27 +124,25 @@
             this.panelCourt1.Controls.Add(this.listBoxCourt1Team1);
             this.panelCourt1.Controls.Add(this.labelVsCourt1);
             this.panelCourt1.Enabled = false;
-            this.panelCourt1.Location = new System.Drawing.Point(728, 1);
-            this.panelCourt1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelCourt1.Location = new System.Drawing.Point(637, 1);
             this.panelCourt1.Name = "panelCourt1";
-            this.panelCourt1.Size = new System.Drawing.Size(338, 158);
+            this.panelCourt1.Size = new System.Drawing.Size(296, 119);
             this.panelCourt1.TabIndex = 21;
             // 
             // labelCourt1MatchTime
             // 
             this.labelCourt1MatchTime.AutoSize = true;
-            this.labelCourt1MatchTime.Location = new System.Drawing.Point(21, 115);
+            this.labelCourt1MatchTime.Location = new System.Drawing.Point(18, 86);
             this.labelCourt1MatchTime.Name = "labelCourt1MatchTime";
-            this.labelCourt1MatchTime.Size = new System.Drawing.Size(87, 20);
+            this.labelCourt1MatchTime.Size = new System.Drawing.Size(71, 15);
             this.labelCourt1MatchTime.TabIndex = 10;
             this.labelCourt1MatchTime.Text = "Match time:";
             // 
             // buttonFinishCourt1
             // 
-            this.buttonFinishCourt1.Location = new System.Drawing.Point(187, 104);
-            this.buttonFinishCourt1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFinishCourt1.Location = new System.Drawing.Point(164, 78);
             this.buttonFinishCourt1.Name = "buttonFinishCourt1";
-            this.buttonFinishCourt1.Size = new System.Drawing.Size(135, 41);
+            this.buttonFinishCourt1.Size = new System.Drawing.Size(118, 31);
             this.buttonFinishCourt1.TabIndex = 9;
             this.buttonFinishCourt1.Text = "Finish";
             this.buttonFinishCourt1.UseVisualStyleBackColor = true;
@@ -149,39 +151,37 @@
             // listBoxCourt1Team2
             // 
             this.listBoxCourt1Team2.FormattingEnabled = true;
-            this.listBoxCourt1Team2.ItemHeight = 20;
-            this.listBoxCourt1Team2.Location = new System.Drawing.Point(187, 51);
-            this.listBoxCourt1Team2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt1Team2.ItemHeight = 15;
+            this.listBoxCourt1Team2.Location = new System.Drawing.Point(164, 38);
             this.listBoxCourt1Team2.Name = "listBoxCourt1Team2";
-            this.listBoxCourt1Team2.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt1Team2.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt1Team2.TabIndex = 5;
             // 
             // labelCourt1
             // 
             this.labelCourt1.AutoSize = true;
             this.labelCourt1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt1.Location = new System.Drawing.Point(143, 9);
+            this.labelCourt1.Location = new System.Drawing.Point(115, 6);
             this.labelCourt1.Name = "labelCourt1";
-            this.labelCourt1.Size = new System.Drawing.Size(83, 28);
+            this.labelCourt1.Size = new System.Drawing.Size(65, 21);
             this.labelCourt1.TabIndex = 7;
             this.labelCourt1.Text = "Court 1";
             // 
             // listBoxCourt1Team1
             // 
             this.listBoxCourt1Team1.FormattingEnabled = true;
-            this.listBoxCourt1Team1.ItemHeight = 20;
-            this.listBoxCourt1Team1.Location = new System.Drawing.Point(21, 51);
-            this.listBoxCourt1Team1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt1Team1.ItemHeight = 15;
+            this.listBoxCourt1Team1.Location = new System.Drawing.Point(18, 38);
             this.listBoxCourt1Team1.Name = "listBoxCourt1Team1";
-            this.listBoxCourt1Team1.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt1Team1.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt1Team1.TabIndex = 4;
             // 
             // labelVsCourt1
             // 
             this.labelVsCourt1.AutoSize = true;
-            this.labelVsCourt1.Location = new System.Drawing.Point(160, 63);
+            this.labelVsCourt1.Location = new System.Drawing.Point(140, 47);
             this.labelVsCourt1.Name = "labelVsCourt1";
-            this.labelVsCourt1.Size = new System.Drawing.Size(22, 20);
+            this.labelVsCourt1.Size = new System.Drawing.Size(18, 15);
             this.labelVsCourt1.TabIndex = 6;
             this.labelVsCourt1.Text = "vs";
             // 
@@ -189,9 +189,9 @@
             // 
             this.labelRestingPlayers.AutoSize = true;
             this.labelRestingPlayers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelRestingPlayers.Location = new System.Drawing.Point(14, 505);
+            this.labelRestingPlayers.Location = new System.Drawing.Point(12, 379);
             this.labelRestingPlayers.Name = "labelRestingPlayers";
-            this.labelRestingPlayers.Size = new System.Drawing.Size(149, 28);
+            this.labelRestingPlayers.Size = new System.Drawing.Size(120, 21);
             this.labelRestingPlayers.TabIndex = 27;
             this.labelRestingPlayers.Text = "Resting Players";
             // 
@@ -205,27 +205,25 @@
             this.panelCourt2.Controls.Add(this.listBoxCourt2Team1);
             this.panelCourt2.Controls.Add(this.labelVsCourt2);
             this.panelCourt2.Enabled = false;
-            this.panelCourt2.Location = new System.Drawing.Point(728, 168);
-            this.panelCourt2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelCourt2.Location = new System.Drawing.Point(637, 126);
             this.panelCourt2.Name = "panelCourt2";
-            this.panelCourt2.Size = new System.Drawing.Size(338, 158);
+            this.panelCourt2.Size = new System.Drawing.Size(296, 119);
             this.panelCourt2.TabIndex = 22;
             // 
             // labelCourt2MatchTime
             // 
             this.labelCourt2MatchTime.AutoSize = true;
-            this.labelCourt2MatchTime.Location = new System.Drawing.Point(21, 115);
+            this.labelCourt2MatchTime.Location = new System.Drawing.Point(18, 86);
             this.labelCourt2MatchTime.Name = "labelCourt2MatchTime";
-            this.labelCourt2MatchTime.Size = new System.Drawing.Size(87, 20);
+            this.labelCourt2MatchTime.Size = new System.Drawing.Size(71, 15);
             this.labelCourt2MatchTime.TabIndex = 11;
             this.labelCourt2MatchTime.Text = "Match time:";
             // 
             // buttonFinishCourt2
             // 
-            this.buttonFinishCourt2.Location = new System.Drawing.Point(187, 104);
-            this.buttonFinishCourt2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFinishCourt2.Location = new System.Drawing.Point(164, 78);
             this.buttonFinishCourt2.Name = "buttonFinishCourt2";
-            this.buttonFinishCourt2.Size = new System.Drawing.Size(135, 41);
+            this.buttonFinishCourt2.Size = new System.Drawing.Size(118, 31);
             this.buttonFinishCourt2.TabIndex = 9;
             this.buttonFinishCourt2.Text = "Finish";
             this.buttonFinishCourt2.UseVisualStyleBackColor = true;
@@ -234,39 +232,37 @@
             // listBoxCourt2Team2
             // 
             this.listBoxCourt2Team2.FormattingEnabled = true;
-            this.listBoxCourt2Team2.ItemHeight = 20;
-            this.listBoxCourt2Team2.Location = new System.Drawing.Point(187, 51);
-            this.listBoxCourt2Team2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt2Team2.ItemHeight = 15;
+            this.listBoxCourt2Team2.Location = new System.Drawing.Point(164, 38);
             this.listBoxCourt2Team2.Name = "listBoxCourt2Team2";
-            this.listBoxCourt2Team2.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt2Team2.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt2Team2.TabIndex = 5;
             // 
             // labelCourt2
             // 
             this.labelCourt2.AutoSize = true;
             this.labelCourt2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt2.Location = new System.Drawing.Point(143, 9);
+            this.labelCourt2.Location = new System.Drawing.Point(115, 6);
             this.labelCourt2.Name = "labelCourt2";
-            this.labelCourt2.Size = new System.Drawing.Size(83, 28);
+            this.labelCourt2.Size = new System.Drawing.Size(65, 21);
             this.labelCourt2.TabIndex = 7;
             this.labelCourt2.Text = "Court 2";
             // 
             // listBoxCourt2Team1
             // 
             this.listBoxCourt2Team1.FormattingEnabled = true;
-            this.listBoxCourt2Team1.ItemHeight = 20;
-            this.listBoxCourt2Team1.Location = new System.Drawing.Point(21, 51);
-            this.listBoxCourt2Team1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt2Team1.ItemHeight = 15;
+            this.listBoxCourt2Team1.Location = new System.Drawing.Point(18, 38);
             this.listBoxCourt2Team1.Name = "listBoxCourt2Team1";
-            this.listBoxCourt2Team1.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt2Team1.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt2Team1.TabIndex = 4;
             // 
             // labelVsCourt2
             // 
             this.labelVsCourt2.AutoSize = true;
-            this.labelVsCourt2.Location = new System.Drawing.Point(160, 63);
+            this.labelVsCourt2.Location = new System.Drawing.Point(140, 47);
             this.labelVsCourt2.Name = "labelVsCourt2";
-            this.labelVsCourt2.Size = new System.Drawing.Size(22, 20);
+            this.labelVsCourt2.Size = new System.Drawing.Size(18, 15);
             this.labelVsCourt2.TabIndex = 6;
             this.labelVsCourt2.Text = "vs";
             // 
@@ -274,19 +270,18 @@
             // 
             this.labelWaitingPlayers.AutoSize = true;
             this.labelWaitingPlayers.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelWaitingPlayers.Location = new System.Drawing.Point(14, 59);
+            this.labelWaitingPlayers.Location = new System.Drawing.Point(12, 44);
             this.labelWaitingPlayers.Name = "labelWaitingPlayers";
-            this.labelWaitingPlayers.Size = new System.Drawing.Size(151, 28);
+            this.labelWaitingPlayers.Size = new System.Drawing.Size(120, 21);
             this.labelWaitingPlayers.TabIndex = 26;
             this.labelWaitingPlayers.Text = "Waiting Players";
             // 
             // buttonRestPlayer
             // 
-            this.buttonRestPlayer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRestPlayer.Location = new System.Drawing.Point(14, 456);
+            this.buttonRestPlayer.Location = new System.Drawing.Point(12, 342);
             this.buttonRestPlayer.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRestPlayer.Name = "buttonRestPlayer";
-            this.buttonRestPlayer.Size = new System.Drawing.Size(113, 41);
+            this.buttonRestPlayer.Size = new System.Drawing.Size(99, 31);
             this.buttonRestPlayer.TabIndex = 25;
             this.buttonRestPlayer.Text = "Rest Player";
             this.buttonRestPlayer.UseVisualStyleBackColor = true;
@@ -294,11 +289,10 @@
             // 
             // buttonEndRest
             // 
-            this.buttonEndRest.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEndRest.Location = new System.Drawing.Point(134, 456);
+            this.buttonEndRest.Location = new System.Drawing.Point(171, 342);
             this.buttonEndRest.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEndRest.Name = "buttonEndRest";
-            this.buttonEndRest.Size = new System.Drawing.Size(113, 41);
+            this.buttonEndRest.Size = new System.Drawing.Size(99, 31);
             this.buttonEndRest.TabIndex = 24;
             this.buttonEndRest.Text = "End Rest";
             this.buttonEndRest.UseVisualStyleBackColor = true;
@@ -306,11 +300,10 @@
             // 
             // buttonAddPlayerToSession
             // 
-            this.buttonAddPlayerToSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(14, 12);
+            this.buttonAddPlayerToSession.Location = new System.Drawing.Point(12, 9);
             this.buttonAddPlayerToSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddPlayerToSession.Name = "buttonAddPlayerToSession";
-            this.buttonAddPlayerToSession.Size = new System.Drawing.Size(113, 41);
+            this.buttonAddPlayerToSession.Size = new System.Drawing.Size(99, 31);
             this.buttonAddPlayerToSession.TabIndex = 18;
             this.buttonAddPlayerToSession.Text = "Add Player";
             this.buttonAddPlayerToSession.UseVisualStyleBackColor = true;
@@ -318,11 +311,10 @@
             // 
             // buttonRemovePlayerFromSession
             // 
-            this.buttonRemovePlayerFromSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(134, 12);
+            this.buttonRemovePlayerFromSession.Location = new System.Drawing.Point(117, 9);
             this.buttonRemovePlayerFromSession.Margin = new System.Windows.Forms.Padding(0);
             this.buttonRemovePlayerFromSession.Name = "buttonRemovePlayerFromSession";
-            this.buttonRemovePlayerFromSession.Size = new System.Drawing.Size(113, 41);
+            this.buttonRemovePlayerFromSession.Size = new System.Drawing.Size(99, 31);
             this.buttonRemovePlayerFromSession.TabIndex = 19;
             this.buttonRemovePlayerFromSession.Text = "Remove Player";
             this.buttonRemovePlayerFromSession.UseVisualStyleBackColor = true;
@@ -340,10 +332,9 @@
             this.buttonEndSession.Enabled = false;
             this.buttonEndSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonEndSession.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonEndSession.Location = new System.Drawing.Point(411, 12);
-            this.buttonEndSession.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonEndSession.Location = new System.Drawing.Point(360, 9);
             this.buttonEndSession.Name = "buttonEndSession";
-            this.buttonEndSession.Size = new System.Drawing.Size(147, 41);
+            this.buttonEndSession.Size = new System.Drawing.Size(129, 31);
             this.buttonEndSession.TabIndex = 28;
             this.buttonEndSession.Text = "End Session";
             this.buttonEndSession.UseVisualStyleBackColor = false;
@@ -352,10 +343,9 @@
             // buttonFindMens
             // 
             this.buttonFindMens.Enabled = false;
-            this.buttonFindMens.Location = new System.Drawing.Point(336, 195);
-            this.buttonFindMens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFindMens.Location = new System.Drawing.Point(310, 145);
             this.buttonFindMens.Name = "buttonFindMens";
-            this.buttonFindMens.Size = new System.Drawing.Size(154, 41);
+            this.buttonFindMens.Size = new System.Drawing.Size(135, 31);
             this.buttonFindMens.TabIndex = 29;
             this.buttonFindMens.Text = "Find Mens";
             this.buttonFindMens.UseVisualStyleBackColor = true;
@@ -374,10 +364,9 @@
             this.panelMatchPreview.Controls.Add(this.labelMatchPreview);
             this.panelMatchPreview.Controls.Add(this.labelMatchPreviewVs);
             this.panelMatchPreview.Enabled = false;
-            this.panelMatchPreview.Location = new System.Drawing.Point(336, 293);
-            this.panelMatchPreview.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelMatchPreview.Location = new System.Drawing.Point(310, 219);
             this.panelMatchPreview.Name = "panelMatchPreview";
-            this.panelMatchPreview.Size = new System.Drawing.Size(338, 225);
+            this.panelMatchPreview.Size = new System.Drawing.Size(296, 169);
             this.panelMatchPreview.TabIndex = 23;
             // 
             // dataGridViewMatchPreviewTeam2
@@ -394,8 +383,7 @@
             this.dataGridViewTextBoxColumn12});
             this.dataGridViewMatchPreviewTeam2.DataSource = this.playerBindingSource;
             this.dataGridViewMatchPreviewTeam2.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewMatchPreviewTeam2.Location = new System.Drawing.Point(187, 67);
-            this.dataGridViewMatchPreviewTeam2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridViewMatchPreviewTeam2.Location = new System.Drawing.Point(164, 50);
             this.dataGridViewMatchPreviewTeam2.MultiSelect = false;
             this.dataGridViewMatchPreviewTeam2.Name = "dataGridViewMatchPreviewTeam2";
             this.dataGridViewMatchPreviewTeam2.ReadOnly = true;
@@ -403,7 +391,7 @@
             this.dataGridViewMatchPreviewTeam2.RowHeadersWidth = 51;
             this.dataGridViewMatchPreviewTeam2.RowTemplate.Height = 25;
             this.dataGridViewMatchPreviewTeam2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewMatchPreviewTeam2.Size = new System.Drawing.Size(133, 45);
+            this.dataGridViewMatchPreviewTeam2.Size = new System.Drawing.Size(116, 34);
             this.dataGridViewMatchPreviewTeam2.TabIndex = 44;
             this.dataGridViewMatchPreviewTeam2.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewMatchPreviewTeam2_RowPrePaint);
             // 
@@ -434,8 +422,7 @@
             this.dataGridViewTextBoxColumn8});
             this.dataGridViewMatchPreviewTeam1.DataSource = this.playerBindingSource;
             this.dataGridViewMatchPreviewTeam1.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewMatchPreviewTeam1.Location = new System.Drawing.Point(21, 67);
-            this.dataGridViewMatchPreviewTeam1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridViewMatchPreviewTeam1.Location = new System.Drawing.Point(18, 50);
             this.dataGridViewMatchPreviewTeam1.MultiSelect = false;
             this.dataGridViewMatchPreviewTeam1.Name = "dataGridViewMatchPreviewTeam1";
             this.dataGridViewMatchPreviewTeam1.ReadOnly = true;
@@ -443,7 +430,7 @@
             this.dataGridViewMatchPreviewTeam1.RowHeadersWidth = 51;
             this.dataGridViewMatchPreviewTeam1.RowTemplate.Height = 25;
             this.dataGridViewMatchPreviewTeam1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewMatchPreviewTeam1.Size = new System.Drawing.Size(133, 45);
+            this.dataGridViewMatchPreviewTeam1.Size = new System.Drawing.Size(116, 34);
             this.dataGridViewMatchPreviewTeam1.TabIndex = 43;
             this.dataGridViewMatchPreviewTeam1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewMatchPreviewTeam1_RowPrePaint);
             // 
@@ -459,10 +446,9 @@
             // buttonMatchPreviewTeam2RemovePlayer
             // 
             this.buttonMatchPreviewTeam2RemovePlayer.Enabled = false;
-            this.buttonMatchPreviewTeam2RemovePlayer.Location = new System.Drawing.Point(187, 120);
-            this.buttonMatchPreviewTeam2RemovePlayer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonMatchPreviewTeam2RemovePlayer.Location = new System.Drawing.Point(164, 90);
             this.buttonMatchPreviewTeam2RemovePlayer.Name = "buttonMatchPreviewTeam2RemovePlayer";
-            this.buttonMatchPreviewTeam2RemovePlayer.Size = new System.Drawing.Size(133, 41);
+            this.buttonMatchPreviewTeam2RemovePlayer.Size = new System.Drawing.Size(116, 31);
             this.buttonMatchPreviewTeam2RemovePlayer.TabIndex = 13;
             this.buttonMatchPreviewTeam2RemovePlayer.Text = "Remove Player";
             this.buttonMatchPreviewTeam2RemovePlayer.UseVisualStyleBackColor = true;
@@ -471,28 +457,27 @@
             // labelMatchPreviewTeam2
             // 
             this.labelMatchPreviewTeam2.AutoSize = true;
-            this.labelMatchPreviewTeam2.Location = new System.Drawing.Point(230, 43);
+            this.labelMatchPreviewTeam2.Location = new System.Drawing.Point(201, 32);
             this.labelMatchPreviewTeam2.Name = "labelMatchPreviewTeam2";
-            this.labelMatchPreviewTeam2.Size = new System.Drawing.Size(57, 20);
+            this.labelMatchPreviewTeam2.Size = new System.Drawing.Size(44, 15);
             this.labelMatchPreviewTeam2.TabIndex = 12;
             this.labelMatchPreviewTeam2.Text = "Team 2";
             // 
             // labelMatchPreviewTeam1
             // 
             this.labelMatchPreviewTeam1.AutoSize = true;
-            this.labelMatchPreviewTeam1.Location = new System.Drawing.Point(62, 43);
+            this.labelMatchPreviewTeam1.Location = new System.Drawing.Point(54, 32);
             this.labelMatchPreviewTeam1.Name = "labelMatchPreviewTeam1";
-            this.labelMatchPreviewTeam1.Size = new System.Drawing.Size(57, 20);
+            this.labelMatchPreviewTeam1.Size = new System.Drawing.Size(44, 15);
             this.labelMatchPreviewTeam1.TabIndex = 11;
             this.labelMatchPreviewTeam1.Text = "Team 1";
             // 
             // buttonMatchPreviewTeam1RemovePlayer
             // 
             this.buttonMatchPreviewTeam1RemovePlayer.Enabled = false;
-            this.buttonMatchPreviewTeam1RemovePlayer.Location = new System.Drawing.Point(21, 120);
-            this.buttonMatchPreviewTeam1RemovePlayer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonMatchPreviewTeam1RemovePlayer.Location = new System.Drawing.Point(18, 90);
             this.buttonMatchPreviewTeam1RemovePlayer.Name = "buttonMatchPreviewTeam1RemovePlayer";
-            this.buttonMatchPreviewTeam1RemovePlayer.Size = new System.Drawing.Size(133, 41);
+            this.buttonMatchPreviewTeam1RemovePlayer.Size = new System.Drawing.Size(116, 31);
             this.buttonMatchPreviewTeam1RemovePlayer.TabIndex = 10;
             this.buttonMatchPreviewTeam1RemovePlayer.Text = "Remove Player";
             this.buttonMatchPreviewTeam1RemovePlayer.UseVisualStyleBackColor = true;
@@ -501,10 +486,9 @@
             // buttonStartGame
             // 
             this.buttonStartGame.Enabled = false;
-            this.buttonStartGame.Location = new System.Drawing.Point(102, 169);
-            this.buttonStartGame.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonStartGame.Location = new System.Drawing.Point(89, 127);
             this.buttonStartGame.Name = "buttonStartGame";
-            this.buttonStartGame.Size = new System.Drawing.Size(135, 41);
+            this.buttonStartGame.Size = new System.Drawing.Size(118, 31);
             this.buttonStartGame.TabIndex = 9;
             this.buttonStartGame.Text = "Start";
             this.buttonStartGame.UseVisualStyleBackColor = true;
@@ -514,28 +498,27 @@
             // 
             this.labelMatchPreview.AutoSize = true;
             this.labelMatchPreview.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelMatchPreview.Location = new System.Drawing.Point(120, 13);
+            this.labelMatchPreview.Location = new System.Drawing.Point(89, 11);
             this.labelMatchPreview.Name = "labelMatchPreview";
-            this.labelMatchPreview.Size = new System.Drawing.Size(153, 28);
+            this.labelMatchPreview.Size = new System.Drawing.Size(123, 21);
             this.labelMatchPreview.TabIndex = 7;
             this.labelMatchPreview.Text = "Match Preview";
             // 
             // labelMatchPreviewVs
             // 
             this.labelMatchPreviewVs.AutoSize = true;
-            this.labelMatchPreviewVs.Location = new System.Drawing.Point(160, 79);
+            this.labelMatchPreviewVs.Location = new System.Drawing.Point(140, 59);
             this.labelMatchPreviewVs.Name = "labelMatchPreviewVs";
-            this.labelMatchPreviewVs.Size = new System.Drawing.Size(22, 20);
+            this.labelMatchPreviewVs.Size = new System.Drawing.Size(18, 15);
             this.labelMatchPreviewVs.TabIndex = 6;
             this.labelMatchPreviewVs.Text = "vs";
             // 
             // buttonFindWomens
             // 
             this.buttonFindWomens.Enabled = false;
-            this.buttonFindWomens.Location = new System.Drawing.Point(527, 195);
-            this.buttonFindWomens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFindWomens.Location = new System.Drawing.Point(477, 145);
             this.buttonFindWomens.Name = "buttonFindWomens";
-            this.buttonFindWomens.Size = new System.Drawing.Size(147, 41);
+            this.buttonFindWomens.Size = new System.Drawing.Size(129, 31);
             this.buttonFindWomens.TabIndex = 30;
             this.buttonFindWomens.Text = "Find Womens";
             this.buttonFindWomens.UseVisualStyleBackColor = true;
@@ -544,11 +527,9 @@
             // buttonFindMixed
             // 
             this.buttonFindMixed.Enabled = false;
-            this.buttonFindMixed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonFindMixed.Location = new System.Drawing.Point(336, 244);
-            this.buttonFindMixed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFindMixed.Location = new System.Drawing.Point(310, 182);
             this.buttonFindMixed.Name = "buttonFindMixed";
-            this.buttonFindMixed.Size = new System.Drawing.Size(154, 41);
+            this.buttonFindMixed.Size = new System.Drawing.Size(135, 31);
             this.buttonFindMixed.TabIndex = 31;
             this.buttonFindMixed.Text = "Find Mixed";
             this.buttonFindMixed.UseVisualStyleBackColor = true;
@@ -557,10 +538,9 @@
             // buttonFindGenderless
             // 
             this.buttonFindGenderless.Enabled = false;
-            this.buttonFindGenderless.Location = new System.Drawing.Point(527, 244);
-            this.buttonFindGenderless.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFindGenderless.Location = new System.Drawing.Point(477, 182);
             this.buttonFindGenderless.Name = "buttonFindGenderless";
-            this.buttonFindGenderless.Size = new System.Drawing.Size(147, 41);
+            this.buttonFindGenderless.Size = new System.Drawing.Size(129, 31);
             this.buttonFindGenderless.TabIndex = 32;
             this.buttonFindGenderless.Text = "Find Genderless";
             this.buttonFindGenderless.UseVisualStyleBackColor = true;
@@ -569,11 +549,10 @@
             // buttonAddToTeam1
             // 
             this.buttonAddToTeam1.Enabled = false;
-            this.buttonAddToTeam1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddToTeam1.Location = new System.Drawing.Point(250, 91);
+            this.buttonAddToTeam1.Location = new System.Drawing.Point(275, 68);
             this.buttonAddToTeam1.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddToTeam1.Name = "buttonAddToTeam1";
-            this.buttonAddToTeam1.Size = new System.Drawing.Size(135, 40);
+            this.buttonAddToTeam1.Size = new System.Drawing.Size(118, 30);
             this.buttonAddToTeam1.TabIndex = 33;
             this.buttonAddToTeam1.Text = "Add To Team 1";
             this.buttonAddToTeam1.UseVisualStyleBackColor = true;
@@ -582,11 +561,10 @@
             // buttonAddToTeam2
             // 
             this.buttonAddToTeam2.Enabled = false;
-            this.buttonAddToTeam2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddToTeam2.Location = new System.Drawing.Point(250, 131);
+            this.buttonAddToTeam2.Location = new System.Drawing.Point(275, 98);
             this.buttonAddToTeam2.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAddToTeam2.Name = "buttonAddToTeam2";
-            this.buttonAddToTeam2.Size = new System.Drawing.Size(135, 40);
+            this.buttonAddToTeam2.Size = new System.Drawing.Size(118, 30);
             this.buttonAddToTeam2.TabIndex = 34;
             this.buttonAddToTeam2.Text = "Add To Team 2";
             this.buttonAddToTeam2.UseVisualStyleBackColor = true;
@@ -602,27 +580,25 @@
             this.panelCourt3.Controls.Add(this.listBoxCourt3Team1);
             this.panelCourt3.Controls.Add(this.labelCourt3Vs);
             this.panelCourt3.Enabled = false;
-            this.panelCourt3.Location = new System.Drawing.Point(728, 335);
-            this.panelCourt3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelCourt3.Location = new System.Drawing.Point(637, 251);
             this.panelCourt3.Name = "panelCourt3";
-            this.panelCourt3.Size = new System.Drawing.Size(338, 158);
+            this.panelCourt3.Size = new System.Drawing.Size(296, 119);
             this.panelCourt3.TabIndex = 23;
             // 
             // labelCourt3MatchTime
             // 
             this.labelCourt3MatchTime.AutoSize = true;
-            this.labelCourt3MatchTime.Location = new System.Drawing.Point(21, 115);
+            this.labelCourt3MatchTime.Location = new System.Drawing.Point(18, 86);
             this.labelCourt3MatchTime.Name = "labelCourt3MatchTime";
-            this.labelCourt3MatchTime.Size = new System.Drawing.Size(87, 20);
+            this.labelCourt3MatchTime.Size = new System.Drawing.Size(71, 15);
             this.labelCourt3MatchTime.TabIndex = 11;
             this.labelCourt3MatchTime.Text = "Match time:";
             // 
             // buttonFinishCourt3
             // 
-            this.buttonFinishCourt3.Location = new System.Drawing.Point(187, 104);
-            this.buttonFinishCourt3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFinishCourt3.Location = new System.Drawing.Point(164, 78);
             this.buttonFinishCourt3.Name = "buttonFinishCourt3";
-            this.buttonFinishCourt3.Size = new System.Drawing.Size(135, 41);
+            this.buttonFinishCourt3.Size = new System.Drawing.Size(118, 31);
             this.buttonFinishCourt3.TabIndex = 9;
             this.buttonFinishCourt3.Text = "Finish";
             this.buttonFinishCourt3.UseVisualStyleBackColor = true;
@@ -631,39 +607,37 @@
             // listBoxCourt3Team2
             // 
             this.listBoxCourt3Team2.FormattingEnabled = true;
-            this.listBoxCourt3Team2.ItemHeight = 20;
-            this.listBoxCourt3Team2.Location = new System.Drawing.Point(187, 51);
-            this.listBoxCourt3Team2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt3Team2.ItemHeight = 15;
+            this.listBoxCourt3Team2.Location = new System.Drawing.Point(164, 38);
             this.listBoxCourt3Team2.Name = "listBoxCourt3Team2";
-            this.listBoxCourt3Team2.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt3Team2.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt3Team2.TabIndex = 5;
             // 
             // labelCourt3
             // 
             this.labelCourt3.AutoSize = true;
             this.labelCourt3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt3.Location = new System.Drawing.Point(143, 9);
+            this.labelCourt3.Location = new System.Drawing.Point(115, 6);
             this.labelCourt3.Name = "labelCourt3";
-            this.labelCourt3.Size = new System.Drawing.Size(83, 28);
+            this.labelCourt3.Size = new System.Drawing.Size(65, 21);
             this.labelCourt3.TabIndex = 7;
             this.labelCourt3.Text = "Court 3";
             // 
             // listBoxCourt3Team1
             // 
             this.listBoxCourt3Team1.FormattingEnabled = true;
-            this.listBoxCourt3Team1.ItemHeight = 20;
-            this.listBoxCourt3Team1.Location = new System.Drawing.Point(21, 51);
-            this.listBoxCourt3Team1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt3Team1.ItemHeight = 15;
+            this.listBoxCourt3Team1.Location = new System.Drawing.Point(18, 38);
             this.listBoxCourt3Team1.Name = "listBoxCourt3Team1";
-            this.listBoxCourt3Team1.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt3Team1.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt3Team1.TabIndex = 4;
             // 
             // labelCourt3Vs
             // 
             this.labelCourt3Vs.AutoSize = true;
-            this.labelCourt3Vs.Location = new System.Drawing.Point(160, 63);
+            this.labelCourt3Vs.Location = new System.Drawing.Point(140, 47);
             this.labelCourt3Vs.Name = "labelCourt3Vs";
-            this.labelCourt3Vs.Size = new System.Drawing.Size(22, 20);
+            this.labelCourt3Vs.Size = new System.Drawing.Size(18, 15);
             this.labelCourt3Vs.TabIndex = 6;
             this.labelCourt3Vs.Text = "vs";
             // 
@@ -677,27 +651,25 @@
             this.panelCourt4.Controls.Add(this.listBoxCourt4Team1);
             this.panelCourt4.Controls.Add(this.labelCourt4Vs);
             this.panelCourt4.Enabled = false;
-            this.panelCourt4.Location = new System.Drawing.Point(728, 501);
-            this.panelCourt4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelCourt4.Location = new System.Drawing.Point(637, 376);
             this.panelCourt4.Name = "panelCourt4";
-            this.panelCourt4.Size = new System.Drawing.Size(338, 158);
+            this.panelCourt4.Size = new System.Drawing.Size(296, 119);
             this.panelCourt4.TabIndex = 24;
             // 
             // labelCourt4MatchTime
             // 
             this.labelCourt4MatchTime.AutoSize = true;
-            this.labelCourt4MatchTime.Location = new System.Drawing.Point(21, 115);
+            this.labelCourt4MatchTime.Location = new System.Drawing.Point(18, 86);
             this.labelCourt4MatchTime.Name = "labelCourt4MatchTime";
-            this.labelCourt4MatchTime.Size = new System.Drawing.Size(87, 20);
+            this.labelCourt4MatchTime.Size = new System.Drawing.Size(71, 15);
             this.labelCourt4MatchTime.TabIndex = 11;
             this.labelCourt4MatchTime.Text = "Match time:";
             // 
             // buttonFinishCourt4
             // 
-            this.buttonFinishCourt4.Location = new System.Drawing.Point(187, 104);
-            this.buttonFinishCourt4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonFinishCourt4.Location = new System.Drawing.Point(164, 78);
             this.buttonFinishCourt4.Name = "buttonFinishCourt4";
-            this.buttonFinishCourt4.Size = new System.Drawing.Size(135, 41);
+            this.buttonFinishCourt4.Size = new System.Drawing.Size(118, 31);
             this.buttonFinishCourt4.TabIndex = 9;
             this.buttonFinishCourt4.Text = "Finish";
             this.buttonFinishCourt4.UseVisualStyleBackColor = true;
@@ -706,39 +678,37 @@
             // listBoxCourt4Team2
             // 
             this.listBoxCourt4Team2.FormattingEnabled = true;
-            this.listBoxCourt4Team2.ItemHeight = 20;
-            this.listBoxCourt4Team2.Location = new System.Drawing.Point(187, 51);
-            this.listBoxCourt4Team2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt4Team2.ItemHeight = 15;
+            this.listBoxCourt4Team2.Location = new System.Drawing.Point(164, 38);
             this.listBoxCourt4Team2.Name = "listBoxCourt4Team2";
-            this.listBoxCourt4Team2.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt4Team2.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt4Team2.TabIndex = 5;
             // 
             // labelCourt4
             // 
             this.labelCourt4.AutoSize = true;
             this.labelCourt4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCourt4.Location = new System.Drawing.Point(143, 9);
+            this.labelCourt4.Location = new System.Drawing.Point(115, 6);
             this.labelCourt4.Name = "labelCourt4";
-            this.labelCourt4.Size = new System.Drawing.Size(83, 28);
+            this.labelCourt4.Size = new System.Drawing.Size(65, 21);
             this.labelCourt4.TabIndex = 7;
             this.labelCourt4.Text = "Court 4";
             // 
             // listBoxCourt4Team1
             // 
             this.listBoxCourt4Team1.FormattingEnabled = true;
-            this.listBoxCourt4Team1.ItemHeight = 20;
-            this.listBoxCourt4Team1.Location = new System.Drawing.Point(21, 51);
-            this.listBoxCourt4Team1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listBoxCourt4Team1.ItemHeight = 15;
+            this.listBoxCourt4Team1.Location = new System.Drawing.Point(18, 38);
             this.listBoxCourt4Team1.Name = "listBoxCourt4Team1";
-            this.listBoxCourt4Team1.Size = new System.Drawing.Size(132, 44);
+            this.listBoxCourt4Team1.Size = new System.Drawing.Size(116, 34);
             this.listBoxCourt4Team1.TabIndex = 4;
             // 
             // labelCourt4Vs
             // 
             this.labelCourt4Vs.AutoSize = true;
-            this.labelCourt4Vs.Location = new System.Drawing.Point(160, 63);
+            this.labelCourt4Vs.Location = new System.Drawing.Point(140, 47);
             this.labelCourt4Vs.Name = "labelCourt4Vs";
-            this.labelCourt4Vs.Size = new System.Drawing.Size(22, 20);
+            this.labelCourt4Vs.Size = new System.Drawing.Size(18, 15);
             this.labelCourt4Vs.TabIndex = 6;
             this.labelCourt4Vs.Text = "vs";
             // 
@@ -746,10 +716,9 @@
             // 
             this.buttonStartSession.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(255)))), ((int)(((byte)(165)))));
             this.buttonStartSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonStartSession.Location = new System.Drawing.Point(250, 12);
-            this.buttonStartSession.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonStartSession.Location = new System.Drawing.Point(219, 9);
             this.buttonStartSession.Name = "buttonStartSession";
-            this.buttonStartSession.Size = new System.Drawing.Size(154, 41);
+            this.buttonStartSession.Size = new System.Drawing.Size(135, 31);
             this.buttonStartSession.TabIndex = 37;
             this.buttonStartSession.Text = "Start Session";
             this.buttonStartSession.UseVisualStyleBackColor = false;
@@ -764,29 +733,27 @@
             "2 Courts Available",
             "3 Courts Available",
             "4 Courts Available"});
-            this.comboBoxCourtsAvailable.Location = new System.Drawing.Point(583, 12);
-            this.comboBoxCourtsAvailable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBoxCourtsAvailable.Location = new System.Drawing.Point(510, 9);
             this.comboBoxCourtsAvailable.Name = "comboBoxCourtsAvailable";
-            this.comboBoxCourtsAvailable.Size = new System.Drawing.Size(138, 28);
+            this.comboBoxCourtsAvailable.Size = new System.Drawing.Size(121, 23);
             this.comboBoxCourtsAvailable.TabIndex = 38;
             this.comboBoxCourtsAvailable.SelectedIndexChanged += new System.EventHandler(this.comboBoxCourtsAvailable_SelectedIndexChanged);
             // 
             // labelMatchMessage
             // 
             this.labelMatchMessage.AutoSize = true;
-            this.labelMatchMessage.Location = new System.Drawing.Point(254, 537);
+            this.labelMatchMessage.Location = new System.Drawing.Point(222, 403);
             this.labelMatchMessage.Name = "labelMatchMessage";
-            this.labelMatchMessage.Size = new System.Drawing.Size(0, 20);
+            this.labelMatchMessage.Size = new System.Drawing.Size(0, 15);
             this.labelMatchMessage.TabIndex = 39;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(584, 111);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(310, 463);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 31);
+            this.button1.Size = new System.Drawing.Size(135, 23);
             this.button1.TabIndex = 40;
-            this.button1.Text = "button1";
+            this.button1.Text = "Regenerate Reports";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -807,8 +774,7 @@
             this.fullNameDataGridViewTextBoxColumn});
             this.dataGridViewWaitingPlayers.DataSource = this.playerBindingSource;
             this.dataGridViewWaitingPlayers.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewWaitingPlayers.Location = new System.Drawing.Point(14, 91);
-            this.dataGridViewWaitingPlayers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridViewWaitingPlayers.Location = new System.Drawing.Point(12, 68);
             this.dataGridViewWaitingPlayers.MultiSelect = false;
             this.dataGridViewWaitingPlayers.Name = "dataGridViewWaitingPlayers";
             this.dataGridViewWaitingPlayers.ReadOnly = true;
@@ -816,7 +782,7 @@
             this.dataGridViewWaitingPlayers.RowHeadersWidth = 51;
             this.dataGridViewWaitingPlayers.RowTemplate.Height = 25;
             this.dataGridViewWaitingPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewWaitingPlayers.Size = new System.Drawing.Size(233, 345);
+            this.dataGridViewWaitingPlayers.Size = new System.Drawing.Size(258, 259);
             this.dataGridViewWaitingPlayers.TabIndex = 41;
             this.dataGridViewWaitingPlayers.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewWaitingPlayers_RowPrePaint);
             // 
@@ -873,8 +839,7 @@
             this.dataGridViewTextBoxColumn4});
             this.dataGridViewRestingPlayers.DataSource = this.playerBindingSource;
             this.dataGridViewRestingPlayers.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewRestingPlayers.Location = new System.Drawing.Point(14, 537);
-            this.dataGridViewRestingPlayers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridViewRestingPlayers.Location = new System.Drawing.Point(12, 403);
             this.dataGridViewRestingPlayers.MultiSelect = false;
             this.dataGridViewRestingPlayers.Name = "dataGridViewRestingPlayers";
             this.dataGridViewRestingPlayers.ReadOnly = true;
@@ -882,7 +847,7 @@
             this.dataGridViewRestingPlayers.RowHeadersWidth = 51;
             this.dataGridViewRestingPlayers.RowTemplate.Height = 25;
             this.dataGridViewRestingPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRestingPlayers.Size = new System.Drawing.Size(233, 122);
+            this.dataGridViewRestingPlayers.Size = new System.Drawing.Size(258, 92);
             this.dataGridViewRestingPlayers.TabIndex = 42;
             this.dataGridViewRestingPlayers.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridViewRestingPlayers_RowPrePaint);
             // 
@@ -922,11 +887,55 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // buttonIncreaseFont
+            // 
+            this.buttonIncreaseFont.Location = new System.Drawing.Point(562, 436);
+            this.buttonIncreaseFont.Name = "buttonIncreaseFont";
+            this.buttonIncreaseFont.Size = new System.Drawing.Size(22, 23);
+            this.buttonIncreaseFont.TabIndex = 43;
+            this.buttonIncreaseFont.Text = "+";
+            this.buttonIncreaseFont.UseVisualStyleBackColor = true;
+            this.buttonIncreaseFont.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // buttonDecreaseFont
+            // 
+            this.buttonDecreaseFont.Location = new System.Drawing.Point(534, 436);
+            this.buttonDecreaseFont.Name = "buttonDecreaseFont";
+            this.buttonDecreaseFont.Size = new System.Drawing.Size(22, 23);
+            this.buttonDecreaseFont.TabIndex = 44;
+            this.buttonDecreaseFont.Text = "-";
+            this.buttonDecreaseFont.UseVisualStyleBackColor = true;
+            this.buttonDecreaseFont.Click += new System.EventHandler(this.buttonDecreaseFont_Click);
+            // 
+            // buttonScaleDown
+            // 
+            this.buttonScaleDown.Location = new System.Drawing.Point(534, 465);
+            this.buttonScaleDown.Name = "buttonScaleDown";
+            this.buttonScaleDown.Size = new System.Drawing.Size(22, 23);
+            this.buttonScaleDown.TabIndex = 45;
+            this.buttonScaleDown.Text = "-";
+            this.buttonScaleDown.UseVisualStyleBackColor = true;
+            this.buttonScaleDown.Click += new System.EventHandler(this.buttonScaleDown_Click);
+            // 
+            // buttonScaleUp
+            // 
+            this.buttonScaleUp.Location = new System.Drawing.Point(562, 465);
+            this.buttonScaleUp.Name = "buttonScaleUp";
+            this.buttonScaleUp.Size = new System.Drawing.Size(22, 23);
+            this.buttonScaleUp.TabIndex = 46;
+            this.buttonScaleUp.Text = "+";
+            this.buttonScaleUp.UseVisualStyleBackColor = true;
+            this.buttonScaleUp.Click += new System.EventHandler(this.buttonScaleUp_Click);
+            // 
             // SessionControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.buttonScaleUp);
+            this.Controls.Add(this.buttonScaleDown);
+            this.Controls.Add(this.buttonDecreaseFont);
+            this.Controls.Add(this.buttonIncreaseFont);
             this.Controls.Add(this.dataGridViewRestingPlayers);
             this.Controls.Add(this.dataGridViewWaitingPlayers);
             this.Controls.Add(this.button1);
@@ -951,9 +960,8 @@
             this.Controls.Add(this.buttonEndRest);
             this.Controls.Add(this.buttonAddPlayerToSession);
             this.Controls.Add(this.buttonRemovePlayerFromSession);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SessionControl";
-            this.Size = new System.Drawing.Size(1075, 668);
+            this.Size = new System.Drawing.Size(941, 501);
             this.panelCourt1.ResumeLayout(false);
             this.panelCourt1.PerformLayout();
             this.panelCourt2.ResumeLayout(false);
@@ -1045,5 +1053,9 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridView dataGridViewMatchPreviewTeam1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private Button buttonIncreaseFont;
+        private Button buttonDecreaseFont;
+        private Button buttonScaleDown;
+        private Button buttonScaleUp;
     }
 }
