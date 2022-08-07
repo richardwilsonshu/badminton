@@ -27,10 +27,11 @@ namespace Badminton.Controls
         private void InitializeCustomControls()
         {
             dataGridViewWaitingPlayers.DataSource = Session.WaitingPlayers;
-            listBoxRestingPlayers.BindPlayers(Session.RestingPlayers);
+            dataGridViewRestingPlayers.DataSource = Session.RestingPlayers;
+            //dataGridViewRestingPlayers.sort
 
-            listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
-            listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
+            dataGridViewMatchPreviewTeam1.DataSource = Session.MatchPreview.Team1Players;
+            dataGridViewMatchPreviewTeam2.DataSource = Session.MatchPreview.Team2Players;
 
             buttonStartSession.Enabled = !Session.Started;
             buttonStartSession.BackColor = Session.Started ? Color.Empty : Color.FromArgb(157, 255, 165);
@@ -128,7 +129,8 @@ namespace Badminton.Controls
 
         private void buttonEndRest_Click(object sender, EventArgs e)
         {
-            if (listBoxRestingPlayers.SelectedItem is not Player player)
+            if (dataGridViewRestingPlayers.SelectedRows.Count <= 0 ||
+                dataGridViewRestingPlayers.SelectedRows[0].DataBoundItem is not Player player)
             {
                 return;
             }
@@ -136,7 +138,7 @@ namespace Badminton.Controls
             Session.RestingPlayers.Remove(player);
             Session.WaitingPlayers.Add(player);
 
-            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            //Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
             Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
@@ -152,7 +154,7 @@ namespace Badminton.Controls
             Session.RestingPlayers.Add(player);
 
             Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
-            Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
+            //Session.RestingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void buttonFinishCourt1_Click(object sender, EventArgs e)
@@ -367,7 +369,8 @@ namespace Badminton.Controls
 
         private void buttonMatchPreviewTeam1RemovePlayer_Click(object sender, EventArgs e)
         {
-            if (listBoxMatchPreviewTeam1.SelectedItem is not Player player)
+            if (dataGridViewMatchPreviewTeam1.SelectedRows.Count <= 0 ||
+                dataGridViewMatchPreviewTeam1.SelectedRows[0].DataBoundItem is not Player player)
             {
                 return;
             }
@@ -381,7 +384,8 @@ namespace Badminton.Controls
 
         private void buttonMatchPreviewTeam2RemovePlayer_Click(object sender, EventArgs e)
         {
-            if (listBoxMatchPreviewTeam2.SelectedItem is not Player player)
+            if (dataGridViewMatchPreviewTeam2.SelectedRows.Count <= 0 ||
+                dataGridViewMatchPreviewTeam2.SelectedRows[0].DataBoundItem is not Player player)
             {
                 return;
             }
@@ -513,8 +517,8 @@ namespace Badminton.Controls
             UpdateMatchPreviewState();
             labelMatchMessage.Text = "";
 
-            listBoxMatchPreviewTeam1.BindPlayers(Session.MatchPreview.Team1Players);
-            listBoxMatchPreviewTeam2.BindPlayers(Session.MatchPreview.Team2Players);
+            dataGridViewMatchPreviewTeam1.DataSource = Session.MatchPreview.Team1Players;
+            dataGridViewMatchPreviewTeam2.DataSource = Session.MatchPreview.Team2Players;
 
             if (match.CourtNumber == 1)
             {
@@ -606,16 +610,22 @@ namespace Badminton.Controls
 
         private void dataGridViewWaitingPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            var player = dataGridViewWaitingPlayers.Rows[e.RowIndex].DataBoundItem as Player;
+            DataGridViewHelpers.PlayerList_RowPrePaint(dataGridViewWaitingPlayers, e);
+        }
 
-            if (player?.Gender == Gender.Male)
-            {
-                dataGridViewWaitingPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
-            }
-            else
-            {
-                dataGridViewWaitingPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
-            }
+        private void dataGridViewRestingPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            DataGridViewHelpers.PlayerList_RowPrePaint(dataGridViewRestingPlayers, e);
+        }
+
+        private void dataGridViewMatchPreviewTeam1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            DataGridViewHelpers.PlayerList_RowPrePaint(dataGridViewMatchPreviewTeam1, e);
+        }
+
+        private void dataGridViewMatchPreviewTeam2_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            DataGridViewHelpers.PlayerList_RowPrePaint(dataGridViewMatchPreviewTeam2, e);
         }
     }
 }
