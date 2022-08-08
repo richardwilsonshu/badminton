@@ -95,9 +95,7 @@ namespace Badminton.Forms
                 return;
             }
 
-            LastWindowState = WindowState;
-
-            if (WindowState == FormWindowState.Maximized)
+            if (LastWindowState == FormWindowState.Normal && WindowState == FormWindowState.Maximized)
             {
                 var scaleSize = new SizeF
                 {
@@ -115,7 +113,7 @@ namespace Badminton.Forms
 
                 //this.SetAutoScrollMargin(Width, Height);
             }
-            else if (WindowState == FormWindowState.Normal)
+            else if (LastWindowState == FormWindowState.Maximized && WindowState == FormWindowState.Normal)
             {
                 var scaleSize = new SizeF
                 {
@@ -136,6 +134,8 @@ namespace Badminton.Forms
 
                 //this.SetAutoScrollMargin(Width, Height);
             }
+
+            LastWindowState = WindowState;
 
             // For whatever reason, un-maximizing the window leaves a small area at the bottom
             // that doesn't expand fully until the window is moved.
