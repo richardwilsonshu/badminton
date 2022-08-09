@@ -1,4 +1,5 @@
-﻿using ClosedXML.Excel;
+﻿using System.ComponentModel;
+using ClosedXML.Excel;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
@@ -17,20 +18,26 @@ namespace Badminton.Classes.Models
             return json;
         }
 
-        public static void MigrateToLatest(BadmintonClub badmintonClub, int modelVersion)
+        public static void MigrateToLatest(BadmintonClub badmintonClub, int modelVersion, BackgroundWorker backgroundWorker)
         {
             if (modelVersion == 1 && BadmintonClub.LatestModelVersion == 2)
             {
+                backgroundWorker.ReportProgress(1);
+
                 CreateBackupBeforeMigration(badmintonClub, modelVersion, BadmintonClub.LatestModelVersion);
 
+                backgroundWorker.ReportProgress(5);
+
                 RegenerateAllElos(badmintonClub);
+
+                backgroundWorker.ReportProgress(10);
 
                 var sessionsToReport = badmintonClub.Sessions
                     .Where(s => s.Ended)
                     .Select((s, i) => new Tuple<int, Session>(i, s))
                     .ToList();
 
-                GenerateReports(sessionsToReport);
+                GenerateReports(sessionsToReport, backgroundWorker);
             }
         }
 
@@ -78,7 +85,7 @@ namespace Badminton.Classes.Models
             }
         }
 
-        public static void GenerateReports(List<Tuple<int, Session>> sessions)
+        public static void GenerateReports(List<Tuple<int, Session>> sessions, BackgroundWorker backgroundWorker)
         {
             var players = sessions
                 .SelectMany(s => s.Item2.FinishedMatches.SelectMany(m => m.Players))
@@ -86,14 +93,33 @@ namespace Badminton.Classes.Models
                 .Distinct()
                 .ToList();
 
+            var reportNumber = 0;
+            var totalReports = players.Count + sessions.Count;
+
             foreach (var player in players)
             {
+                if (backgroundWorker.CancellationPending)
+                {
+                    break;
+                }
+
+                Task.Delay(1000).Wait();
+
                 GeneratePlayerReport(sessions, player);
+                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
             }
 
             foreach (var (_, session) in sessions)
             {
+                if (backgroundWorker.CancellationPending)
+                {
+                    break;
+                }
+
+                Task.Delay(1000).Wait();
+
                 GenerateSessionReport(session);
+                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
             }
         }
 

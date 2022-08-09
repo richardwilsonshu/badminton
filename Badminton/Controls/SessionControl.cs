@@ -598,7 +598,8 @@ namespace Badminton.Controls
                 .Select((s, i) => new Tuple<int, Session>(i, s))
                 .ToList();
 
-            Migrator.GenerateReports(sessionsToReport);
+            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(sessionsToReport, backgroundWork));
+            progressDialog.ShowDialog();
         }
 
         private void dataGridViewWaitingPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

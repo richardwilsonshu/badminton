@@ -31,18 +31,20 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 50);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(347, 32);
             this.progressBar1.TabIndex = 0;
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Enabled = false;
             this.buttonCancel.Location = new System.Drawing.Point(137, 89);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(95, 39);
@@ -54,19 +56,24 @@
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Location = new System.Drawing.Point(12, 25);
+            this.labelMessage.Location = new System.Drawing.Point(12, 18);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(37, 21);
+            this.labelMessage.Size = new System.Drawing.Size(46, 28);
             this.labelMessage.TabIndex = 3;
             this.labelMessage.Text = "Info";
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // ProgressDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(373, 134);
             this.ControlBox = false;
             this.Controls.Add(this.labelMessage);
@@ -74,7 +81,7 @@
             this.Controls.Add(this.progressBar1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProgressDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -89,5 +96,6 @@
         private ProgressBar progressBar1;
         private Button buttonCancel;
         private Label labelMessage;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

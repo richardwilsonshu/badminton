@@ -16,7 +16,16 @@ namespace Badminton.Forms
                 Close();
             }
 
-            var loadedBadmintonClub = BadmintonClub.Load();
+            BadmintonClub? loadedBadmintonClub = null;
+
+            try
+            {
+                loadedBadmintonClub = BadmintonClub.Load();
+            }
+            catch (OperationCanceledException)
+            {
+                Close();
+            }
 
             if (loadedBadmintonClub != null)
             {

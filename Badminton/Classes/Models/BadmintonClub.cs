@@ -34,9 +34,8 @@ namespace Badminton.Classes
                 new Tuple<int, Session>(Sessions.Count - 1, CurrentSession)
             };
 
-            using var progressDialog = new ProgressDialog("Generating Reports...");
-
-            Migrator.GenerateReports(sessionsToReport); // TODO move me, perhaps add something in the UI to show progress?
+            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(sessionsToReport, backgroundWork));
+            progressDialog.ShowDialog();
 
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
             Sessions.Add(placeholderSession);
@@ -94,10 +93,21 @@ namespace Badminton.Classes
 
                 if (jsonModelVersion != LatestModelVersion)
                 {
-                    Migrator.MigrateToLatest(badmintonClub, jsonModelVersion);
+                    var message = $"Migrating from version {jsonModelVersion} to {LatestModelVersion}...";
+                    using var progressDialog = new ProgressDialog(message,
+                        backgroundWorker =>
+                            Migrator.MigrateToLatest(badmintonClub, jsonModelVersion, backgroundWorker));
+                    if (progressDialog.ShowDialog() == DialogResult.Cancel)
+                    {
+                        throw new OperationCanceledException();
+                    }
                 }
 
                 return badmintonClub;
+            }
+            catch (OperationCanceledException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
