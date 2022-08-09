@@ -1,13 +1,21 @@
+using System.Diagnostics;
 using Badminton.Classes;
 
 namespace Badminton.Forms
 {
     public partial class MainForm : Form
     {
-        private BadmintonClub _badmintonClub = new();
+        private readonly BadmintonClub _badmintonClub = new();
 
         public MainForm()
         {
+            if (Process.GetProcessesByName("badminton").Length > 1)
+            {
+                // Is already running
+                MessageBox.Show($"Another instance is already running", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
+
             var loadedBadmintonClub = BadmintonClub.Load();
 
             if (loadedBadmintonClub != null)
