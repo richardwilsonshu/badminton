@@ -97,6 +97,7 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
@@ -922,11 +923,22 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(689, 83);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // SessionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewRestingPlayers);
             this.Controls.Add(this.dataGridViewWaitingPlayers);
             this.Controls.Add(this.labelMatchMessage);
@@ -1044,5 +1056,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridView dataGridViewMatchPreviewTeam1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private Button button1;
     }
 }

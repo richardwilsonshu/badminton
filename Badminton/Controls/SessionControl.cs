@@ -654,5 +654,10 @@ namespace Badminton.Controls
         {
             Scale(new SizeF(1.1F, 1.1F));
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            button1_Click(null, null);
+        }
     }
 }

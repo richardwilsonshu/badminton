@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Badminton.Classes.Models;
+using Badminton.Dialogs;
 
 namespace Badminton.Classes
 {
@@ -32,6 +33,8 @@ namespace Badminton.Classes
             {
                 new Tuple<int, Session>(Sessions.Count - 1, CurrentSession)
             };
+
+            using var progressDialog = new ProgressDialog("Generating Reports...");
 
             Migrator.GenerateReports(sessionsToReport); // TODO move me, perhaps add something in the UI to show progress?
 
