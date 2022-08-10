@@ -103,8 +103,6 @@ namespace Badminton.Classes.Models
                     break;
                 }
 
-                Task.Delay(1000).Wait();
-
                 GeneratePlayerReport(sessions, player);
                 backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
             }
@@ -115,8 +113,6 @@ namespace Badminton.Classes.Models
                 {
                     break;
                 }
-
-                Task.Delay(1000).Wait();
 
                 GenerateSessionReport(session);
                 backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
