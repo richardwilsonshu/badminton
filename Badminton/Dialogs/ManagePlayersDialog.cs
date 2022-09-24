@@ -108,6 +108,7 @@ namespace Badminton.Dialogs
             if (confirmResult == DialogResult.Yes)
             {
                 _badmintonClub.RemovePlayer(player);
+                ApplyPlayersFilter();
             }
         }
 
