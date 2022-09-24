@@ -422,7 +422,7 @@
             // 
             // playerBindingSource
             // 
-            this.playerBindingSource.DataSource = typeof(Badminton.Classes.Player);
+            this.playerBindingSource.DataSource = typeof(Badminton.Shared.Classes.Player);
             // 
             // dataGridViewMatchPreviewTeam1
             // 

@@ -1,4 +1,5 @@
-﻿using Badminton.Enums;
+﻿using Badminton.Shared.Classes;
+using Badminton.Shared.Enums;
 
 namespace Badminton.Classes
 {

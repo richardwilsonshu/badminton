@@ -1,7 +1,7 @@
 ﻿using Badminton.Classes;
 using Badminton.Dialogs;
+using Badminton.Shared.Classes;
 using System.ComponentModel;
-using Badminton.Classes.Models;
 
 namespace Badminton.Controls
 {
@@ -586,7 +586,7 @@ namespace Badminton.Controls
             SetMatchPreviewMessage(fromMatchPicker: true);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object? sender, EventArgs e)
         {
             if (Directory.Exists("Players"))
             {
@@ -658,7 +658,7 @@ namespace Badminton.Controls
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            button1_Click(null, null);
+            button1_Click(null, EventArgs.Empty);
         }
     }
 }

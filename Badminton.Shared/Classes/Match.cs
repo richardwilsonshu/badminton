@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace Badminton.Classes
+namespace Badminton.Shared.Classes
 {
     public class Match
     {

@@ -1,5 +1,6 @@
 ﻿using Badminton.Classes;
-using Badminton.Enums;
+using Badminton.Shared.Classes;
+using Badminton.Shared.Enums;
 using System.ComponentModel;
 
 namespace Badminton.Dialogs

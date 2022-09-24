@@ -1,7 +1,7 @@
-﻿using Badminton.Enums;
+﻿using Badminton.Shared.Enums;
 using System.ComponentModel;
 
-namespace Badminton.Classes
+namespace Badminton.Shared.Classes
 {
     public class MatchPicker
     {

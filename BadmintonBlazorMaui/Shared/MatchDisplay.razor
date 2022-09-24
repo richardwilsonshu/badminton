@@ -1,0 +1,9 @@
+﻿<div class="flex-1 flex-grow-1 border border-dark">
+    <h3 class="text-center">Court @Match.CourtNumber</h3>
+</div>
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public Badminton.Shared.Classes.Match Match { get; set; }
+}

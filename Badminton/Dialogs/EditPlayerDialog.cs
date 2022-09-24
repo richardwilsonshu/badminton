@@ -1,14 +1,6 @@
-﻿using Badminton.Classes;
-using Badminton.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Badminton.Shared.Classes;
+using Badminton.Shared.Enums;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Badminton.Dialogs
 {

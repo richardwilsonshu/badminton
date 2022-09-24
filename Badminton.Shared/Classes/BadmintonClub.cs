@@ -2,10 +2,8 @@
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
-using Badminton.Classes.Models;
-using Badminton.Dialogs;
 
-namespace Badminton.Classes
+namespace Badminton.Shared.Classes
 {
     public class BadmintonClub
     {
@@ -17,6 +15,11 @@ namespace Badminton.Classes
         public SortableBindingList<Player> Players { get; set; } = new();
         public SortableBindingList<Player> DeletedPlayers { get; set; } = new();
         public List<Session> Sessions { get; set; } = new();
+
+        public delegate void ShowGenerateReportsDialogHandler(ShowGenerateReportsDialogEventArgs args);
+
+        public event ShowGenerateReportsDialogHandler? ShowGenerateReportsDialog;
+        public event EventHandler<string>? SaveFailed;
 
         [IgnoreDataMember] public Session CurrentSession => Sessions.LastOrDefault() ?? new Session(4);
 
@@ -34,8 +37,8 @@ namespace Badminton.Classes
                 new Tuple<int, Session>(Sessions.Count - 1, CurrentSession)
             };
 
-            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(sessionsToReport, backgroundWork));
-            progressDialog.ShowDialog();
+            var eventArgs = new ShowGenerateReportsDialogEventArgs(sessionsToReport);
+            ShowGenerateReportsDialog?.Invoke(eventArgs);
 
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
             Sessions.Add(placeholderSession);
@@ -56,11 +59,11 @@ namespace Badminton.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"File '{Constants.FileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SaveFailed?.Invoke(this, $"File '{Constants.FileName}' could not be saved. Error: {ex}");
             }
         }
 
-        public static BadmintonClub? Load()
+        public static BadmintonClub? Load(Action<BadmintonClub, int> migrationUIHandler)
         {
             if (!File.Exists(Constants.FileName))
             {
@@ -93,14 +96,7 @@ namespace Badminton.Classes
 
                 if (jsonModelVersion != LatestModelVersion)
                 {
-                    var message = $"Migrating from version {jsonModelVersion} to {LatestModelVersion}...";
-                    using var progressDialog = new ProgressDialog(message,
-                        backgroundWorker =>
-                            Migrator.MigrateToLatest(badmintonClub, jsonModelVersion, backgroundWorker));
-                    if (progressDialog.ShowDialog() == DialogResult.Cancel)
-                    {
-                        throw new OperationCanceledException();
-                    }
+                    migrationUIHandler?.Invoke(badmintonClub, jsonModelVersion);
                 }
 
                 return badmintonClub;
@@ -108,11 +104,6 @@ namespace Badminton.Classes
             catch (OperationCanceledException ex)
             {
                 throw ex;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Badminton.Shared.Classes;
+using System.ComponentModel;
 
 namespace Badminton.Classes
 {

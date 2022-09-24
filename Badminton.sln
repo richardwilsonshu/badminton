@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadmintonBlazorWasm", "Badm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadmintonBlazorMaui", "BadmintonBlazorMaui\BadmintonBlazorMaui.csproj", "{C15F76E4-A014-4380-8C3E-4858C6FC9421}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton.Shared", "Badminton.Shared\Badminton.Shared.csproj", "{1A36EC8B-BBFA-49D6-AE68-CFEB12CBA793}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{C15F76E4-A014-4380-8C3E-4858C6FC9421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C15F76E4-A014-4380-8C3E-4858C6FC9421}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C15F76E4-A014-4380-8C3E-4858C6FC9421}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1A36EC8B-BBFA-49D6-AE68-CFEB12CBA793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A36EC8B-BBFA-49D6-AE68-CFEB12CBA793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A36EC8B-BBFA-49D6-AE68-CFEB12CBA793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A36EC8B-BBFA-49D6-AE68-CFEB12CBA793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

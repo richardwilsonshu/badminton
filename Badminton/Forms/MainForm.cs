@@ -1,5 +1,6 @@
 using System.Diagnostics;
-using Badminton.Classes;
+using Badminton.Dialogs;
+using Badminton.Shared.Classes;
 
 namespace Badminton.Forms
 {
@@ -20,16 +21,24 @@ namespace Badminton.Forms
 
             try
             {
-                loadedBadmintonClub = BadmintonClub.Load();
+                loadedBadmintonClub = BadmintonClub.Load(MigrateWithDialog);
             }
             catch (OperationCanceledException)
             {
                 Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"File '{Constants.FileName}' could not be loaded. Error: {ex}", "Load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
 
             if (loadedBadmintonClub != null)
             {
                 _badmintonClub = loadedBadmintonClub;
+
+                _badmintonClub.SaveFailed += LoadedBadmintonClub_SaveFailed;
+                _badmintonClub.ShowGenerateReportsDialog += _badmintonClub_ShowGenerateReportsDialog;
             }
 
             if (!_badmintonClub.Sessions.Any())
@@ -42,6 +51,31 @@ namespace Badminton.Forms
             InitializeCustomControls();
 
             //IncreaseFontSize(Controls);
+        }
+
+        private void MigrateWithDialog(BadmintonClub badmintonClub, int jsonModelVersion)
+        {
+            var message = $"Migrating from version {jsonModelVersion} to {BadmintonClub.LatestModelVersion}...";
+
+            using var progressDialog = new ProgressDialog(message,
+                backgroundWorker =>
+                    Migrator.MigrateToLatest(badmintonClub, jsonModelVersion, backgroundWorker));
+
+            if (progressDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                throw new OperationCanceledException();
+            }
+        }
+
+        private void _badmintonClub_ShowGenerateReportsDialog(ShowGenerateReportsDialogEventArgs args)
+        {
+            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(args.SessionsToReport, backgroundWork));
+            progressDialog.ShowDialog();
+        }
+
+        private void LoadedBadmintonClub_SaveFailed(object? sender, string message)
+        {
+            MessageBox.Show(message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void InitializeCustomControls()

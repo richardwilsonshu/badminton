@@ -16,7 +16,7 @@
         <ApplicationTitle>BadmintonBlazorMaui</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.badmintonblazormaui</ApplicationId>
+        <ApplicationId>me.richardwilson.badminton</ApplicationId>
         <ApplicationIdGuid>D5C046DB-8E96-4BEB-9CA7-39549DA25883</ApplicationIdGuid>
 
         <!-- Versions -->
@@ -54,6 +54,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Badminton.Shared\Badminton.Shared.csproj" />
       <ProjectReference Include="..\BadmintonRazorLibrary\BadmintonRazorLibrary.csproj" />
     </ItemGroup>
 

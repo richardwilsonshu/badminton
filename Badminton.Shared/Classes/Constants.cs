@@ -1,4 +1,4 @@
-﻿namespace Badminton.Classes
+﻿namespace Badminton.Shared.Classes
 {
     public static class Constants
     {

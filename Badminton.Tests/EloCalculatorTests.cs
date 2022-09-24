@@ -1,4 +1,5 @@
-using Badminton.Classes;
+using Badminton.Shared.Classes;
+using Badminton.Shared.Enums;
 using System.ComponentModel;
 using Xunit;
 
@@ -9,12 +10,12 @@ namespace Badminton.Tests
         [Fact]
         public void When_AllPlayersHaveSameElo_EloChangesBy10()
         {
-            var team1Player1 = new Player("team1Player1", Enums.Gender.Male) { Elo = 1600 };
-            var team1Player2 = new Player("team1Player2", Enums.Gender.Male) { Elo = 1600 };
-            var team2Player1 = new Player("team2Player1", Enums.Gender.Male) { Elo = 1600 };
-            var team2Player2 = new Player("team2Player2", Enums.Gender.Male) { Elo = 1600 };
+            var team1Player1 = new Player("team1Player1", Gender.Male) { Elo = 1600 };
+            var team1Player2 = new Player("team1Player2", Gender.Male) { Elo = 1600 };
+            var team2Player1 = new Player("team2Player1", Gender.Male) { Elo = 1600 };
+            var team2Player2 = new Player("team2Player2", Gender.Male) { Elo = 1600 };
 
-            var session = new Session(4);
+            //var session = new Session(4);
 
             var match = new Match
             {

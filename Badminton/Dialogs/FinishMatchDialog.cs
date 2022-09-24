@@ -1,4 +1,4 @@
-﻿using Badminton.Classes;
+﻿using Badminton.Shared.Classes;
 
 namespace Badminton.Dialogs
 {

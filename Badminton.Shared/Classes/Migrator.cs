@@ -3,7 +3,7 @@ using ClosedXML.Excel;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace Badminton.Classes.Models
+namespace Badminton.Shared.Classes
 {
     public static class Migrator
     {
@@ -45,21 +45,13 @@ namespace Badminton.Classes.Models
         {
             var backupFileName = $"V{currentVersion}_before_V{nextVersion}_migration_{Constants.FileName}";
 
-            try
-            {
-                badmintonClub.ModelVersion = BadmintonClub.LatestModelVersion;
+            badmintonClub.ModelVersion = BadmintonClub.LatestModelVersion;
 
-                using var writer = new StreamWriter(File.Open(backupFileName, FileMode.Create));
-                writer.Write(JsonConvert.SerializeObject(badmintonClub, new JsonSerializerSettings()
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                }));
-            }
-            catch (Exception ex)
+            using var writer = new StreamWriter(File.Open(backupFileName, FileMode.Create));
+            writer.Write(JsonConvert.SerializeObject(badmintonClub, new JsonSerializerSettings()
             {
-                MessageBox.Show($"File '{backupFileName}' could not be saved. Error: {ex}", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
-            }
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            }));
         }
 
         public static void RegenerateAllElos(BadmintonClub badmintonClub)
@@ -104,7 +96,7 @@ namespace Badminton.Classes.Models
                 }
 
                 GeneratePlayerReport(sessions, player);
-                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
+                backgroundWorker.ReportProgress(10 + (int)(++reportNumber / (float)totalReports * 100));
             }
 
             foreach (var (_, session) in sessions)
@@ -115,7 +107,7 @@ namespace Badminton.Classes.Models
                 }
 
                 GenerateSessionReport(session);
-                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
+                backgroundWorker.ReportProgress(10 + (int)(++reportNumber / (float)totalReports * 100));
             }
         }
 
@@ -131,8 +123,8 @@ namespace Badminton.Classes.Models
             var fileName = @$"Players\{ReplaceInvalidChars($"{player.FullName}.xlsx")}";
             var needsHeader = false;
 
-            using var workbook = File.Exists(fileName) 
-                ? new XLWorkbook(fileName) 
+            using var workbook = File.Exists(fileName)
+                ? new XLWorkbook(fileName)
                 : new XLWorkbook();
 
             if (!workbook.TryGetWorksheet("Session Report", out var worksheet))

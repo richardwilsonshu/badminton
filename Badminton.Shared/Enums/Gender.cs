@@ -1,4 +1,4 @@
-﻿namespace Badminton.Enums
+﻿namespace Badminton.Shared.Enums
 {
     public enum Gender
     {
