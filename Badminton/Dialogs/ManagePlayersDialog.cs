@@ -19,7 +19,10 @@ namespace Badminton.Dialogs
 
         private void InitializeCustomControls()
         {
-            listBoxPlayers.BindPlayers(_badmintonClub.Players);
+            listBoxPlayers.DisplayMember = nameof(Player.FullName);
+            listBoxPlayers.ValueMember = nameof(Player.FullName);
+
+            ApplyPlayersFilter();
 
             var genderOptions = Enum
                 .GetNames<Gender>()
@@ -52,6 +55,7 @@ namespace Badminton.Dialogs
             var newPlayer = new Player(fullName, gender.Value);
 
             _badmintonClub.Players.Add(newPlayer);
+            ApplyPlayersFilter();
 
             textBoxPlayerName.Text = "";
             comboBoxGender.SelectedIndex = 0;
@@ -66,6 +70,7 @@ namespace Badminton.Dialogs
             }
 
             _badmintonClub.Players.Remove(player);
+            ApplyPlayersFilter();
 
             player.WaitingSinceDate = DateTime.Now.AddMinutes(-99);
             _badmintonClub.CurrentSession.WaitingPlayers.Add(player);
@@ -106,5 +111,32 @@ namespace Badminton.Dialogs
             }
         }
 
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            textBoxFilter.Clear();
+            ApplyPlayersFilter();
+        }
+
+        private void textBoxFilter_TextChanged(object sender, EventArgs e)
+        {
+            ApplyPlayersFilter();
+        }
+
+        private void ApplyPlayersFilter()
+        {
+            listBoxPlayers.Items.Clear();
+
+            var filteredPlayers = _badmintonClub.Players.ToList();
+
+            if (!string.IsNullOrWhiteSpace(textBoxFilter.Text))
+            {
+                filteredPlayers = filteredPlayers.Where(p => p.FullName.ToLower().Contains(textBoxFilter.Text.ToLower())).ToList();
+            }
+
+            foreach (var player in filteredPlayers)
+            {
+                listBoxPlayers.Items.Add(player);
+            }
+        }
     }
 }

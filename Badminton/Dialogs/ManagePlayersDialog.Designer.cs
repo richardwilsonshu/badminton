@@ -38,6 +38,8 @@
             this.labelNewPlayerGender = new System.Windows.Forms.Label();
             this.buttonEditPlayer = new System.Windows.Forms.Button();
             this.buttonDeletePlayer = new System.Windows.Forms.Button();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.btnClearFilter = new System.Windows.Forms.Button();
             this.panelNewPlayer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +58,9 @@
             // 
             this.listBoxPlayers.FormattingEnabled = true;
             this.listBoxPlayers.ItemHeight = 21;
-            this.listBoxPlayers.Location = new System.Drawing.Point(12, 10);
+            this.listBoxPlayers.Location = new System.Drawing.Point(12, 52);
             this.listBoxPlayers.Name = "listBoxPlayers";
-            this.listBoxPlayers.Size = new System.Drawing.Size(204, 256);
+            this.listBoxPlayers.Size = new System.Drawing.Size(204, 214);
             this.listBoxPlayers.TabIndex = 24;
             // 
             // buttonAddNewPlayer
@@ -141,6 +143,25 @@
             this.buttonDeletePlayer.UseVisualStyleBackColor = true;
             this.buttonDeletePlayer.Click += new System.EventHandler(this.buttonDeletePlayer_Click);
             // 
+            // textBoxFilter
+            // 
+            this.textBoxFilter.Location = new System.Drawing.Point(12, 12);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.PlaceholderText = "Type here to filter";
+            this.textBoxFilter.Size = new System.Drawing.Size(161, 29);
+            this.textBoxFilter.TabIndex = 32;
+            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+            // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Location = new System.Drawing.Point(179, 12);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(37, 29);
+            this.btnClearFilter.TabIndex = 33;
+            this.btnClearFilter.Text = "X";
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            // 
             // ManagePlayersDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -148,6 +169,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(349, 393);
+            this.Controls.Add(this.btnClearFilter);
+            this.Controls.Add(this.textBoxFilter);
             this.Controls.Add(this.buttonDeletePlayer);
             this.Controls.Add(this.buttonEditPlayer);
             this.Controls.Add(this.panelNewPlayer);
@@ -163,6 +186,7 @@
             this.panelNewPlayer.ResumeLayout(false);
             this.panelNewPlayer.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -178,5 +202,7 @@
         private Label labelNewPlayerGender;
         private Button buttonEditPlayer;
         private Button buttonDeletePlayer;
+        private TextBox textBoxFilter;
+        private Button btnClearFilter;
     }
 }
