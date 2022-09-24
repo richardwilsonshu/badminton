@@ -17,6 +17,7 @@ namespace Badminton.Classes
         public SortableBindingList<Player> Players { get; set; } = new();
         public SortableBindingList<Player> DeletedPlayers { get; set; } = new();
         public List<Session> Sessions { get; set; } = new();
+        public MatchFinderSettings MatchFinderSettings { get; set; } = new(); // TODO
 
         [IgnoreDataMember] public Session CurrentSession => Sessions.LastOrDefault() ?? new Session(4);
 

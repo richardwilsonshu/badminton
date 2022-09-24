@@ -98,6 +98,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.panelCourt1.SuspendLayout();
             this.panelCourt2.SuspendLayout();
             this.panelMatchPreview.SuspendLayout();
@@ -925,7 +926,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(689, 83);
+            this.button1.Location = new System.Drawing.Point(623, 95);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 43;
@@ -934,11 +935,22 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Location = new System.Drawing.Point(656, 49);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(154, 31);
+            this.buttonSettings.TabIndex = 44;
+            this.buttonSettings.Text = "Settings";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // SessionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewRestingPlayers);
             this.Controls.Add(this.dataGridViewWaitingPlayers);
@@ -1058,5 +1070,6 @@
         private DataGridView dataGridViewMatchPreviewTeam1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private Button button1;
+        private Button buttonSettings;
     }
 }

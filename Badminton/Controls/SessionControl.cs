@@ -550,7 +550,7 @@ namespace Badminton.Controls
         {
             var matchPicker = new MatchPicker();
 
-            matchPicker.PickMatch(null, Session);
+            matchPicker.PickMatch(null, Session, _badmintonClub);
 
             UpdateMatchPreviewState();
             SetMatchPreviewMessage(fromMatchPicker: true);
@@ -560,7 +560,7 @@ namespace Badminton.Controls
         {
             var matchPicker = new MatchPicker();
 
-            matchPicker.PickMatch("M", Session);
+            matchPicker.PickMatch("M", Session, _badmintonClub);
 
             UpdateMatchPreviewState();
             SetMatchPreviewMessage(fromMatchPicker: true);
@@ -570,7 +570,7 @@ namespace Badminton.Controls
         {
             var matchPicker = new MatchPicker();
 
-            matchPicker.PickMatch("F", Session);
+            matchPicker.PickMatch("F", Session, _badmintonClub);
 
             UpdateMatchPreviewState();
             SetMatchPreviewMessage(fromMatchPicker: true);
@@ -580,7 +580,7 @@ namespace Badminton.Controls
         {
             var matchPicker = new MatchPicker();
 
-            matchPicker.PickMatch("X", Session);
+            matchPicker.PickMatch("X", Session, _badmintonClub);
 
             UpdateMatchPreviewState();
             SetMatchPreviewMessage(fromMatchPicker: true);
@@ -659,6 +659,13 @@ namespace Badminton.Controls
         private void button1_Click_1(object sender, EventArgs e)
         {
             button1_Click(null, null);
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            using var dialog = new MatchFinderSettingsDialog(_badmintonClub);
+
+            dialog.ShowDialog();
         }
     }
 }
