@@ -45,7 +45,7 @@
             // 
             // buttonAddToSession
             // 
-            this.buttonAddToSession.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddToSession.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonAddToSession.Location = new System.Drawing.Point(222, 12);
             this.buttonAddToSession.Name = "buttonAddToSession";
             this.buttonAddToSession.Size = new System.Drawing.Size(115, 86);
