@@ -378,6 +378,7 @@ namespace Badminton.Controls
 
             UpdateMatchPreviewState();
             labelMatchMessage.Text = "";
+            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void buttonMatchPreviewTeam2RemovePlayer_Click(object sender, EventArgs e)
@@ -393,6 +394,7 @@ namespace Badminton.Controls
 
             UpdateMatchPreviewState();
             labelMatchMessage.Text = "";
+            Session.WaitingPlayers.ApplySort(nameof(Player.SecondsWaiting), ListSortDirection.Descending);
         }
 
         private void UpdateMatchPreviewState()
@@ -424,7 +426,7 @@ namespace Badminton.Controls
             {
                 if (fromMatchPicker)
                 {
-                    labelMatchMessage.Text = "Not Enough Players for this Game Type";
+                    labelMatchMessage.Text = "Failed to find a match";
                 }
 
                 return;
