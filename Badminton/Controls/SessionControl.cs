@@ -598,7 +598,7 @@ namespace Badminton.Controls
                 .Select((s, i) => new Tuple<int, Session>(i, s))
                 .ToList();
 
-            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(sessionsToReport, backgroundWork));
+            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => BadmintonClub.GenerateReports(sessionsToReport, _badmintonClub, backgroundWork));
             progressDialog.ShowDialog();
         }
 

@@ -4,6 +4,8 @@ using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Badminton.Classes.Models;
 using Badminton.Dialogs;
+using System.ComponentModel;
+using Badminton.Classes.Reports;
 
 namespace Badminton.Classes
 {
@@ -35,7 +37,7 @@ namespace Badminton.Classes
                 new Tuple<int, Session>(Sessions.Count - 1, CurrentSession)
             };
 
-            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => Migrator.GenerateReports(sessionsToReport, backgroundWork));
+            using var progressDialog = new ProgressDialog("Generating Reports...", backgroundWork => GenerateReports(sessionsToReport, this, backgroundWork));
             progressDialog.ShowDialog();
 
             var placeholderSession = new Session(CurrentSession.CourtsAvailable);
@@ -135,6 +137,42 @@ namespace Badminton.Classes
 
             DeletedPlayers.Add(player);
             Players.Remove(player);
+        }
+
+        public static void GenerateReports(List<Tuple<int, Session>> sessions, BadmintonClub badmintonClub, BackgroundWorker backgroundWorker)
+        {
+            var players = sessions
+                .SelectMany(s => s.Item2.FinishedMatches.SelectMany(m => m.Players))
+                .Concat(sessions.SelectMany(s => s.Item2.Players))
+                .Distinct()
+                .ToList();
+
+            var reportNumber = 0;
+            var totalReports = players.Count + sessions.Count;
+
+            foreach (var player in players)
+            {
+                if (backgroundWorker.CancellationPending)
+                {
+                    break;
+                }
+
+                PlayerIndividualReport.Generate(sessions, player);
+                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
+            }
+
+            foreach (var (_, session) in sessions)
+            {
+                if (backgroundWorker.CancellationPending)
+                {
+                    break;
+                }
+
+                SessionReport.Generate(session);
+                backgroundWorker.ReportProgress(10 + (int)((++reportNumber / (float)totalReports) * 100));
+            }
+
+            LeaderboardReport.Generate(badmintonClub);
         }
     }
 }
